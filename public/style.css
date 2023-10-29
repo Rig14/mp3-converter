@@ -1,3 +1,30 @@
-h1 {
-    color: red;
+p h1 {
+    font-family: Roboto monospace;
+}
+
+.navbar {
+    width: 100vw;
+    height: 120px;
+    background-color: #3B3B3B;
+}
+.homebutton {
+    font-family: Roboto, serif;
+    color: #FFFFFF;
+    text-align: center;
+}
+.navbar > img {
+    height: inherit;
+}
+
+footer {
+
+}
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+}
+main {
+    background-color: antiquewhite;
+    width: 100vw;
 }
