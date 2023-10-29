@@ -12,9 +12,11 @@
                 "ms-vscode.makefile-tools",
                 "samuelcolvin.jinjahtml",
                 "tamasfe.even-better-toml",
-                "cstrap.flask-snippets"
+                "cstrap.flask-snippets",
+                "ecmel.vscode-html-css",
+                "xabikos.JavaScriptSnippets"
             ]
         }
     },
-    "forwardPorts": [5000]
+    "forwardPorts": [5000, 8080]
 }
