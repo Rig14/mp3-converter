@@ -71,3 +71,6 @@ main > .button-container {
     color: #194af6;
     text-decoration: none;
 }
+.need-help-text a:hover {
+    text-decoration: underline;
+}
