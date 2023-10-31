@@ -74,3 +74,63 @@ main > .button-container {
 .need-help-text a:hover {
     text-decoration: underline;
 }
+
+body{
+    position: relative
+}
+
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: white;
+    outline: 4px solid black;
+    outline-offset: -4px; 
+    display: flex;
+    flex-direction: row;
+}
+
+#footer-logo{
+    height: inherit;
+    outline: 5px solid black;
+    outline-offset: -5px;   
+}
+
+
+
+.column{
+    display: flex;
+    flex-direction: row;
+    color: white;
+    text-align: left;
+    row-gap: 5px;
+    padding-left: 60px;
+}
+title2{
+    padding-top: 20px;
+    padding-bottom: 0px;
+    font-size: 1.25rem;
+    color: black;
+}
+.sub-column{
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+}
+.sub-column a{
+    color:darkgray;
+    font-weight:bold;
+    font-size: 0.9rem;
+    text-decoration: none;
+}
+.sub-column a:hover {
+    text-decoration: underline;
+}
+#copyright-text{
+    padding-top: 135px;
+    padding-left: 315px;
+    color: black;
+    text-align: right;
+    font-size: 0.7rem;
+}
