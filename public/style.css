@@ -6,3 +6,35 @@
 .navbar > img {
     height: inherit;
 }
+
+.home {
+    position: relative;
+    left: 400px;
+}
+
+.youtube {
+    position: relative;
+    left: 600px;
+}
+
+.soundcloud {
+    position: relative;
+    left: 800px;
+}
+
+.tiktok {
+    position: relative;
+    left: 1000px;
+}
+
+.playlist {
+    position: relative;
+    left: 1200px;
+}
+
+.help {
+    position: relative;
+    left: 1400px;
+}
+
+
