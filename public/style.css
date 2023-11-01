@@ -4,7 +4,15 @@
     margin: 0;
     font-family: 'Roboto', sans-serif;
 }
+html {
+    height: 100%;
+}
 
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
 .main-wrapper {
     display: flex;
     flex-direction: column;
@@ -75,61 +83,63 @@ main > .button-container {
     text-decoration: underline;
 }
 
-body{
-    position: relative
-}
-
 footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
     width: 100%;
+    margin-top: auto;
     background-color: white;
-    outline: 4px solid black;
-    outline-offset: -4px; 
+    border-top: 4px solid black;
+    border-bottom: 4px solid black;
     display: flex;
     flex-direction: row;
+    height: 200px;
+    align-self: flex-end;
 }
 
-#footer-logo{
-    height: inherit;
-    outline: 5px solid black;
-    outline-offset: -5px;   
+#footer-logo {
+
+    width: 600px;
+    border-right: 4px solid black;
 }
 
+.sub-column > h3 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 10px;
+}
 
-
-.column{
+.column {
     display: flex;
     flex-direction: row;
-    color: white;
     text-align: left;
     row-gap: 5px;
     padding-left: 60px;
-}
-title2{
     padding-top: 20px;
-    padding-bottom: 0px;
-    font-size: 1.25rem;
-    color: black;
 }
-.sub-column{
+
+#footer-logo > img {
+    height: 100%;
+    width: 100%;
+}
+
+.sub-column {
     display: flex;
     flex-direction: column;
     row-gap: 5px;
 }
-.sub-column a{
-    color:darkgray;
-    font-weight:bold;
+
+.sub-column a {
+    color: darkgray;
+    font-weight: bold;
     font-size: 0.9rem;
     text-decoration: none;
 }
 .sub-column a:hover {
     text-decoration: underline;
 }
-#copyright-text{
-    padding-top: 135px;
-    padding-left: 315px;
+#copyright-text {
+    margin-left: auto;
+    margin-top: auto;
     color: black;
     text-align: right;
     font-size: 0.7rem;
