@@ -143,4 +143,71 @@ footer {
     color: black;
     text-align: right;
     font-size: 0.7rem;
+
+    .navbar {
+        width: 100vw;
+        height: 120px;
+        background-color: #3B3B3B;
+        display: flex;
+    }
+
+    .navbar > img {
+        height: inherit;
+    }
+
+    .text {
+        position: relative;
+        bottom: 100px;
+        top: 500px;
+    }
+
+    .home {
+        color: white;
+        position: relative;
+        left: 200px;
+        top: 20px;
+    }
+
+    .youtube {
+        color: white;
+        position: relative;
+        left: 400px;
+        top: 20px;
+    }
+
+    .soundcloud {
+        color: white;
+        position: relative;
+        left: 600px;
+        top: 20px;
+    }
+
+    .tiktok {
+        color: white;
+        position: relative;
+        left: 800px;
+        top: 20px;
+    }
+
+    .playlist {
+        color: white;
+        position: relative;
+        left: 1000px;
+        top: 20px;
+    }
+
+    .help {
+        color: white;
+        position: relative;
+        left: 1200px;
+        top: 20px;
+    }
+
+    .login-button {
+        color: rgb(128, 128, 128);
+        border: 1px;
+        height: 100px;
+        width: 100px;
+    }
 }
+
