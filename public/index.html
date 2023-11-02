@@ -1,14 +1,128 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="style.css" />
+        <link rel="stylesheet" href="./normalize.css" />
+        <link rel="stylesheet" href="./style.css" />
         <title>Converter</title>
     </head>
     <body>
-        <h1>Converter home page</h1>
-        <sub>convert anything</sub>
-        <script src="script.js"></script>
+        <div class="page-wrapper">
+            <nav>
+                <a href="/">
+                    <img src="./resources/Logo.svg" alt="Converter logo" />
+                </a>
+                <ul class="navbar-links">
+                    <li>
+                        <a href="/"> Home </a>
+                    </li>
+                    <li>
+                        <a href="youtube-convert"> Youtube </a>
+                    </li>
+                    <li>
+                        <a href="soundcloud-convert"> Soundcloud </a>
+                    </li>
+                    <li>
+                        <a href="tiktok-convert"> TikTok </a>
+                    </li>
+                    <li>
+                        <a href="playlist-convert"> Playlist </a>
+                    </li>
+                    <li>
+                        <a href="help"> Help </a>
+                    </li>
+                </ul>
+                <div class="button-container">
+                    <a href="login">
+                        <button class="login-button">Login</button>
+                    </a>
+                    <a href="sign-up">
+                        <button class="signup-button">Sign up</button>
+                    </a>
+                </div>
+            </nav>
+            <div class="main-wrapper">
+                <main>
+                    <h1 class="main-page-header">
+                        Free YouTube to MP3/4 converter
+                    </h1>
+                    <p class="main-page-subtext">
+                        Looking for a free and convenient tool to download
+                        YouTube videos? Our online YouTube to MP3/4 converter is
+                        all that and more! No need to register or install
+                        software — convert high-quality videos right from the
+                        browser with minimal effort.
+                    </p>
+                    <div class="button-container">
+                        <a href="youtube-convert">
+                            <button style="background-color: #f01414">
+                                YouTube
+                            </button>
+                        </a>
+                        <a href="soundcloud-convert">
+                            <button style="background-color: #ff9c08">
+                                Soundcloud
+                            </button>
+                        </a>
+                        <a href="tiktok-convert">
+                            <button style="background-color: black">
+                                TikTok
+                            </button>
+                        </a>
+                        <a href="playlist-convert">
+                            <button style="background-color: #6d55ac">
+                                Playlist
+                            </button>
+                        </a>
+                    </div>
+                    <p class="need-help-text">
+                        Need help? <a href="help">Click me!</a>
+                    </p>
+                </main>
+            </div>
+            <footer>
+                <div class="footer-logo-box">
+                    <img src="./resources/Logo.svg" alt="Converter Logo" />
+                </div>
+                <div class="footer-links-box">
+                    <h3>Converters</h3>
+                    <ol>
+                        <li>
+                            <a href="youtube-convert">Youtube</a>
+                        </li>
+                        <li>
+                            <a href="soundcloud-convert">Soundcloud</a>
+                        </li>
+                        <li>
+                            <a href="tiktok-convert">TikTok</a>
+                        </li>
+                        <li>
+                            <a href="playlist-convert">Playlist</a>
+                        </li>
+                    </ol>
+                </div>
+                <div class="footer-links-box">
+                    <h3>Support</h3>
+                    <ol>
+                        <li>
+                            <a href="help">Help</a>
+                        </li>
+                        <li>
+                            <a href="legal">Legal</a>
+                        </li>
+                        <li>
+                            <a href="contact">Contact</a>
+                        </li>
+                        <li>
+                            <a href="feedback">Feedback</a>
+                        </li>
+                    </ol>
+                </div>
+                <p class="copyleft">
+                    © 2023 TheConverterCompany. All wrongs reserved
+                </p>
+            </footer>
+        </div>
     </body>
 </html>
