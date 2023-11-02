@@ -250,3 +250,20 @@ footer {
         display: none;
     }
 }
+
+.user-form-box {
+    margin: 5rem;
+    background-color: var(--backgroud-color);
+    width: 50%;
+    height: 40rem;
+    border-radius: 20px;
+    box-shadow: 0 0 10px 0 black;
+}
+
+.user-form-box h1 {
+    color: white;
+    font-size: 3rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
