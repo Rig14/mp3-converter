@@ -1,18 +1,94 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
 
+:root {
+    --backgroud-color: #3b3b3b;
+    --alt-link-color: #878787;
+    --form-color: #d9d9d9;
+    --link-color: #194af6;
+}
+
 * {
-    margin: 0;
     font-family: 'Roboto', sans-serif;
 }
-html {
+
+body, html {
     height: 100%;
 }
 
-body {
+.page-wrapper {
     display: flex;
     flex-direction: column;
     height: 100%;
 }
+
+nav {
+    width: 100%;
+    height: 5rem;
+    background-color: var(--backgroud-color);
+    display: flex;
+    flex-direction: row;
+}
+nav img {
+    height: 3rem;
+    padding-left: 1rem;
+    padding-top: 0.5rem;
+}
+
+.navbar-links {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+}
+.navbar-links > li {
+    font-size: 1.5rem;
+    display: flex;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.navbar-links > li > a {
+    color: white;
+    text-decoration: none;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.navbar-links > li > a:hover {
+    text-decoration: underline;
+}
+
+.button-container {
+    margin-left: auto;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+.button-container button {
+    border-radius: 15px;
+    padding: 0.5rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    font-size: 1.7rem;
+    transition: 0.2s;
+    cursor: pointer;
+}
+.login-button {
+    background-color: var(--form-color);
+    color: black;
+    border: 1px solid var(--link-color);
+}
+.signup-button {
+    background-color: var(--link-color);
+    color: white;
+    border: none;
+}
+
+.button-container button:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
 .main-wrapper {
     display: flex;
     flex-direction: column;
@@ -49,7 +125,7 @@ main > .button-container {
     margin-top: 2rem;
 }
 
-.button-container button {
+main > .button-container button {
     padding: 1.3rem 1rem;
     border: none;
     width: 13rem;
@@ -61,12 +137,12 @@ main > .button-container {
     color: white;
 }
 
-.button-container button:hover {
+main > .button-container button:hover {
     filter: brightness(0.9);
     font-size: 1.1rem;
 }
 
-.button-container a {
+main > .button-container a {
     border-radius: 100px;
     margin: 0 2.5rem;
 }
@@ -84,130 +160,48 @@ main > .button-container {
 }
 
 footer {
-    width: 100%;
     margin-top: auto;
-    background-color: white;
-    border-top: 4px solid black;
-    border-bottom: 4px solid black;
-    display: flex;
-    flex-direction: row;
-    height: 200px;
-    align-self: flex-end;
-}
-
-#footer-logo {
-
-    width: 600px;
-    border-right: 4px solid black;
-}
-
-.sub-column > h3 {
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: black;
-    margin-bottom: 10px;
-}
-
-.column {
-    display: flex;
-    flex-direction: row;
-    text-align: left;
-    row-gap: 5px;
-    padding-left: 60px;
-    padding-top: 20px;
-}
-
-#footer-logo > img {
-    height: 100%;
     width: 100%;
-}
-
-.sub-column {
+    height: fit-content;
+    border-top: 2px solid black;
     display: flex;
-    flex-direction: column;
-    row-gap: 5px;
+    flex-direction: row;
+    gap: 2rem;
 }
 
-.sub-column a {
-    color: darkgray;
-    font-weight: bold;
-    font-size: 0.9rem;
+.footer-logo-box {
+    display: flex;
+    align-items: flex-end;
+    background-color: var(--backgroud-color);
+    border-right: 2px solid black;
+}
+
+.footer-logo-box img {
+    padding-bottom: 2rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    height: 7rem;
+}
+
+.footer-links-box > h3{
+    font-size: 1.5rem;
+    margin-top: 0.5rem;
+}
+.footer-links-box ol {
+    padding: 0;
+}
+
+.footer-links-box li {
+    list-style: none;
+    font-size: 1rem;
+    padding: 0;
+    margin-top: 0.4rem;
+}
+.footer-links-box a {
+    color: var(--alt-link-color);
     text-decoration: none;
 }
-.sub-column a:hover {
+
+.footer-links-box a:hover {
     text-decoration: underline;
 }
-#copyright-text {
-    margin-left: auto;
-    margin-top: auto;
-    color: black;
-    text-align: right;
-    font-size: 0.7rem;
-
-    .navbar {
-        width: 100vw;
-        height: 120px;
-        background-color: #3B3B3B;
-        display: flex;
-    }
-
-    .navbar > img {
-        height: inherit;
-    }
-
-    .text {
-        position: relative;
-        bottom: 100px;
-        top: 500px;
-    }
-
-    .home {
-        color: white;
-        position: relative;
-        left: 200px;
-        top: 20px;
-    }
-
-    .youtube {
-        color: white;
-        position: relative;
-        left: 400px;
-        top: 20px;
-    }
-
-    .soundcloud {
-        color: white;
-        position: relative;
-        left: 600px;
-        top: 20px;
-    }
-
-    .tiktok {
-        color: white;
-        position: relative;
-        left: 800px;
-        top: 20px;
-    }
-
-    .playlist {
-        color: white;
-        position: relative;
-        left: 1000px;
-        top: 20px;
-    }
-
-    .help {
-        color: white;
-        position: relative;
-        left: 1200px;
-        top: 20px;
-    }
-
-    .login-button {
-        color: rgb(128, 128, 128);
-        border: 1px;
-        height: 100px;
-        width: 100px;
-    }
-}
-
