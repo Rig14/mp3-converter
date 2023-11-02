@@ -196,10 +196,12 @@ footer {
 .footer-links-box > h3 {
     font-size: 1.5rem;
     margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
 }
 
 .footer-links-box ol {
     padding: 0;
+    margin-top: 0.5rem;
 }
 
 .footer-links-box li {
