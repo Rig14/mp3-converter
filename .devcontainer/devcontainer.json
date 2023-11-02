@@ -13,7 +13,11 @@
                 "tamasfe.even-better-toml",
                 "cstrap.flask-snippets",
                 "ecmel.vscode-html-css",
-                "xabikos.JavaScriptSnippets"
+                "xabikos.JavaScriptSnippets",
+                "rvest.vs-code-prettier-eslint",
+                "esbenp.prettier-vscode",
+                "Zignd.html-css-class-completion",
+				"ms-python.black-formatter"
             ]
         }
     },

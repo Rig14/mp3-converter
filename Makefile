@@ -7,9 +7,4 @@ dev:
 setup-dev:
 	pip install -r requirements.txt
 	pip install -r dev-requirements.txt
-	sudo npm install -g prettier http-server
-format:
-	black backend
-	npx prettier . --write
-lint:
-	pylint backend
+	sudo npm install -g http-server
