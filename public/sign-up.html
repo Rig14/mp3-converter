@@ -50,58 +50,63 @@
                         <form action="submit" id="form">
                             <div class="input-field">
                                 <label for="email"> Email: </label>
-                                <input
-                                    type="text"
-                                    name="email"
-                                    id="email"
-                                    placeholder="Enter your email address..."
-                                />
+                                <div>
+                                    <input
+                                        type="text"
+                                        name="email"
+                                        id="email"
+                                        placeholder="Enter your email address..."
+                                    />
+                                </div>
                             </div>
                             <div class="input-field">
                                 <label for="password"> Password: </label>
-                                <input
-                                    type="password"
-                                    name="password"
-                                    id="password"
-                                    placeholder="Enter your password..."
-                                />
-                                <button
-                                    type="button"
-                                    onmousedown="showPassword('password')"
-                                    onmouseup="hidePassword('password')"
-                                >
-                                    <img
-                                        src="./resources/password-eye.svg"
-                                        alt="Password eye"
+                                <div>
+                                    <input
+                                        type="password"
+                                        name="password"
+                                        id="password"
+                                        placeholder="Enter your password..."
                                     />
-                                </button>
+                                    <button
+                                        type="button"
+                                        onmousedown="showPassword('password')"
+                                        onmouseup="hidePassword('password')"
+                                    >
+                                        <img
+                                            src="./resources/password-eye.svg"
+                                            alt="Password eye"
+                                        />
+                                    </button>
+                                </div>
                             </div>
                             <div class="input-field">
                                 <label for="password-confirm">
                                     Confirm password:
                                 </label>
-                                <input
-                                    type="password"
-                                    name="password-confirm"
-                                    id="password-confirm"
-                                    placeholder="Enter your password..."
-                                />
-                                <button
-                                    type="button"
-                                    onmousedown="showPassword('password-confirm')"
-                                    onmouseup="hidePassword('password-confirm')"
-                                >
-                                    <img
-                                        src="./resources/password-eye.svg"
-                                        alt="Password eye"
+                                <div>
+                                    <input
+                                        type="password"
+                                        name="password-confirm"
+                                        id="password-confirm"
+                                        placeholder="Enter your password..."
                                     />
-                                </button>
+                                    <button
+                                        type="button"
+                                        onmousedown="showPassword('password-confirm')"
+                                        onmouseup="hidePassword('password-confirm')"
+                                    >
+                                        <img
+                                            src="./resources/password-eye.svg"
+                                            alt="Password eye"
+                                        />
+                                    </button>
+                                </div>
                             </div>
                             <p id="error-message"></p>
-                            <p>
-                                Already have an account?<a href="login"
-                                    >Sign in</a
-                                >
+                            <p class="account-text">
+                                Already have an account?
+                                <a href="login">Sign in</a>
                             </p>
                             <button
                                 class="submit-button"
