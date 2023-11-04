@@ -375,3 +375,17 @@ footer {
 .submit-button:hover {
     transform: scale(1.1);
 }
+
+@media only screen and (max-width: 600px) {
+    .user-form-box {
+        width: 100%;
+    }
+    .user-form-box h1 {
+        font-size: 2rem;
+    }
+
+    .user-form-box form {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+}
