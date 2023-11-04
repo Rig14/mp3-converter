@@ -15,3 +15,9 @@ function processFormData() {
     const formData = new FormData(form);
     console.log(formData);
 }
+
+function displayFormError(message) {
+    // display error message
+    const error = document.getElementById('error-message');
+    error.innerText = message;
+}
