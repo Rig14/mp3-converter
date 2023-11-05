@@ -5,20 +5,22 @@
     "customizations": {
         "vscode": {
             "extensions": [
-                "ms-azuretools.vscode-docker",
-                "GitHub.copilot",
-                "ms-python.python",
-                "ms-python.vscode-pylance",
-                "ms-vscode.makefile-tools",
-                "tamasfe.even-better-toml",
-                "cstrap.flask-snippets",
-                "ecmel.vscode-html-css",
-                "xabikos.JavaScriptSnippets",
-                "rvest.vs-code-prettier-eslint",
-                "esbenp.prettier-vscode",
-                "Zignd.html-css-class-completion",
-				"ms-python.black-formatter"
-            ]
+				"ms-azuretools.vscode-docker",
+				"GitHub.copilot",
+				"ms-python.python",
+				"ms-python.vscode-pylance",
+				"ms-vscode.makefile-tools",
+				"tamasfe.even-better-toml",
+				"cstrap.flask-snippets",
+				"ecmel.vscode-html-css",
+				"xabikos.JavaScriptSnippets",
+				"rvest.vs-code-prettier-eslint",
+				"esbenp.prettier-vscode",
+				"Zignd.html-css-class-completion",
+				"ms-python.black-formatter",
+				"adpyke.vscode-sql-formatter",
+				"qwtel.sqlite-viewer"
+			]
         }
     },
     "forwardPorts": [5000, 8080]

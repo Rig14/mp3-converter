@@ -1,4 +1,5 @@
 server-dev:
+	cd backend && python3 db.py
 	flask --app ./backend/app run --debug
 web-dev:
 	npx http-server public -c-1
