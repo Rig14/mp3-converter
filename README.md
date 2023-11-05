@@ -4,35 +4,64 @@ Convert anything form anywhere
 
 ## Development
 
-This repo uses devcontainer for ease of use. For this to work you will need to install **docker** on your system. Docker is the only thing that is required to develop on this project.
+To develop on this project you have 2 options:
 
-After starting the dev container run:
+1) use VSCode **dev container** (preffered)
+2) use your **own** environment
 
+### VSCode dev container
+Using a dev container you dont need to setup anything on your own. All the **helpful extentions** are installed for you, all the **dependencies** are installed for you, and you can **start developing right away**.
+
+Before you start developing in a dev container you will need to install 2 things on your system:
+
+1) [Docker](https://docs.docker.com/get-docker/)
+2) [VSCode](https://code.visualstudio.com/download)
+
+NB! After you have installed Docker you **dont need to do anything with it**. VSCode will use it for you.
+
+After you have installed Docker and VSCode you can start developing in a dev container:
+
+1) Clone this repo:
+In your terminal run:
+```
+git clone https://gitlab.cs.taltech.ee/ririvi/iti0105-2023.git
+```
+2) Open the project in VSCode:
+```
+cd iti0105-2023
+code .
+```
+
+3) Click the **blue button** in the bottom left corner of VSCode (open in remote window):
+
+![alt](./README-assets/remote-windows-button.png)
+
+
+4) After clicking it you will see a popup. Click **"Reopen in Container"**
+
+5) Wait for the container to build and you are ready to go! (it can take several minuter when you open the project for the first time).
+
+6) useful commands are available in the **makefile**. You can run them in the **terminal** in VSCode. Commands are listed below.
+
+### Your own environment
+If you dont want to use a dev container you can setup your own environment. If you choose this route you will need to install all the dependencies yourself and you will need to install all the helpful extentions yourself.
+
+
+
+## Usage
+
+### Install dependencies
+Should be run when you want to work on backend code.
 ```
 make setup-dev
 ```
 
-This will install the required packages needed for development
-
-To start the dev servers run:
-
+### start web server
 ```
-make dev
+make web-dev
 ```
 
-backend will be running on port **5000** and frontend will be running on port **8080**
-
-For example, got to http://localhost:8080/ to see the frontend.
-
-### Formating and linting
-
-should be used before pushing to the repo.
-
+### start backend
 ```
-make format
-make lint
+make server-dev
 ```
-
-Development is possible without a dev container but it requires the coder to install dependencies themselves. (Make their own venv, install python packages, etc.)
-
----
