@@ -41,6 +41,27 @@ code .
 
 5) Wait for the container to build and you are ready to go! (it can take several minuter when you open the project for the first time).
 
+6) useful commands are available in the **makefile**. You can run them in the **terminal** in VSCode. Commands are listed below.
 
 ### Your own environment
 If you dont want to use a dev container you can setup your own environment. If you choose this route you will need to install all the dependencies yourself and you will need to install all the helpful extentions yourself.
+
+
+
+## Usage
+
+### Install dependencies
+Should be run when you want to work on backend code.
+```
+make setup-dev
+```
+
+### start web server
+```
+make web-dev
+```
+
+### start backend
+```
+make server-dev
+```
