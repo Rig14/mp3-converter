@@ -10,14 +10,14 @@ To develop on this project you have 2 options:
 2) use your **own** environment
 
 ### VSCode dev container
-Using a dev container you dont need to setup anything on your own. All the helpful extentions are installed for you, all the dependencies are installed for you, and you can start developing right away.
+Using a dev container you dont need to setup anything on your own. All the **helpful extentions** are installed for you, all the **dependencies** are installed for you, and you can **start developing right away**.
 
 Before you start developing in a dev container you will need to install 2 things on your system:
 
 1) [Docker](https://docs.docker.com/get-docker/)
 2) [VSCode](https://code.visualstudio.com/download)
 
-NB! After you have installed Docker you dont need to do anything with it. VSCode will use it for you.
+NB! After you have installed Docker you **dont need to do anything with it**. VSCode will use it for you.
 
 After you have installed Docker and VSCode you can start developing in a dev container:
 
@@ -33,6 +33,7 @@ code .
 ```
 
 3) Click the blue button in the bottom left corner of VSCode (open in remote window):
+
 ![alt](./README-assets/remote-windows-button.png)
 
 
