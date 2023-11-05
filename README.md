@@ -32,12 +32,12 @@ cd iti0105-2023
 code .
 ```
 
-3) Click the blue button in the bottom left corner of VSCode (open in remote window):
+3) Click the **blue button** in the bottom left corner of VSCode (open in remote window):
 
 ![alt](./README-assets/remote-windows-button.png)
 
 
-4) After clicking it you will see a popup. Click "Reopen in Container"
+4) After clicking it you will see a popup. Click **"Reopen in Container"**
 
 5) Wait for the container to build and you are ready to go! (it can take several minuter when you open the project for the first time).
 
