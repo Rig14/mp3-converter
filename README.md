@@ -50,12 +50,6 @@ If you dont want to use a dev container you can setup your own environment. If y
 
 ## Usage
 
-### Install dependencies
-Should be run when you want to work on backend code.
-```
-make setup-dev
-```
-
 ### start web server
 ```
 make web-dev
