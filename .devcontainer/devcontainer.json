@@ -19,7 +19,8 @@
 				"Zignd.html-css-class-completion",
 				"ms-python.black-formatter",
 				"adpyke.vscode-sql-formatter",
-				"qwtel.sqlite-viewer"
+				"qufiwefefwoyn.inline-sql-syntax",
+				"ms-python.pylint"
 			]
         }
     },
