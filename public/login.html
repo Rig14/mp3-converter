@@ -46,7 +46,7 @@
             <div class="main-wrapper">
                 <main>
                     <div class="user-form-box">
-                        <h1>Sign up</h1>
+                        <h1>Login</h1>
                         <form action="submit" id="form">
                             <div class="input-field">
                                 <label for="email"> Email: </label>
@@ -80,40 +80,17 @@
                                     </button>
                                 </div>
                             </div>
-                            <div class="input-field">
-                                <label for="password-confirm">
-                                    Confirm password:
-                                </label>
-                                <div>
-                                    <input
-                                        type="password"
-                                        name="password-confirm"
-                                        id="password-confirm"
-                                        placeholder="Enter your password..."
-                                    />
-                                    <button
-                                        type="button"
-                                        onmousedown="showPassword('password-confirm')"
-                                        onmouseup="hidePassword('password-confirm')"
-                                    >
-                                        <img
-                                            src="./resources/password-eye.svg"
-                                            alt="Password eye"
-                                        />
-                                    </button>
-                                </div>
-                            </div>
                             <p id="error-message"></p>
                             <p class="account-text">
-                                Already have an account?
-                                <a href="login">Sign in</a>
+                                Don't have an account?
+                                <a href="sign-up">Sign up</a>
                             </p>
                             <button
                                 class="submit-button"
                                 type="button"
-                                onclick="processFormData('sign-up')"
+                                onclick="processFormData('login')"
                             >
-                                Sign up
+                                Login
                             </button>
                         </form>
                     </div>
