@@ -8,6 +8,7 @@ __pycache__/
 
 # sql database files
 *.db
+.database
 
 # Distribution / packaging
 .Python
