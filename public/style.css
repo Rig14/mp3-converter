@@ -376,6 +376,12 @@ footer {
     transform: scale(1.1);
 }
 
+.help-header {
+    position: relative;
+    top: 25px;
+    text-align: center;
+}
+
 @media only screen and (max-width: 600px) {
     .user-form-box {
         width: 100%;
