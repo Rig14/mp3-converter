@@ -379,8 +379,53 @@ footer {
 .help-header {
     position: relative;
     top: 25px;
+    right: 100px;
     text-align: center;
 }
+
+.tutorial {
+    position: relative;
+    top: 40px;
+    left: 50px;
+    text-align: left;
+}
+.tutorial-paragraph {
+    position: relative;
+    top: 30px;
+    left: 50px;
+    text-align: left;
+}
+
+.tutorial-image {
+    position: relative;
+    bottom: 40px;
+    left: 500px;
+}
+
+.tutorial-image-alternate {
+    position: relative;
+    bottom: 40px;
+    left: 900px;
+}
+
+.tutorial-image-alternate2 {
+    position: relative;
+    bottom: 40px;
+    left: 975px;
+}
+
+.tutorial-image-alternate3 {
+    position: relative;
+    bottom: 40px;
+    left: 750px;
+}
+
+.tutorial-image-alternate4 {
+    position: relative;
+    bottom: 40px;
+    left: 650px;
+}
+
 
 @media only screen and (max-width: 600px) {
     .user-form-box {
