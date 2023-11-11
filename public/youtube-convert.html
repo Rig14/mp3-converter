@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="./normalize.css" />
+        <link rel="stylesheet" href="./style.css" />
+        <script src="./script.js"></script>
+        <title>Converter</title>
+    </head>
+    <body>
+        <div class="page-wrapper">
+            <nav>
+                <a href="/">
+                    <img src="./resources/Logo.svg" alt="Converter logo" />
+                </a>
+                <ul class="navbar-links">
+                    <li>
+                        <a href="/"> Home </a>
+                    </li>
+                    <li>
+                        <a href="youtube-convert"> Youtube </a>
+                    </li>
+                    <li>
+                        <a href="soundcloud-convert"> Soundcloud </a>
+                    </li>
+                    <li>
+                        <a href="tiktok-convert"> TikTok </a>
+                    </li>
+                    <li>
+                        <a href="playlist-convert"> Playlist </a>
+                    </li>
+                    <li>
+                        <a href="help"> Help </a>
+                    </li>
+                </ul>
+                <div class="button-container">
+                    <a href="login">
+                        <button class="login-button">Login</button>
+                    </a>
+                    <a href="sign-up">
+                        <button class="signup-button">Sign up</button>
+                    </a>
+                </div>
+            </nav>
+            <div class="main-wrapper">
+                <main>
+                    <div class="link-pasting-box">
+                        <h1>Convert from Youtube</h1>
+
+                        <div class="youtube-input-field">
+                            <form action="submit" id="form">
+                                <div>
+                                    <div class="youtube-logo">
+                                        <img
+                                            src="./resources/youtube-logo.svg"
+                                            alt="pw"
+                                        />
+                                        Youtube
+                                    </div>
+                                    <input
+                                        type="url"
+                                        name="youtube-link"
+                                        id="youtube-link"
+                                        placeholder="Paste any Youtube URL here"
+                                    />
+                                    <!--
+                                    <div class="youtube-dropdown">
+                                        <div class="dropdown-preview">
+                                            MP32
+                                            <i class="arrow-down"></i>
+                                        </div>
+                                        <div class="dropdown-content-test">
+                                            <p>.mp3 96 kbps</p>
+                                            <p>.mp3 128 kbps</p>
+                                            <p>.mp3 256 kbps</p>
+                                            <p>.mp3 320 kbps</p>
+                                            <p>.mp4 144p</p>
+                                            <p>.mp4 480p</p>
+                                            <p>.mp4 720p</p>
+                                            <p>.mp4 1080p</p>
+                                            <p>võib muuta</p>
+                                        </div>
+                                    </div>
+                                    -->
+                                    <select
+                                        name="dropdown-content"
+                                        id="dropdown-content"
+                                    >
+                                        <option value="mp3-64">
+                                            .mp3 64 kbps
+                                        </option>
+                                        <option selected value="mp3-128">
+                                            .mp3 128 kbps
+                                        </option>
+                                        <option value="mp3-192">
+                                            .mp3 192 kbps
+                                        </option>
+                                        <option value="mp3-320">
+                                            .mp3 320 kbps
+                                        </option>
+                                        <option value="mp4-144">
+                                            .mp4 144p
+                                        </option>
+                                        <option value="mp4-480">
+                                            .mp4 480p
+                                        </option>
+                                        <option value="mp4-720">
+                                            .mp4 720p
+                                        </option>
+                                        <option value="mp4-1080">
+                                            .mp4 1080p
+                                        </option>
+                                    </select>
+                                </div>
+                                <p class="need-help-text">
+                                    Need help? <a href="help">Click me!</a>
+                                </p>
+                                <a href="youtube-download">
+                                    <button
+                                        class="convert-button"
+                                        type="button"
+                                        onclick="processFormData('youtube-convert')"
+                                    >
+                                        CONVERT
+                                    </button>
+                                </a>
+                            </form>
+                        </div>
+                    </div>
+                </main>
+            </div>
+            <footer>
+                <div class="footer-logo-box">
+                    <img src="./resources/Logo.svg" alt="Converter Logo" />
+                </div>
+                <div class="footer-links-box">
+                    <h3>Converters</h3>
+                    <ol>
+                        <li>
+                            <a href="youtube-convert">Youtube</a>
+                        </li>
+                        <li>
+                            <a href="soundcloud-convert">Soundcloud</a>
+                        </li>
+                        <li>
+                            <a href="tiktok-convert">TikTok</a>
+                        </li>
+                        <li>
+                            <a href="playlist-convert">Playlist</a>
+                        </li>
+                    </ol>
+                </div>
+                <div class="footer-links-box">
+                    <h3>Support</h3>
+                    <ol>
+                        <li>
+                            <a href="help">Help</a>
+                        </li>
+                        <li>
+                            <a href="legal">Legal</a>
+                        </li>
+                        <li>
+                            <a href="contact">Contact</a>
+                        </li>
+                        <li>
+                            <a href="feedback">Feedback</a>
+                        </li>
+                    </ol>
+                </div>
+                <p class="copyleft">
+                    © 2023 TheConverterCompany. All wrongs reserved
+                </p>
+            </footer>
+        </div>
+    </body>
+</html>

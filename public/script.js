@@ -24,6 +24,9 @@ function processFormData(form_type) {
             formData.get('password'),
             formData.get('password-confirm')
         );
+    } else if (form_type === 'youtube-convert') {
+        console.log('youtube url and format submitted. Data:');
+        console.log(formData);
     }
 }
 
