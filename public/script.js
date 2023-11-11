@@ -85,3 +85,11 @@ async function login_user(email, password) {
         window.location.href = '/';
     }
 }
+
+function check_user_status() {
+    // check if user is logged in
+    const token = localStorage.getItem('token');
+    if (!token) return;
+
+    // check the valitity of the token
+}

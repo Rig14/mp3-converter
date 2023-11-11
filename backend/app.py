@@ -5,7 +5,7 @@ import bcrypt
 from flask import Flask, request
 from flask_cors import CORS
 from backend.db import execute
-from backend.token import create_token
+from backend.token import create_token, get_id_from_token
 
 app = Flask(__name__)
 CORS(app)
@@ -49,7 +49,6 @@ def signup():
 
     # crete a name for user based on email
     name = email.split("@")[0]
-    default_motd = "Hello, World!"
 
     # hashing password
     hashed_pw = bcrypt.hashpw(password.encode(), bcrypt.gensalt())
@@ -57,8 +56,8 @@ def signup():
     # insert user into database
     try:
         execute(
-            "INSERT INTO users (name, email, password, motd) VALUES (?, ?, ?, ?)",
-            (name, email, hashed_pw, default_motd),
+            "INSERT INTO users (name, email, password) VALUES (?, ?, ?)",
+            (name, email, hashed_pw),
         )
     except sqlite3.Error as e:
         return {"error": str(e)}, 500
@@ -99,3 +98,23 @@ def login():
     user_id = execute("SELECT id FROM users WHERE email = ?", (email,))[0][0]
     token = create_token(user_id)
     return {"token": token}, 200
+
+
+@app.route("/api/user_data", methods=["GET"])
+def user_data():
+    """
+    User data route. Returns the user data if the token is valid.
+    """
+    token = request.get_json().get("token")
+
+    if not token:
+        return {"error": "Token is missing"}, 400
+
+    id = get_id_from_token(token)
+
+    if not id:
+        return {"error": "Invalid token"}, 400
+
+    user = execute("SELECT name, motd, image FROM users WHERE id = ?", (id,))[0]
+
+    return {"name": user[0], "motd": user[1], "image": user[2]}, 200
