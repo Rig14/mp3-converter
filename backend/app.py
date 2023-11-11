@@ -61,7 +61,7 @@ def signup():
             (name, email, hashed_pw, default_motd),
         )
     except sqlite3.Error as e:
-        return {"error": str(e)}, 400
+        return {"error": str(e)}, 500
 
     # get user id
     user_id = execute("SELECT id FROM users WHERE email = ?", (email,))[0][0]
@@ -78,24 +78,24 @@ def login():
 
     If the user exists and the password is correct, returns a 200 status code and jwt token.
     """
-    email = request.args.get("email")
-    password = request.args.get("password")
+    email = request.get_json().get("email")
+    password = request.get_json().get("password")
 
     # check if email and password are provided
     if not email or not password:
-        return Response("Email and password are required", status=400)
+        return {"error": "Email and password are required"}, 400
 
     # check if user exists
     user = execute("SELECT * FROM users WHERE email = ?", (email,))
     if not user:
-        return Response("User does not exist", status=400)
+        return {"error": "User does not exist"}, 400
 
     # check if password is correct
     hashed_pw = execute("SELECT password FROM users WHERE email = ?", (email,))[0][0]
     if not bcrypt.checkpw(password.encode(), hashed_pw):
-        return Response("Password is incorrect", status=400)
+        return {"error": "Password is incorrect"}, 400
 
     # making jwt token:
     user_id = execute("SELECT id FROM users WHERE email = ?", (email,))[0][0]
     token = create_token(user_id)
-    return Response(token, status=200)
+    return {"token": token}, 200
