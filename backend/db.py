@@ -17,8 +17,6 @@ def update(last: bool = False):
     Apply all migrations in the migrations folder.
 
     Creates the database if it is not already created.
-
-    Should be run every time code is pushed to production.
     """
     # Create the database directory if it doesn't exist.
     if not os.path.exists(DATABASE_FILE_DIR):
@@ -49,6 +47,15 @@ def update(last: bool = False):
                 cursor.executescript(migration_file.read())
 
         connection.commit()
+
+
+def update_last():
+    """
+    Apply the last migration in the migrations folder.
+
+    Should be run every time code is pushed to production.
+    """
+    update(last=True)
 
 
 def execute(query: str, parametes: tuple = ()):

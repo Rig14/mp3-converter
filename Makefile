@@ -12,3 +12,5 @@ update-db:
 	cd backend && python db.py update
 dev:
 	make server-dev & make web-dev
+update-db-latest:
+	cd backend && python db.py update_last

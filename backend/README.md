@@ -5,15 +5,23 @@ This part contains instructions on how to use the API.
 ## API endpoints
 
 ### Sign up
-`/api/signup?username=<username>&password=<password>&password_confirm=<password>`
+`/api/signup`
 - **Method:** POST
 - **Description:** Creates a new user
+- **Request Body:**
+    - email: user's email
+    - password: user's password
+    - password_confirm: user's password confirmation
 - **Returns:** Error message when values are invalid. Otherwise returns JWT.
 
+
 ### Login
-`/api/login?username=<username>&password=<password>`
+`/api/login`
 - **Method:** POST
 - **Description:** Logs in a user
+- **Request Body:**
+    - email: user's email
+    - password: user's password
 - **Returns:** Error message when values are invalid. Otherwise returns JWT.
 
 

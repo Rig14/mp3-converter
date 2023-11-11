@@ -2,10 +2,10 @@
 import re
 import sqlite3
 import bcrypt
-from flask import Flask, Response, request
+from flask import Flask, request
+from flask_cors import CORS
 from backend.db import execute
 from backend.token import create_token
-from flask_cors import CORS
 
 app = Flask(__name__)
 CORS(app)
