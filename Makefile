@@ -10,3 +10,5 @@ erase-db:
 	cd backend && python db.py erase_database && python db.py update
 update-db:
 	cd backend && python db.py update
+dev:
+	make server-dev & make web-dev
