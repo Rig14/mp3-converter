@@ -26,7 +26,7 @@ Before you start using the API a ``.env`` file **must be made**. Variables for t
     - password: user's password
 - **Returns:** Error message when values are invalid. Otherwise returns JWT.
 
-## User data
+### User data
 `/api/user_data`
 - **Method:** GET
 - **Description:** Returns small amount of user data
