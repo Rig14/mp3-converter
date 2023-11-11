@@ -12,13 +12,11 @@ DATABASE_FILE_PATH = os.path.join(DATABASE_FILE_DIR, "database.db")
 MIGRATIONS_DIR = os.path.join(os.path.dirname(__file__), "migrations")
 
 
-def update():
+def update(last: bool = False):
     """
     Apply all migrations in the migrations folder.
 
     Creates the database if it is not already created.
-
-    Should be run every time code is pushed to production.
     """
     # Create the database directory if it doesn't exist.
     if not os.path.exists(DATABASE_FILE_DIR):
@@ -39,11 +37,25 @@ def update():
         cursor = connection.cursor()
 
         # execute all migrations
-        for migration in migrations:
-            with open(migration, "r", encoding="UTF-8") as migration_file:
+        if not last:
+            for migration in migrations:
+                with open(migration, "r", encoding="UTF-8") as migration_file:
+                    cursor.executescript(migration_file.read())
+        else:
+            # execute only the last migration
+            with open(migrations[-1], "r", encoding="UTF-8") as migration_file:
                 cursor.executescript(migration_file.read())
 
         connection.commit()
+
+
+def update_last():
+    """
+    Apply the last migration in the migrations folder.
+
+    Should be run every time code is pushed to production.
+    """
+    update(last=True)
 
 
 def execute(query: str, parametes: tuple = ()):
