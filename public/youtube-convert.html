@@ -46,8 +46,9 @@
                 <main>
                     <div class="link-pasting-box">
                         <h1>Convert from Youtube</h1>
-                        <form>
-                            <div class="youtube-input-field">
+
+                        <div class="youtube-input-field">
+                            <form action="submit" id="form">
                                 <div>
                                     <div class="youtube-logo">
                                         <img
@@ -111,16 +112,20 @@
                                         </option>
                                     </select>
                                 </div>
-                            </div>
-                        </form>
-                        <p class="need-help-text">
-                            Need help? <a href="help">Click me!</a>
-                        </p>
-                        <a href="youtube-download">
-                            <button class="convert-button" type="button">
-                                CONVERT
-                            </button>
-                        </a>
+                                <p class="need-help-text">
+                                    Need help? <a href="help">Click me!</a>
+                                </p>
+                                <a href="youtube-download">
+                                    <button
+                                        class="convert-button"
+                                        type="button"
+                                        onclick="processFormData('youtube-convert')"
+                                    >
+                                        CONVERT
+                                    </button>
+                                </a>
+                            </form>
+                        </div>
                     </div>
                 </main>
             </div>

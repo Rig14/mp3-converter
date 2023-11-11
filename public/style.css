@@ -408,7 +408,6 @@ footer {
 
 .youtube-input-field input {
     border: none;
-    outline: ;
     background-color: var(--form-color);
     width: 40rem;
     border: 3px solid black;
@@ -493,6 +492,7 @@ footer {
 
 .convert-button {
     margin-top: 3rem;
+    margin-bottom: 4rem;
     background-color: var(--backgroud-color);
     padding: 0.7rem;
     width: 9rem;

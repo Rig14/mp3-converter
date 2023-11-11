@@ -20,6 +20,9 @@ function processFormData(form_type) {
     } else if (form_type === 'sign-up') {
         console.log('sign-up form submitted. Data:');
         console.log(formData);
+    } else if (form_type === 'youtube-convert') {
+        console.log('youtube url and format submitted. Data:');
+        console.log(formData);
     }
 }
 
