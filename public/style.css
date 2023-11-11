@@ -506,6 +506,7 @@ footer {
 }
 
 #dropdown-content {
+    outline: none;
     height: auto;
     background-color: var(--backgroud-color);
     width: 10rem;
