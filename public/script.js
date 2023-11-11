@@ -59,6 +59,7 @@ async function create_user(email, password, password_confirm) {
         // and set token in local storage
         const data = await response.json();
         localStorage.setItem('token', data.token);
+        await locally_save_user_data();
         window.location.href = '/';
     }
 }
@@ -85,14 +86,34 @@ async function login_user(email, password) {
         // and set token in local storage
         const data = await response.json();
         localStorage.setItem('token', data.token);
+        await locally_save_user_data();
         window.location.href = '/';
     }
 }
 
-function check_user_status() {
-    // check if user is logged in
+async function locally_save_user_data() {
+    // fetch user data from backend and save it in local storage
+    const url = BACKEND_URL + '/api/user_data';
     const token = localStorage.getItem('token');
-    if (!token) return;
 
-    // check the valitity of the token
+    // send request to backend with user data
+    const response = await fetch(url, {
+        method: 'GET',
+        headers: { Authorization: token },
+    });
+
+    if (response.status === 200) {
+        // if response http status code is 200, then save user data in local storage
+        const data = await response.json();
+        localStorage.setItem('user_data', JSON.stringify(data));
+    }
+}
+
+function logout() {
+    // delete token from local storage and user data
+    localStorage.removeItem('token');
+    localStorage.removeItem('user_data');
+
+    // redirect to home page
+    window.location.href = '/';
 }
