@@ -105,16 +105,21 @@ def user_data():
     """
     User data route. Returns the user data if the token is valid.
     """
-    token = request.get_json().get("token")
+    token = request.headers.get("Authorization")
 
     if not token:
         return {"error": "Token is missing"}, 400
 
-    id = get_id_from_token(token)
+    user_id = get_id_from_token(token)
 
-    if not id:
+    if not user_id:
         return {"error": "Invalid token"}, 400
 
-    user = execute("SELECT name, motd, image FROM users WHERE id = ?", (id,))[0]
+    user = execute("SELECT name, motd, image FROM users WHERE id = ?", (user_id,))[0]
 
-    return {"name": user[0], "motd": user[1], "image": user[2]}, 200
+    return {
+        "id": user_id,
+        "name": user[0],
+        "motd": user[1],
+        "profile_picture": user[2],
+    }, 200
