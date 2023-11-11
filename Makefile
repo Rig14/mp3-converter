@@ -5,7 +5,7 @@ server-dev:
 	flask --app ./backend/app run --debug
 web-dev:
 	sudo npm install -g http-server
-	npx http-server public -c-1
+	npx http-server public -c-1 --cors
 erase-db:
 	cd backend && python db.py erase_database && python db.py update
 update-db:

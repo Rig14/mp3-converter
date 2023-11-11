@@ -1,3 +1,5 @@
+const BACKEND_URL = 'http://localhost:5000';
+
 function showPassword(fieldID) {
     // shows the password in plain text instead on dots
     const field = document.getElementById(fieldID);
@@ -15,11 +17,26 @@ function processFormData(form_type) {
     const formData = new FormData(form);
 
     if (form_type === 'login') {
-        console.log('login form submitted. Data:');
-        console.log(formData);
+        return {};
     } else if (form_type === 'sign-up') {
-        console.log('sign-up form submitted. Data:');
-        console.log(formData);
+        url = BACKEND_URL + '/api/signup';
+        fetch(url, {
+            method: 'POST',
+            body: JSON.stringify({
+                email: formData.get('email'),
+                password: formData.get('password'),
+                password_confirm: formData.get('password-confirm'),
+            }),
+            headers: { 'Content-Type': 'application/json' },
+        }).then((response) => {
+            if (response.status === 200) {
+                window.location.href = '/login';
+            } else {
+                response.json().then((data) => {
+                    displayFormError(data.error);
+                });
+            }
+        });
     }
 }
 
