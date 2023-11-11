@@ -2,6 +2,8 @@
 
 This part contains instructions on how to use the API.
 
+Before you start using the API a ``.env`` file **must be made**. Variables for the .env file can be found in the .env.example file.
+
 ## API endpoints
 
 ### Sign up
@@ -24,6 +26,13 @@ This part contains instructions on how to use the API.
     - password: user's password
 - **Returns:** Error message when values are invalid. Otherwise returns JWT.
 
+### User data
+`/api/user_data`
+- **Method:** GET
+- **Description:** Returns small amount of user data
+- **Request Body:** None
+- **Returns:** Error message when values are invalid. Otherwise returns user data.
+
 
 # SQL database access
 
@@ -33,5 +42,5 @@ For example to create a new user:
 ```python
 from backend.db import execute
 
-execute("INSERT INTO users (username, password) VALUES (%s, %s)", ("username", "password"))
+execute("INSERT INTO users (email, password) VALUES (%s, %s)", ("legit@email.com", "password"))
 ```
