@@ -1,0 +1,9 @@
+pages:
+  stage: deploy
+  script:
+    - echo "Site is being deployed to GitLab Pages"
+  artifacts:
+    paths:
+      - public
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
