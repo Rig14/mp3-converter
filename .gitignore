@@ -136,6 +136,9 @@ venv.bak/
 .spyderproject
 .spyproject
 
+# media folders
+Youtube
+
 # Rope project settings
 .ropeproject
 
