@@ -2,10 +2,11 @@
 import re
 import sqlite3
 import bcrypt
-from flask import Flask, request
+from flask import Flask, request, send_file
 from flask_cors import CORS
 from backend.db import execute
 from backend.token import create_token, get_id_from_token
+from backend.youtube import youtube_download, youtube_serve
 
 app = Flask(__name__)
 CORS(app)
@@ -123,3 +124,31 @@ def user_data():
         "motd": user[1],
         "profile_picture": user[2],
     }, 200
+
+
+@app.route("/api/download", methods=["POST"])
+def download():
+    """
+    Download content, given a url using yt-dlp.
+
+    Returns a 200 status code and the file name.
+    """
+    url = request.get_json().get("url")
+    platfrom = request.get_json().get("platform")
+    media_format = request.get_json().get("format")
+
+    if platfrom == "youtube":
+        result = youtube_download(url, media_format)
+        return result
+
+    return {"error": "Invalid platform"}, 400
+
+
+@app.route("/api/file", methods=["GET"])
+def serve_file():
+    """Sends file to frontend."""
+    identifier = request.args.get("identifier")
+    platform = request.args.get("platform")
+
+    if platform == "youtube":
+        return youtube_serve(identifier)
