@@ -25,8 +25,37 @@ function processFormData(form_type) {
             formData.get('password-confirm')
         );
     } else if (form_type === 'youtube-convert') {
-        console.log('youtube url and format submitted. Data:');
-        console.log(formData);
+        const url = formData.get('youtube-link');
+        const media_type = formData.get('dropdown-content');
+        youtube_convert(url, media_type);
+    }
+}
+
+async function youtube_convert(url, format_type) {
+    request_url = BACKEND_URL + '/api/download';
+
+    const result = await fetch(request_url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            url,
+            platform: 'youtube',
+            format: format_type,
+        }),
+    });
+
+    if (result.status !== 200) {
+        // if response http status code is not 200, then display error message
+        const data = await result.json();
+        displayFormError(data.error);
+    } else {
+        const data = await result.json();
+
+        window.location.href =
+            BACKEND_URL +
+            '/api/file?identifier=' +
+            data.identifier +
+            '&platform=youtube';
     }
 }
 
