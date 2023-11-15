@@ -572,6 +572,26 @@ footer {
     padding: 0;
 }
 
+.contact-info {
+    position: relative;
+    top: 200px;
+}
+
+.contact-link  {
+    position: relative;
+    left: 1085px;
+    top: 140px;
+    color: blue;
+    font-size: 35px;
+}
+
+.donation-info {
+    position: relative;
+    bottom: 500px;
+    left: 2250px;
+    font-size: 24px;
+}
+
 @media only screen and (max-width: 600px) {
     .user-info > div {
         display: none;
