@@ -580,3 +580,69 @@ footer {
         margin-right: 1rem;
     }
 }
+
+.filename-editing-box {
+    text-align: center;
+}
+
+.filename-editing-box h1 {
+    font-size: 1.5rem;
+    margin-top: 5rem;
+    margin-bottom: 4rem;
+}
+
+.filename-editing-box .need-help-text {
+    text-align: center;
+    margin-right: 25rem;
+    margin-top: 0.75rem;
+    text-shadow: 0.5px 0.5px 0.5px gray;
+}
+
+#file-format-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+    height: auto;
+    background-color: var(--backgroud-color);
+    color: white;
+    border: 3px solid black;
+    width: 4rem;
+    font-size: 1.2rem;
+}
+
+/*fixes alignment issues caused by file-size element
+maybe there is a better solution*/
+#youtube-filename {
+    width: 45.7rem;
+    font-size: 1.1rem;
+}
+
+/*fixes alignment issues caused by file-size element
+maybe there is a better solution*/
+#filename-editing-flex-row {
+    padding-left: 6.75rem;
+}
+
+#file-size {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 1rem;
+    font-size: 1.3rem;
+}
+
+.download-button {
+    margin-top: 3rem;
+    margin-bottom: 4rem;
+    background-color: green;
+    padding: 0.7rem;
+    width: 9rem;
+    border: none;
+    color: white;
+    box-shadow: 2px 2px 2px gray;
+}
+
+.download-button:hover {
+    transform: scale(1.02);
+}

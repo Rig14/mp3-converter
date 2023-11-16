@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="./normalize.css" />
+        <link rel="stylesheet" href="./style.css" />
+        <script src="./script.js"></script>
+        <title>Converter</title>
+    </head>
+    <body>
+        <div class="page-wrapper">
+            <nav>
+                <a href="/">
+                    <img src="./resources/Logo.svg" alt="Converter logo" />
+                </a>
+                <ul class="navbar-links">
+                    <li>
+                        <a href="/"> Home </a>
+                    </li>
+                    <li>
+                        <a href="youtube-convert"> Youtube </a>
+                    </li>
+                    <li>
+                        <a href="soundcloud-convert"> Soundcloud </a>
+                    </li>
+                    <li>
+                        <a href="tiktok-convert"> TikTok </a>
+                    </li>
+                    <li>
+                        <a href="playlist-convert"> Playlist </a>
+                    </li>
+                    <li>
+                        <a href="help"> Help </a>
+                    </li>
+                </ul>
+                <div class="button-container" id="user-info">
+                    <a href="login">
+                        <button class="login-button">Login</button>
+                    </a>
+                    <a href="sign-up">
+                        <button class="signup-button">Sign up</button>
+                    </a>
+                </div>
+            </nav>
+            <div class="main-wrapper">
+                <main>
+                    <div class="filename-editing-box">
+                        <h1>Edit filename or download</h1>
+
+                        <div class="youtube-input-field">
+                            <form action="submit" id="form">
+                                <div id="filename-editing-flex-row">
+                                    <div class="youtube-logo">
+                                        <img
+                                            src="./resources/youtube-logo.svg"
+                                            alt="pw"
+                                        />
+                                        Youtube
+                                    </div>
+                                    <input
+                                        type="text"
+                                        name="youtube-filename"
+                                        id="youtube-filename"
+                                        value="Rick Astley - Never Gonna Give You Up (Official Music Video)"
+                                    />
+
+                                    <div id="file-format-box">.mp3</div>
+                                    <p id="file-size">(3.45 Mb)</p>
+                                </div>
+                                <p class="need-help-text">
+                                    Need help? <a href="help">Click me!</a>
+                                </p>
+                                <button
+                                    class="download-button"
+                                    type="button"
+                                    onclick="processFormData('youtube-download')"
+                                >
+                                    DOWNLOAD
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </main>
+            </div>
+            <footer>
+                <div class="footer-logo-box">
+                    <img src="./resources/Logo.svg" alt="Converter Logo" />
+                </div>
+                <div class="footer-links-box">
+                    <h3>Converters</h3>
+                    <ol>
+                        <li>
+                            <a href="youtube-convert">Youtube</a>
+                        </li>
+                        <li>
+                            <a href="soundcloud-convert">Soundcloud</a>
+                        </li>
+                        <li>
+                            <a href="tiktok-convert">TikTok</a>
+                        </li>
+                        <li>
+                            <a href="playlist-convert">Playlist</a>
+                        </li>
+                    </ol>
+                </div>
+                <div class="footer-links-box">
+                    <h3>Support</h3>
+                    <ol>
+                        <li>
+                            <a href="help">Help</a>
+                        </li>
+                        <li>
+                            <a href="legal">Legal</a>
+                        </li>
+                        <li>
+                            <a href="contact">Contact</a>
+                        </li>
+                        <li>
+                            <a href="feedback">Feedback</a>
+                        </li>
+                    </ol>
+                </div>
+                <p class="copyleft">
+                    © 2023 TheConverterCompany. All wrongs reserved
+                </p>
+            </footer>
+        </div>
+        <script src="./navbar_user.js"></script>
+    </body>
+</html>
