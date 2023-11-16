@@ -89,7 +89,7 @@ async function create_user(email, password, password_confirm) {
         const data = await response.json();
         localStorage.setItem('token', data.token);
         await locally_save_user_data();
-        window.location.href = '/';
+        window.location.href = 'index.html';
     }
 }
 
@@ -116,7 +116,7 @@ async function login_user(email, password) {
         const data = await response.json();
         localStorage.setItem('token', data.token);
         await locally_save_user_data();
-        window.location.href = '/';
+        window.location.href = 'index.html';
     }
 }
 
@@ -144,5 +144,5 @@ function logout() {
     localStorage.removeItem('user_data');
 
     // redirect to home page
-    window.location.href = '/';
+    window.location.href = 'index.html';
 }
