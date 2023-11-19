@@ -14,3 +14,7 @@ dev:
 	make server-dev & make web-dev
 update-db-latest:
 	cd backend && python db.py update_last
+
+install:
+	pip install -r requirements.txt
+	pip install -r dev-requirements.txt
