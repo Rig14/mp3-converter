@@ -1,8 +1,8 @@
 """Main application file"""
 from flask import Flask, request
 from flask_cors import CORS
-from backend.youtube import youtube_download, youtube_serve
 from backend.user import create_user, login_user, get_user_data
+from backend.providers.yt import youtube_download, youtube_serve
 
 app = Flask(__name__)
 CORS(app)
