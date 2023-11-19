@@ -87,9 +87,10 @@ def update():
         conn.commit()
 
 
-def execute():
+def execute(query, params=None):
     """
     Execute a sql query on the database.
+    returns a list of the query results if there are any. else returns a empty list.
     """
     # change dir to backend/db
     os.chdir(DATABASE_FILE_DIR)
@@ -100,7 +101,7 @@ def execute():
         cursor = conn.cursor()
 
         # Execute the query.
-        cursor.execute("SELECT * FROM users")
+        cursor.execute(query, params)
 
         # Get the results.
         results = cursor.fetchall()
