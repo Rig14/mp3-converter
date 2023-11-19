@@ -2,6 +2,7 @@
 
 import os
 import sqlite3
+import sys
 
 # Database location is in the home directory.
 DATABASE_FILE_DIR = os.path.dirname(__file__)
@@ -111,4 +112,5 @@ def execute(query, params=None):
 
 
 if __name__ == "__main__":
-    reset()
+    # run the function with the name passed as the first argument
+    globals()[sys.argv[1]]()
