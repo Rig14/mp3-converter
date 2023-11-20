@@ -137,7 +137,7 @@ venv.bak/
 .spyproject
 
 # media folders
-Youtube
+downloaded-media
 
 # Rope project settings
 .ropeproject
