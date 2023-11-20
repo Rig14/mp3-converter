@@ -27,38 +27,31 @@ function processFormData(form_type) {
     } else if (form_type === 'youtube-convert') {
         const url = formData.get('youtube-link');
         const media_type = formData.get('dropdown-content');
-        youtube_convert(url, media_type);
+
+        download_to_server(url);
     }
 }
 
-async function youtube_convert(url, format_type) {
-    request_url = BACKEND_URL + '/api/download';
-
-    const result = await fetch(request_url, {
+async function download_to_server(url) {
+    const res = await fetch(BACKEND_URL + '/api/download', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
             url,
-            platform: 'youtube',
-            format: format_type,
         }),
+        headers: { 'Content-Type': 'application/json' },
     });
 
-    if (result.status !== 200) {
-        // if response http status code is not 200, then display error message
-        const data = await result.json();
-        displayFormError(data.error);
-    } else {
-        const data = await result.json();
-
-        window.location.href =
-            BACKEND_URL +
-            '/api/file?identifier=' +
-            data.identifier +
-            '&platform=youtube';
+    if (res.status === 200) {
+        const data = await res.json();
+        console.log(data);
+        // got to backend / api / download ? identifier= data . identifier
+        document.getElementById('form').innerHTML = `
+            ${document.getElementById('form').innerHTML}
+            <a href="${BACKEND_URL}/api/file?identifier=${data.identifier}">
+                Download
+        `;
     }
 }
-
 function displayFormError(message) {
     // display error message
     const error = document.getElementById('error-message');
