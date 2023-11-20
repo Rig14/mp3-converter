@@ -40,12 +40,10 @@ Before you start using the API a ``.env`` file **must be made**. Variables for t
 - **Description:** Downloads a file to the **server** using yt-dlp
 - **Request Body:**
     - url: url of the video
-    - format: format of the video
-    - platform: platform of the video
-- **Returns:** Error message when values are invalid. Otherwise returns the identifier.
+- **Returns:** Error message when content cant be downloaded. Otherwise returns the identifier.
 
 ### Get file
-`/api/file?identifier=<identifier>&platform=<platform>`
+`/api/file?identifier=<identifier>`
 - **Method:** GET
 - **Description:** Returns a file
 - **Request Body:** None

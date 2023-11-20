@@ -2,7 +2,7 @@
 from flask import Flask, request
 from flask_cors import CORS
 from backend.user import create_user, login_user, get_user_data
-from backend.providers.yt import youtube_download, youtube_serve
+from backend.downloader import download_to_server, send_file_from_server
 
 app = Flask(__name__)
 CORS(app)
@@ -51,21 +51,13 @@ def download():
     Returns a 200 status code and the file name.
     """
     url = request.get_json().get("url")
-    platfrom = request.get_json().get("platform")
-    media_format = request.get_json().get("format")
 
-    if platfrom == "youtube":
-        result = youtube_download(url, media_format)
-        return result
-
-    return {"error": "Invalid platform"}, 400
+    return download_to_server(url)
 
 
 @app.route("/api/file", methods=["GET"])
 def serve_file():
     """Sends file to frontend."""
     identifier = request.args.get("identifier")
-    platform = request.args.get("platform")
 
-    if platform == "youtube":
-        return youtube_serve(identifier)
+    return send_file_from_server(identifier)
