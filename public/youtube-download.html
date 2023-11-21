@@ -45,12 +45,12 @@
             </nav>
             <div class="main-wrapper">
                 <main>
-                    <div class="link-pasting-box">
-                        <h1>Convert from Youtube</h1>
+                    <div class="filename-editing-box">
+                        <h1>Edit filename or download</h1>
 
                         <div class="input-bar">
                             <form action="submit" id="form">
-                                <div class="link-pasting-flex-row">
+                                <div id="filename-editing-flex-row">
                                     <div class="youtube-logo">
                                         <img
                                             src="./resources/youtube-logo.svg"
@@ -59,50 +59,24 @@
                                         Youtube
                                     </div>
                                     <input
-                                        type="url"
-                                        name="youtube-link"
-                                        id="youtube-link"
-                                        placeholder="Paste any Youtube URL here"
+                                        type="text"
+                                        name="youtube-filename"
+                                        id="youtube-filename"
+                                        value="Rick Astley - Never Gonna Give You Up (Official Music Video)"
                                     />
-                                    <!--
-                                    <div class="youtube-dropdown">
-                                        <div class="dropdown-preview">
-                                            MP32
-                                            <i class="arrow-down"></i>
-                                        </div>
-                                        <div class="dropdown-content-test">
-                                            <p>.mp3 96 kbps</p>
-                                            <p>.mp3 128 kbps</p>
-                                            <p>.mp3 256 kbps</p>
-                                            <p>.mp3 320 kbps</p>
-                                            <p>.mp4 144p</p>
-                                            <p>.mp4 480p</p>
-                                            <p>.mp4 720p</p>
-                                            <p>.mp4 1080p</p>
-                                            <p>võib muuta</p>
-                                        </div>
-                                    </div>
-                                    -->
-                                    <select
-                                        name="dropdown-content"
-                                        id="dropdown-content"
-                                    >
-                                        <option value="3gp">3gp</option>
-                                        <option value="m4a">m4a</option>
-                                        <option value="mp3">mp3</option>
-                                        <option value="mp4">mp4</option>
-                                        <option value="webm">webm</option>
-                                    </select>
+
+                                    <div id="file-format-box">.mp3</div>
+                                    <div id="file-size">(3.45 Mb)</div>
                                 </div>
                                 <p class="need-help-text">
                                     Need help? <a href="help">Click me!</a>
                                 </p>
                                 <button
-                                    class="convert-button"
+                                    class="download-button"
                                     type="button"
-                                    onclick="processFormData('youtube-convert')"
+                                    onclick="processFormData('youtube-download')"
                                 >
-                                    CONVERT
+                                    DOWNLOAD
                                 </button>
                             </form>
                         </div>
