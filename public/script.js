@@ -59,6 +59,7 @@ function displayFormError(message) {
 }
 
 async function create_user(email, password, password_confirm) {
+    set_loading_animation();
     const url = BACKEND_URL + '/api/signup';
 
     // send request to backend with user data
@@ -76,6 +77,7 @@ async function create_user(email, password, password_confirm) {
         // if response http status code is not 200, then display error message
         const data = await response.json();
         displayFormError(data.error);
+        remove_loading_animation();
     } else {
         // if response http status code is 200, then redirect to home page
         // and set token in local storage
@@ -87,6 +89,7 @@ async function create_user(email, password, password_confirm) {
 }
 
 async function login_user(email, password) {
+    set_loading_animation();
     const url = BACKEND_URL + '/api/login';
 
     // send request to backend with user data
@@ -103,6 +106,7 @@ async function login_user(email, password) {
         // if response http status code is not 200, then display error message
         const data = await response.json();
         displayFormError(data.error);
+        remove_loading_animation();
     } else {
         // if response http status code is 200, then redirect to home page
         // and set token in local storage
@@ -138,4 +142,20 @@ function logout() {
 
     // redirect to home page
     window.location.href = 'index.html';
+}
+
+function set_loading_animation() {
+    const button = document.getElementById('submit-button');
+    button.style.display = 'none';
+
+    const loading = document.getElementById('loading-animation');
+    loading.style.display = 'block';
+}
+
+function remove_loading_animation() {
+    const button = document.getElementById('submit-button');
+    button.style.display = 'block';
+
+    const loading = document.getElementById('loading-animation');
+    loading.style.display = 'none';
 }

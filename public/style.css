@@ -580,3 +580,10 @@ footer {
         margin-right: 1rem;
     }
 }
+
+#loading-animation {
+    width: 40px;
+    height: 40px;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
