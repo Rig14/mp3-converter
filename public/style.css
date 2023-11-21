@@ -646,3 +646,10 @@ maybe there is a better solution*/
 .download-button:hover {
     transform: scale(1.02);
 }
+
+#loading-animation {
+    width: 40px;
+    height: 40px;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}

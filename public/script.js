@@ -27,38 +27,31 @@ function processFormData(form_type) {
     } else if (form_type === 'youtube-convert') {
         const url = formData.get('youtube-link');
         const media_type = formData.get('dropdown-content');
-        youtube_convert(url, media_type);
+
+        download_to_server(url);
     }
 }
 
-async function youtube_convert(url, format_type) {
-    request_url = BACKEND_URL + '/api/download';
-
-    const result = await fetch(request_url, {
+async function download_to_server(url) {
+    const res = await fetch(BACKEND_URL + '/api/download', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
             url,
-            platform: 'youtube',
-            format: format_type,
         }),
+        headers: { 'Content-Type': 'application/json' },
     });
 
-    if (result.status !== 200) {
-        // if response http status code is not 200, then display error message
-        const data = await result.json();
-        displayFormError(data.error);
-    } else {
-        const data = await result.json();
-
-        window.location.href =
-            BACKEND_URL +
-            '/api/file?identifier=' +
-            data.identifier +
-            '&platform=youtube';
+    if (res.status === 200) {
+        const data = await res.json();
+        console.log(data);
+        // got to backend / api / download ? identifier= data . identifier
+        document.getElementById('form').innerHTML = `
+            ${document.getElementById('form').innerHTML}
+            <a href="${BACKEND_URL}/api/file?identifier=${data.identifier}">
+                Download
+        `;
     }
 }
-
 function displayFormError(message) {
     // display error message
     const error = document.getElementById('error-message');
@@ -66,6 +59,7 @@ function displayFormError(message) {
 }
 
 async function create_user(email, password, password_confirm) {
+    set_loading_animation();
     const url = BACKEND_URL + '/api/signup';
 
     // send request to backend with user data
@@ -83,6 +77,7 @@ async function create_user(email, password, password_confirm) {
         // if response http status code is not 200, then display error message
         const data = await response.json();
         displayFormError(data.error);
+        remove_loading_animation();
     } else {
         // if response http status code is 200, then redirect to home page
         // and set token in local storage
@@ -94,6 +89,7 @@ async function create_user(email, password, password_confirm) {
 }
 
 async function login_user(email, password) {
+    set_loading_animation();
     const url = BACKEND_URL + '/api/login';
 
     // send request to backend with user data
@@ -110,6 +106,7 @@ async function login_user(email, password) {
         // if response http status code is not 200, then display error message
         const data = await response.json();
         displayFormError(data.error);
+        remove_loading_animation();
     } else {
         // if response http status code is 200, then redirect to home page
         // and set token in local storage
@@ -145,4 +142,20 @@ function logout() {
 
     // redirect to home page
     window.location.href = 'index.html';
+}
+
+function set_loading_animation() {
+    const button = document.getElementById('submit-button');
+    button.style.display = 'none';
+
+    const loading = document.getElementById('loading-animation');
+    loading.style.display = 'block';
+}
+
+function remove_loading_animation() {
+    const button = document.getElementById('submit-button');
+    button.style.display = 'block';
+
+    const loading = document.getElementById('loading-animation');
+    loading.style.display = 'none';
 }
