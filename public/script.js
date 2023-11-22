@@ -26,16 +26,46 @@ function processFormData(form_type) {
         );
     } else if (form_type === 'youtube-convert') {
         const url = formData.get('youtube-link');
+        // Accepts all https combinations, youtu.be and m.youtube
+        // False positive when space or invalid character in url after "watch?v="
+        const regex = url.search(
+            String.raw`^((?:https?:)?\/\/)?((?:www|m)\.)?(?:youtube\.com\/watch\?v=|youtu\.be)`
+        );
+        if (regex === 0) {
+            const media_type = formData.get('dropdown-content');
+
+            window.location.href = `./loading.html?url=${url}&media_type=${media_type}`;
+        } else {
+            displayFormError('Please enter a valid url');
+        }
+    } else if (form_type === 'youtube-download') {
+        const params = new URLSearchParams(window.location.search);
+
+        window.location.href =
+            BACKEND_URL + '/api/file?identifier=' + params.get('identifier');
+    } else if (form_type === 'soundcloud-convert') {
+        const url = formData.get('soundcloud-link');
         const media_type = formData.get('dropdown-content');
 
         window.location.href = `./loading.html?url=${url}&media_type=${media_type}`;
-    } else if (form_type === 'youtube-download') {
+    } else if (form_type === 'soundcloud-download') {
+        const params = new URLSearchParams(window.location.search);
+
+        window.location.href =
+            BACKEND_URL + '/api/file?identifier=' + params.get('identifier');
+    } else if (form_type === 'tiktok-convert') {
+        const url = formData.get('tiktok-link');
+        const media_type = formData.get('dropdown-content');
+
+        window.location.href = `./loading.html?url=${url}&media_type=${media_type}`;
+    } else if (form_type === 'tiktok-download') {
         const params = new URLSearchParams(window.location.search);
 
         window.location.href =
             BACKEND_URL + '/api/file?identifier=' + params.get('identifier');
     }
 }
+
 function displayFormError(message) {
     // display error message
     const error = document.getElementById('error-message');
