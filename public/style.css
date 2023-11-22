@@ -572,25 +572,40 @@ footer {
     padding: 0;
 }
 
-.contact-info {
-    position: relative;
-    top: 200px;
+.contact-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 90rem;
 }
 
-.contact-link  {
-    position: relative;
-    left: 1085px;
-    top: 140px;
-    color: blue;
-    font-size: 35px;
+.contact-info {
+    width: 600px;
+    margin-right: auto;
 }
 
 .donation-info {
-    position: relative;
-    bottom: 500px;
-    left: 2250px;
-    font-size: 24px;
+    width: 200px;
+    margin-left: auto;
+    margin-top: 43rem;
 }
+
+.contact-link  {
+    color: blue;
+    font-size: 2rem;
+}
+
+.feedback-box {
+    display: flex;
+    flex-direction: column;
+    margin-right: auto;
+}
+
+
+.submit-button {
+    color: white;
+    background-color: black;
+}
+
 
 @media only screen and (max-width: 600px) {
     .user-info > div {
