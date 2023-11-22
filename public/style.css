@@ -691,3 +691,10 @@ maybe there is a better solution*/
     margin-top: 2rem;
     margin-bottom: 2rem;
 }
+
+#loading-page-animation {
+    width: 80px;
+    height: 80px;
+    margin-top: 7rem;
+    margin-bottom: 2rem;
+}
