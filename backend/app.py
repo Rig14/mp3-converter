@@ -51,8 +51,9 @@ def download():
     Returns a 200 status code and the file name.
     """
     url = request.get_json().get("url")
+    format_str = request.get_json().get("format")
 
-    return download_to_server(url)
+    return download_to_server(url, format_str)
 
 
 @app.route("/api/file", methods=["GET"])
