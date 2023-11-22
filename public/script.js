@@ -28,15 +28,16 @@ function processFormData(form_type) {
         const url = formData.get('youtube-link');
         const media_type = formData.get('dropdown-content');
 
-        download_to_server(url);
+        download_to_server(url, media_type);
     }
 }
 
-async function download_to_server(url) {
+async function download_to_server(url, media_type) {
     const res = await fetch(BACKEND_URL + '/api/download', {
         method: 'POST',
         body: JSON.stringify({
             url,
+            format: media_type,
         }),
         headers: { 'Content-Type': 'application/json' },
     });
