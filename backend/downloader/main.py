@@ -53,7 +53,7 @@ def download_to_server(url: str, format_str: str):
         "-o",  # set the output file name
         "%(title)s.%(ext)s",
         "-f",  # set the format
-        "/".join(map(str, FORMATS[format_str])) + "+bestaudio",
+        "/".join(map(str, FORMATS[format_str])) + "/bestvideo" + "+bestaudio",
         url,  # the url to download
     ]
 
