@@ -28,29 +28,12 @@ function processFormData(form_type) {
         const url = formData.get('youtube-link');
         const media_type = formData.get('dropdown-content');
 
-        download_to_server(url, media_type);
-    }
-}
+        window.location.href = `./loading.html?url=${url}&media_type=${media_type}`;
+    } else if (form_type === 'youtube-download') {
+        const params = new URLSearchParams(window.location.search);
 
-async function download_to_server(url, media_type) {
-    const res = await fetch(BACKEND_URL + '/api/download', {
-        method: 'POST',
-        body: JSON.stringify({
-            url,
-            format: media_type,
-        }),
-        headers: { 'Content-Type': 'application/json' },
-    });
-
-    if (res.status === 200) {
-        const data = await res.json();
-        console.log(data);
-        // got to backend / api / download ? identifier= data . identifier
-        document.getElementById('form').innerHTML = `
-            ${document.getElementById('form').innerHTML}
-            <a href="${BACKEND_URL}/api/file?identifier=${data.identifier}">
-                Download
-        `;
+        window.location.href =
+            BACKEND_URL + '/api/file?identifier=' + params.get('identifier');
     }
 }
 function displayFormError(message) {
@@ -159,4 +142,30 @@ function remove_loading_animation() {
 
     const loading = document.getElementById('loading-animation');
     loading.style.display = 'none';
+}
+
+async function on_loading_page() {
+    const params = new URLSearchParams(window.location.search);
+    const url = params.get('url');
+    const media_type = params.get('media_type');
+
+    const request_url = BACKEND_URL + '/api/download';
+
+    const response = await fetch(request_url, {
+        body: JSON.stringify({
+            url,
+            format: media_type,
+        }),
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+    });
+
+    if (response.status !== 200) {
+        window.location.href = 'index.html';
+    } else {
+        const data = await response.json();
+        const identifier = data.identifier;
+        window.location.href =
+            './youtube-download.html?identifier=' + identifier;
+    }
 }
