@@ -33,7 +33,6 @@ function processFormData(form_type) {
         );
         if (regex === 0) {
             const media_type = formData.get('dropdown-content');
-
             window.location.href = `./loading.html?url=${url}&media_type=${media_type}`;
         } else {
             displayFormError('Please enter a valid url');
@@ -45,9 +44,15 @@ function processFormData(form_type) {
             BACKEND_URL + '/api/file?identifier=' + params.get('identifier');
     } else if (form_type === 'soundcloud-convert') {
         const url = formData.get('soundcloud-link');
-        const media_type = formData.get('dropdown-content');
-
-        window.location.href = `./loading.html?url=${url}&media_type=${media_type}`;
+        const regex = url.search(
+            String.raw`^((?:https?:)?\/\/)?((?:www|m|on)\.)?soundcloud\.com\/(?!discover|feed|you|-|_)`
+        );
+        if (regex === 0) {
+            const media_type = formData.get('dropdown-content');
+            window.location.href = `./loading.html?url=${url}&media_type=${media_type}`;
+        } else {
+            displayFormError('Please enter a valid url');
+        }
     } else if (form_type === 'soundcloud-download') {
         const params = new URLSearchParams(window.location.search);
 
