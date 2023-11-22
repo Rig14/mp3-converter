@@ -1,5 +1,6 @@
 """Everything that has to do with downloading usign yt-dlp"""
 import os
+import random
 import subprocess
 
 from flask import send_file
@@ -37,13 +38,10 @@ def download_to_server(url: str, format_str: str):
         os.makedirs(MEDIA_DIR)
 
     # make the identifier
-    identifier = hex(hash(url))[3:]
+    identifier = hex(hash(url + str(random.randint(1, 1000))))[3:]
 
     # create a dir named after identifier in the media dir
-    try:
-        os.makedirs(os.path.join(MEDIA_DIR, str(identifier)))
-    except FileExistsError:
-        return {"identifier": identifier}, 200
+    os.makedirs(os.path.join(MEDIA_DIR, identifier))
 
     # create a command to be run
     command = [
