@@ -1,0 +1,1 @@
+rm -rf /workspaces/iti0105-2023/backend/downloader/downloaded-media
