@@ -1,0 +1,1 @@
+rm -rf ./backend/downloader/downloaded-media

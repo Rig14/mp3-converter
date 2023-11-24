@@ -25,5 +25,5 @@
 			]
         }
     },
-    "forwardPorts": [5000, 8080]
+    "forwardPorts": [5000, 8080, 80]
 }
