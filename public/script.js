@@ -29,8 +29,8 @@ function processFormData(form_type) {
         // Accepts all https combinations, youtu.be and m.youtube
         // Certain invalid characters in url might cause false-positive
         const regex = url.search(
-            String.raw`^((?:https?:)?\/\/)?((?:www|m)\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/?)([\w\-]+)(\S+)?$`
             // less strict regex: String.raw`^((?:https?:)?\/\/)?((?:www|m)\.)?(?:youtube\.com\/watch\?v=|youtu\.be)`
+            String.raw`^((?:https?:)?\/\/)?((?:www|m)\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/?)([\w\-]+)(\S+)?$`
         );
         if (regex === 0) {
             const media_type = formData.get('dropdown-content');
@@ -47,6 +47,7 @@ function processFormData(form_type) {
         const url = formData.get('soundcloud-link');
         const regex = url.search(
             // Desktop browser: www.soundcloud    Mobile browser: m.soundcloud    Mobile app: on.soundcloud
+            // negative lookahead contains discover|feed|you because user might forget to open the song directly and copy only the discover page url
             // less strict regex: String.raw`^((?:https?:)?\/\/)?((?:www|m|on)\.)?soundcloud\.com\/(?!discover|feed|you)`
             String.raw`^((?:https?:)?\/\/)?((?:www|m|on)\.)?soundcloud\.com\/(?!discover|feed|you)(?!.*?(-|_){2})([\w\-]+)(\S+)?$`
         );
@@ -64,7 +65,7 @@ function processFormData(form_type) {
     } else if (form_type === 'tiktok-convert') {
         const url = formData.get('tiktok-link');
         const regex = url.search(
-            // regex has 2 main parts:  url copied from mobile app containing "vm.tiktok"   |   url copied directly from a browser that must contain "/video/"
+            // 2 main regex parts:  url copied from mobile app containing "vm.tiktok"   |   url copied directly from a browser that must contain "/video/"
             String.raw`^((?:https?:)?\/\/)?((?:www)\.)?tiktok\.com\/([\w\-@]+)/video/(?!.*?(-|_){2})([\w\-@]+)(\S+)?$|^((?:https?:)?\/\/)?((?:vm)\.)?tiktok\.com\/(?!.*?(-|_){2})([\w\-@]+)(\S+)?$`
         );
         if (regex === 0) {
