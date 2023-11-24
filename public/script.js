@@ -27,15 +27,16 @@ function processFormData(form_type) {
     } else if (form_type === 'youtube-convert') {
         const url = formData.get('youtube-link');
         // Accepts all https combinations, youtu.be and m.youtube
-        // False positive when space or invalid character in url after "watch?v="
+        // Certain invalid characters in url might cause false-positive
         const regex = url.search(
-            String.raw`^((?:https?:)?\/\/)?((?:www|m)\.)?(?:youtube\.com\/watch\?v=|youtu\.be)`
+            String.raw`^((?:https?:)?\/\/)?((?:www|m)\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/?)([\w\-]+)(\S+)?$`
+            // less strict regex: String.raw`^((?:https?:)?\/\/)?((?:www|m)\.)?(?:youtube\.com\/watch\?v=|youtu\.be)`
         );
         if (regex === 0) {
             const media_type = formData.get('dropdown-content');
             window.location.href = `./loading.html?url=${url}&media_type=${media_type}`;
         } else {
-            displayFormError('Please enter a valid url');
+            displayFormError('Please enter a valid Youtube url');
         }
     } else if (form_type === 'youtube-download') {
         const params = new URLSearchParams(window.location.search);
@@ -45,13 +46,15 @@ function processFormData(form_type) {
     } else if (form_type === 'soundcloud-convert') {
         const url = formData.get('soundcloud-link');
         const regex = url.search(
-            String.raw`^((?:https?:)?\/\/)?((?:www|m|on)\.)?soundcloud\.com\/(?!discover|feed|you|-|_)`
+            // Desktop browser: www.soundcloud    Mobile browser: m.soundcloud    Mobile app: on.soundcloud
+            // less strict regex: String.raw`^((?:https?:)?\/\/)?((?:www|m|on)\.)?soundcloud\.com\/(?!discover|feed|you)`
+            String.raw`^((?:https?:)?\/\/)?((?:www|m|on)\.)?soundcloud\.com\/(?!discover|feed|you)(?!.*?(-|_){2})([\w\-]+)(\S+)?$`
         );
         if (regex === 0) {
             const media_type = formData.get('dropdown-content');
             window.location.href = `./loading.html?url=${url}&media_type=${media_type}`;
         } else {
-            displayFormError('Please enter a valid url');
+            displayFormError('Please enter a valid Soundcloud url');
         }
     } else if (form_type === 'soundcloud-download') {
         const params = new URLSearchParams(window.location.search);
@@ -60,9 +63,16 @@ function processFormData(form_type) {
             BACKEND_URL + '/api/file?identifier=' + params.get('identifier');
     } else if (form_type === 'tiktok-convert') {
         const url = formData.get('tiktok-link');
-        const media_type = formData.get('dropdown-content');
-
-        window.location.href = `./loading.html?url=${url}&media_type=${media_type}`;
+        const regex = url.search(
+            // regex has 2 main parts:  url copied from mobile app containing "vm.tiktok"   |   url copied directly from a browser that must contain "/video/"
+            String.raw`^((?:https?:)?\/\/)?((?:www)\.)?tiktok\.com\/([\w\-@]+)/video/(?!.*?(-|_){2})([\w\-@]+)(\S+)?$|^((?:https?:)?\/\/)?((?:vm)\.)?tiktok\.com\/(?!.*?(-|_){2})([\w\-@]+)(\S+)?$`
+        );
+        if (regex === 0) {
+            const media_type = formData.get('dropdown-content');
+            window.location.href = `./loading.html?url=${url}&media_type=${media_type}`;
+        } else {
+            displayFormError('Please enter a valid Tiktok url');
+        }
     } else if (form_type === 'tiktok-download') {
         const params = new URLSearchParams(window.location.search);
 
