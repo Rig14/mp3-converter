@@ -36,14 +36,14 @@ RUN --mount=type=cache,target=/root/.cache/pip \
     --mount=type=bind,source=requirements.txt,target=requirements.txt \
     python -m pip install -r requirements.txt
 
+# make the database file writable by the non-privileged user
+RUN chmod 666 backend/db/database.db
+
 # Switch to the non-privileged user to run the application.
 USER appuser
 
 # Copy the source code into the container.
 COPY . .
-
-# make the database file writable by the non-privileged user
-RUN chmod 666 backend/db/database.db
 
 # Expose the port that the application listens on.
 EXPOSE 80
