@@ -42,6 +42,9 @@ USER appuser
 # Copy the source code into the container.
 COPY . .
 
+# make the database file writable by the non-privileged user
+RUN chmod 666 backend/db/database.db
+
 # Expose the port that the application listens on.
 EXPOSE 80
 
