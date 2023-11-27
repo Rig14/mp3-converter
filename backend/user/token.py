@@ -12,6 +12,9 @@ def create_token(user_id: int):
     load_dotenv()
     jwt_secret = os.getenv("JWT_SECRET")
 
+    if not jwt_secret:
+        jwt_secret = "secret"
+
     payload = {
         "exp": datetime.datetime.now() + datetime.timedelta(days=10),
         "sub": user_id,
