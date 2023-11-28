@@ -1,4 +1,6 @@
-const BACKEND_URL = 'http://193.40.156.222';
+//const BACKEND_URL = 'http://193.40.156.222';
+
+const BACKEND_URL = 'http://127.0.0.1:5000';
 
 function showPassword(fieldID) {
     // shows the password in plain text instead on dots
@@ -39,10 +41,15 @@ function processFormData(form_type) {
             displayFormError('Please enter a valid Youtube url');
         }
     } else if (form_type === 'youtube-download') {
+        file_name = formData.get('youtube-filename');
         const params = new URLSearchParams(window.location.search);
 
         window.location.href =
-            BACKEND_URL + '/api/file?identifier=' + params.get('identifier');
+            BACKEND_URL +
+            '/api/file?identifier=' +
+            params.get('identifier') +
+            '&file_name=' +
+            file_name;
     } else if (form_type === 'soundcloud-convert') {
         const url = formData.get('soundcloud-link');
         const regex = url.search(

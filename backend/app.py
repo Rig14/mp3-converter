@@ -60,5 +60,6 @@ def download():
 def serve_file():
     """Sends file to frontend."""
     identifier = request.args.get("identifier")
+    file_name = request.args.get("file_name")
 
-    return send_file_from_server(identifier)
+    return send_file_from_server(identifier, file_name)

@@ -64,7 +64,7 @@ def download_to_server(url: str, format_str: str):
     return {"identifier": identifier}, 200
 
 
-def send_file_from_server(identifier: str, file_name: str | None = None):
+def send_file_from_server(identifier: str, file_name_new: str | None = None):
     """Will send the file as an atachment to the client using the identifier"""
     # create the path to the file directory
     path = os.path.join(MEDIA_DIR, identifier)
@@ -76,8 +76,16 @@ def send_file_from_server(identifier: str, file_name: str | None = None):
     # get the file name from the directory
     file_name = os.listdir(path)[0]
 
+    file_extention = file_name.split(".")[-1]
+
     # create the path to the file
     path = os.path.join(path, file_name)
 
     # return the file as an attachment
-    return send_file(path, as_attachment=True, download_name=file_name)
+    return send_file(
+        path,
+        as_attachment=True,
+        download_name=file_name_new + "." + file_extention
+        if file_name_new
+        else file_name,
+    )
