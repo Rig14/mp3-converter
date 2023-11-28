@@ -11,12 +11,12 @@
     <body>
         <div class="page-wrapper">
             <nav>
-                <a href="/">
+                <a href="index.html">
                     <img src="./resources/Logo.svg" alt="Converter logo" />
                 </a>
                 <ul class="navbar-links">
                     <li>
-                        <a href="/"> Home </a>
+                        <a href="index.html"> Home </a>
                     </li>
                     <li>
                         <a href="youtube-convert"> Youtube </a>
@@ -47,10 +47,9 @@
                 <main>
                     <div class="link-pasting-box">
                         <h1>Convert from Youtube</h1>
-
-                        <div class="youtube-input-field">
+                        <div class="input-bar">
                             <form action="submit" id="form">
-                                <div>
+                                <div class="link-pasting-flex-row">
                                     <div class="youtube-logo">
                                         <img
                                             src="./resources/youtube-logo.svg"
@@ -87,16 +86,20 @@
                                         name="dropdown-content"
                                         id="dropdown-content"
                                     >
-                                        <option value="3gp">3gp</option>
-                                        <option value="m4a">m4a</option>
-                                        <option value="mp3">mp3</option>
-                                        <option value="mp4">mp4</option>
-                                        <option value="webm">webm</option>
+                                        <option value="144p">144p</option>
+                                        <option value="240p">240p</option>
+                                        <option value="360p">360p</option>
+                                        <option value="480p">480p</option>
+                                        <option value="720p">720p</option>
+                                        <option value="1080p">1080p</option>
+                                        <option value="1440p">1440p</option>
+                                        <option value="2160p">2160p</option>
                                     </select>
                                 </div>
                                 <p class="need-help-text">
                                     Need help? <a href="help">Click me!</a>
                                 </p>
+                                <p id="error-message"></p>
                                 <button
                                     class="convert-button"
                                     type="button"

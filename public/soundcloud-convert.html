@@ -6,12 +6,6 @@
         <link rel="stylesheet" href="./normalize.css" />
         <link rel="stylesheet" href="./style.css" />
         <script src="./script.js"></script>
-        <script>
-            // prevent user from accessing this page if they are already logged in
-            if (localStorage.getItem('token')) {
-                window.location.href = '/';
-            }
-        </script>
         <title>Converter</title>
     </head>
     <body>
@@ -51,61 +45,44 @@
             </nav>
             <div class="main-wrapper">
                 <main>
-                    <div class="user-form-box">
-                        <h1>Login</h1>
-                        <form action="submit" id="form">
-                            <div class="input-field">
-                                <label for="email"> Email: </label>
-                                <div>
-                                    <input
-                                        type="text"
-                                        name="email"
-                                        id="email"
-                                        placeholder="Enter your email address..."
-                                    />
-                                </div>
-                            </div>
-                            <div class="input-field">
-                                <label for="password"> Password: </label>
-                                <div>
-                                    <input
-                                        type="password"
-                                        name="password"
-                                        id="password"
-                                        placeholder="Enter your password..."
-                                    />
-                                    <button
-                                        type="button"
-                                        onmousedown="showPassword('password')"
-                                        onmouseup="hidePassword('password')"
-                                    >
+                    <div class="link-pasting-box">
+                        <h1>Convert from Soundcloud</h1>
+                        <div class="input-bar">
+                            <form action="submit" id="form">
+                                <div class="link-pasting-flex-row">
+                                    <div class="soundcloud-logo">
                                         <img
-                                            src="./resources/password-eye.svg"
-                                            alt="Password eye"
+                                            src="./resources/soundcloud-logo.svg"
+                                            alt="pw"
                                         />
-                                    </button>
+                                        Soundcloud
+                                    </div>
+                                    <input
+                                        type="url"
+                                        name="soundcloud-link"
+                                        id="soundcloud-link"
+                                        placeholder="Paste any Soundcloud URL here"
+                                    />
+                                    <select
+                                        name="dropdown-content"
+                                        id="dropdown-content"
+                                    >
+                                        <option value="mp3">mp3</option>
+                                    </select>
                                 </div>
-                            </div>
-                            <p id="error-message"></p>
-                            <p class="account-text">
-                                Don't have an account?
-                                <a href="sign-up">Sign up</a>
-                            </p>
-                            <button
-                                class="submit-button"
-                                type="button"
-                                id="submit-button"
-                                onclick="processFormData('login')"
-                            >
-                                Login
-                            </button>
-                            <img
-                                src="./resources/loading-animation.gif"
-                                alt=""
-                                id="loading-animation"
-                                style="display: none"
-                            />
-                        </form>
+                                <p class="need-help-text">
+                                    Need help? <a href="help">Click me!</a>
+                                </p>
+                                <p id="error-message"></p>
+                                <button
+                                    class="convert-button"
+                                    type="button"
+                                    onclick="processFormData('soundcloud-convert')"
+                                >
+                                    CONVERT
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </main>
             </div>

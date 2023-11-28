@@ -6,12 +6,6 @@
         <link rel="stylesheet" href="./normalize.css" />
         <link rel="stylesheet" href="./style.css" />
         <script src="./script.js"></script>
-        <script>
-            // prevent user from accessing this page if they are already logged in
-            if (localStorage.getItem('token')) {
-                window.location.href = '/';
-            }
-        </script>
         <title>Converter</title>
     </head>
     <body>
@@ -51,61 +45,40 @@
             </nav>
             <div class="main-wrapper">
                 <main>
-                    <div class="user-form-box">
-                        <h1>Login</h1>
-                        <form action="submit" id="form">
-                            <div class="input-field">
-                                <label for="email"> Email: </label>
-                                <div>
+                    <div class="filename-editing-box">
+                        <h1>Edit filename or download</h1>
+                        <div class="input-bar">
+                            <form action="submit" id="form">
+                                <div id="filename-editing-flex-row">
+                                    <div class="soundcloud-logo">
+                                        <img
+                                            src="./resources/soundcloud-logo.svg"
+                                            alt="pw"
+                                        />
+                                        Soundcloud
+                                    </div>
                                     <input
                                         type="text"
-                                        name="email"
-                                        id="email"
-                                        placeholder="Enter your email address..."
+                                        name="soundcloud-filename"
+                                        id="filename-input-element"
+                                        value="Rick Astley - Never Gonna Give You Up (slowed)"
                                     />
+
+                                    <div id="file-format-box">.mp3</div>
+                                    <div id="file-size">(3.45 Mb)</div>
                                 </div>
-                            </div>
-                            <div class="input-field">
-                                <label for="password"> Password: </label>
-                                <div>
-                                    <input
-                                        type="password"
-                                        name="password"
-                                        id="password"
-                                        placeholder="Enter your password..."
-                                    />
-                                    <button
-                                        type="button"
-                                        onmousedown="showPassword('password')"
-                                        onmouseup="hidePassword('password')"
-                                    >
-                                        <img
-                                            src="./resources/password-eye.svg"
-                                            alt="Password eye"
-                                        />
-                                    </button>
-                                </div>
-                            </div>
-                            <p id="error-message"></p>
-                            <p class="account-text">
-                                Don't have an account?
-                                <a href="sign-up">Sign up</a>
-                            </p>
-                            <button
-                                class="submit-button"
-                                type="button"
-                                id="submit-button"
-                                onclick="processFormData('login')"
-                            >
-                                Login
-                            </button>
-                            <img
-                                src="./resources/loading-animation.gif"
-                                alt=""
-                                id="loading-animation"
-                                style="display: none"
-                            />
-                        </form>
+                                <p class="need-help-text">
+                                    Need help? <a href="help">Click me!</a>
+                                </p>
+                                <button
+                                    class="download-button"
+                                    type="button"
+                                    onclick="processFormData('soundcloud-download')"
+                                >
+                                    DOWNLOAD
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </main>
             </div>

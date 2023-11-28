@@ -5,6 +5,7 @@
     --alt-link-color: #878787;
     --form-color: #d9d9d9;
     --link-color: #194af6;
+    --download-color: #3f8846;
 }
 
 * {
@@ -400,13 +401,13 @@ footer {
     margin-bottom: 4rem;
 }
 
-.youtube-input-field div {
+.input-bar .link-pasting-flex-row {
     display: flex;
     flex-direction: row;
     height: 3rem;
 }
 
-.youtube-input-field input {
+.input-bar input {
     border: none;
     background-color: var(--form-color);
     width: 40rem;
@@ -418,11 +419,11 @@ footer {
     font-size: 1rem;
 }
 
-.youtube-input-field img {
+.youtube-logo img {
     padding-left: 0.5rem;
 }
 
-.youtube-input-field .youtube-logo {
+.input-bar .youtube-logo {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -435,8 +436,41 @@ footer {
     font-size: 1.3rem;
     z-index: 1;
 }
+
+.soundcloud-logo img {
+    padding-left: 0.2rem;
+}
+
+.input-bar .soundcloud-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--form-color);
+    height: auto;
+    gap: 0rem;
+    width: 10rem;
+    border-radius: 30px 0px 0px 30px;
+    border: 3px solid black;
+    font-size: 1.3rem;
+    z-index: 1;
+}
+
+.input-bar .tiktok-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--form-color);
+    height: auto;
+    gap: 0.1rem;
+    width: 10rem;
+    border-radius: 30px 0px 0px 30px;
+    border: 3px solid black;
+    font-size: 1.3rem;
+    z-index: 1;
+}
+
 /*
-.youtube-input-field .youtube-dropdown .dropdown-preview {
+.input-bar .youtube-dropdown .dropdown-preview {
     height: auto;
     align-items: center;
     justify-content: center;
@@ -449,7 +483,7 @@ footer {
     border: 3px solid black;
 }
 
-.youtube-input-field .dropdown-content-test {
+.input-bar .dropdown-content-test {
     position: static;
     display: none;
     flex-direction: column;
@@ -487,7 +521,7 @@ footer {
     text-align: center;
     margin-right: 25rem;
     margin-top: 0.75rem;
-    text-shadow: 0.5px 0.5px 0.5px gray;
+    text-shadow: 0.4px 0.4px 0.4px gray;
 }
 
 .convert-button {
@@ -614,4 +648,88 @@ footer {
     .user-info > a {
         margin-right: 1rem;
     }
+}
+
+.filename-editing-box {
+    text-align: center;
+}
+
+.filename-editing-box h1 {
+    font-size: 1.5rem;
+    margin-top: 5rem;
+    margin-bottom: 4rem;
+}
+
+.filename-editing-box .need-help-text {
+    text-align: center;
+    margin-right: 25rem;
+    margin-top: 0.75rem;
+    text-shadow: 0.4px 0.4px 0.4px gray;
+}
+
+#file-format-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+    height: auto;
+    background-color: var(--backgroud-color);
+    color: white;
+    border: 3px solid black;
+    width: 4rem;
+    font-size: 1.2rem;
+}
+
+/*fixes alignment issues caused by file-size element
+maybe there is a better solution*/
+#filename-input-element {
+    width: 45.7rem;
+    font-size: 1.1rem;
+}
+
+/*fixes alignment issues caused by file-size element
+maybe there is a better solution*/
+#filename-editing-flex-row {
+    display: flex;
+    flex-direction: row;
+    height: 3rem;
+    padding-left: 6.75rem;
+}
+
+#file-size {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    padding-left: 1rem;
+    font-size: 1.3rem;
+}
+
+.download-button {
+    margin-top: 3rem;
+    margin-bottom: 4rem;
+    background-color: var(--download-color);
+    padding: 0.7rem;
+    width: 9rem;
+    border: none;
+    color: white;
+    box-shadow: 2px 2px 2px gray;
+}
+
+.download-button:hover {
+    transform: scale(1.02);
+}
+
+#loading-animation {
+    width: 40px;
+    height: 40px;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+#loading-page-animation {
+    width: 80px;
+    height: 80px;
+    margin-top: 7rem;
+    margin-bottom: 2rem;
 }

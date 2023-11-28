@@ -6,12 +6,6 @@
         <link rel="stylesheet" href="./normalize.css" />
         <link rel="stylesheet" href="./style.css" />
         <script src="./script.js"></script>
-        <script>
-            // prevent user from accessing this page if they are already logged in
-            if (localStorage.getItem('token')) {
-                window.location.href = '/';
-            }
-        </script>
         <title>Converter</title>
     </head>
     <body>
@@ -51,62 +45,12 @@
             </nav>
             <div class="main-wrapper">
                 <main>
-                    <div class="user-form-box">
-                        <h1>Login</h1>
-                        <form action="submit" id="form">
-                            <div class="input-field">
-                                <label for="email"> Email: </label>
-                                <div>
-                                    <input
-                                        type="text"
-                                        name="email"
-                                        id="email"
-                                        placeholder="Enter your email address..."
-                                    />
-                                </div>
-                            </div>
-                            <div class="input-field">
-                                <label for="password"> Password: </label>
-                                <div>
-                                    <input
-                                        type="password"
-                                        name="password"
-                                        id="password"
-                                        placeholder="Enter your password..."
-                                    />
-                                    <button
-                                        type="button"
-                                        onmousedown="showPassword('password')"
-                                        onmouseup="hidePassword('password')"
-                                    >
-                                        <img
-                                            src="./resources/password-eye.svg"
-                                            alt="Password eye"
-                                        />
-                                    </button>
-                                </div>
-                            </div>
-                            <p id="error-message"></p>
-                            <p class="account-text">
-                                Don't have an account?
-                                <a href="sign-up">Sign up</a>
-                            </p>
-                            <button
-                                class="submit-button"
-                                type="button"
-                                id="submit-button"
-                                onclick="processFormData('login')"
-                            >
-                                Login
-                            </button>
-                            <img
-                                src="./resources/loading-animation.gif"
-                                alt=""
-                                id="loading-animation"
-                                style="display: none"
-                            />
-                        </form>
-                    </div>
+                    <img
+                        src="./resources/loading-animation.gif"
+                        alt=""
+                        id="loading-page-animation"
+                    />
+                    Converting your file, please wait
                 </main>
             </div>
             <footer>
@@ -153,5 +97,8 @@
             </footer>
         </div>
         <script src="./navbar_user.js"></script>
+        <script>
+            on_loading_page();
+        </script>
     </body>
 </html>

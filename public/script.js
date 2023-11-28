@@ -1,4 +1,4 @@
-const BACKEND_URL = 'http://localhost:5000';
+const BACKEND_URL = 'http://193.40.156.222';
 
 function showPassword(fieldID) {
     // shows the password in plain text instead on dots
@@ -26,36 +26,59 @@ function processFormData(form_type) {
         );
     } else if (form_type === 'youtube-convert') {
         const url = formData.get('youtube-link');
-        const media_type = formData.get('dropdown-content');
-        youtube_convert(url, media_type);
-    }
-}
-
-async function youtube_convert(url, format_type) {
-    request_url = BACKEND_URL + '/api/download';
-
-    const result = await fetch(request_url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            url,
-            platform: 'youtube',
-            format: format_type,
-        }),
-    });
-
-    if (result.status !== 200) {
-        // if response http status code is not 200, then display error message
-        const data = await result.json();
-        displayFormError(data.error);
-    } else {
-        const data = await result.json();
+        // Accepts all https combinations, youtu.be and m.youtube
+        // Certain invalid characters in url might cause false-positive
+        const regex = url.search(
+            // less strict regex: String.raw`^((?:https?:)?\/\/)?((?:www|m)\.)?(?:youtube\.com\/watch\?v=|youtu\.be)`
+            String.raw`^((?:https?:)?\/\/)?((?:www|m)\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/?)([\w\-]+)(\S+)?$`
+        );
+        if (regex === 0) {
+            const media_type = formData.get('dropdown-content');
+            window.location.href = `./loading.html?url=${url}&media_type=${media_type}`;
+        } else {
+            displayFormError('Please enter a valid Youtube url');
+        }
+    } else if (form_type === 'youtube-download') {
+        const params = new URLSearchParams(window.location.search);
 
         window.location.href =
-            BACKEND_URL +
-            '/api/file?identifier=' +
-            data.identifier +
-            '&platform=youtube';
+            BACKEND_URL + '/api/file?identifier=' + params.get('identifier');
+    } else if (form_type === 'soundcloud-convert') {
+        const url = formData.get('soundcloud-link');
+        const regex = url.search(
+            // Desktop browser: www.soundcloud    Mobile browser: m.soundcloud    Mobile app: on.soundcloud
+            // negative lookahead contains discover|feed|you because user might forget to open the song directly and copy only the discover page url
+            // less strict regex: String.raw`^((?:https?:)?\/\/)?((?:www|m|on)\.)?soundcloud\.com\/(?!discover|feed|you)`
+            String.raw`^((?:https?:)?\/\/)?((?:www|m|on)\.)?soundcloud\.com\/(?!discover|feed|you)(?!.*?(-|_){2})([\w\-]+)(\S+)?$`
+        );
+        if (regex === 0) {
+            const media_type = formData.get('dropdown-content');
+            window.location.href = `./loading.html?url=${url}&media_type=${media_type}`;
+        } else {
+            displayFormError('Please enter a valid Soundcloud url');
+        }
+    } else if (form_type === 'soundcloud-download') {
+        const params = new URLSearchParams(window.location.search);
+
+        window.location.href =
+            BACKEND_URL + '/api/file?identifier=' + params.get('identifier');
+    } else if (form_type === 'tiktok-convert') {
+        const url = formData.get('tiktok-link');
+        const regex = url.search(
+            // 2 main regex parts:  url copied from mobile app containing "vm.tiktok"   |   url copied directly from a browser that must contain "/video/"
+            String.raw`^((?:https?:)?\/\/)?((?:www)\.)?tiktok\.com\/([\w\-@]+)/video/(?!.*?(-|_){2})([\w\-@]+)(\S+)?$|^((?:https?:)?\/\/)?((?:vm)\.)?tiktok\.com\/(?!.*?(-|_){2})([\w\-@]+)(\S+)?$`
+        );
+        if (regex === 0) {
+            const media_type = formData.get('dropdown-content');
+            window.location.href = `./loading.html?url=${url}&media_type=${media_type}`;
+        } else {
+            displayFormError('Please enter a valid Tiktok url');
+        }
+    } else if (form_type === 'tiktok-download') {
+        const params = new URLSearchParams(window.location.search);
+
+        window.location.href =
+            BACKEND_URL + '/api/file?identifier=' + params.get('identifier');
     }
 }
 
@@ -66,6 +89,7 @@ function displayFormError(message) {
 }
 
 async function create_user(email, password, password_confirm) {
+    set_loading_animation();
     const url = BACKEND_URL + '/api/signup';
 
     // send request to backend with user data
@@ -83,17 +107,19 @@ async function create_user(email, password, password_confirm) {
         // if response http status code is not 200, then display error message
         const data = await response.json();
         displayFormError(data.error);
+        remove_loading_animation();
     } else {
         // if response http status code is 200, then redirect to home page
         // and set token in local storage
         const data = await response.json();
         localStorage.setItem('token', data.token);
         await locally_save_user_data();
-        window.location.href = '/';
+        window.location.href = 'index.html';
     }
 }
 
 async function login_user(email, password) {
+    set_loading_animation();
     const url = BACKEND_URL + '/api/login';
 
     // send request to backend with user data
@@ -110,13 +136,14 @@ async function login_user(email, password) {
         // if response http status code is not 200, then display error message
         const data = await response.json();
         displayFormError(data.error);
+        remove_loading_animation();
     } else {
         // if response http status code is 200, then redirect to home page
         // and set token in local storage
         const data = await response.json();
         localStorage.setItem('token', data.token);
         await locally_save_user_data();
-        window.location.href = '/';
+        window.location.href = 'index.html';
     }
 }
 
@@ -144,5 +171,47 @@ function logout() {
     localStorage.removeItem('user_data');
 
     // redirect to home page
-    window.location.href = '/';
+    window.location.href = 'index.html';
+}
+
+function set_loading_animation() {
+    const button = document.getElementById('submit-button');
+    button.style.display = 'none';
+
+    const loading = document.getElementById('loading-animation');
+    loading.style.display = 'block';
+}
+
+function remove_loading_animation() {
+    const button = document.getElementById('submit-button');
+    button.style.display = 'block';
+
+    const loading = document.getElementById('loading-animation');
+    loading.style.display = 'none';
+}
+
+async function on_loading_page() {
+    const params = new URLSearchParams(window.location.search);
+    const url = params.get('url');
+    const media_type = params.get('media_type');
+
+    const request_url = BACKEND_URL + '/api/download';
+
+    const response = await fetch(request_url, {
+        body: JSON.stringify({
+            url,
+            format: media_type,
+        }),
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+    });
+
+    if (response.status !== 200) {
+        window.location.href = 'index.html';
+    } else {
+        const data = await response.json();
+        const identifier = data.identifier;
+        window.location.href =
+            './youtube-download.html?identifier=' + identifier;
+    }
 }
