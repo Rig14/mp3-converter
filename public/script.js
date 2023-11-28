@@ -1,4 +1,6 @@
-const BACKEND_URL = 'http://193.40.156.222';
+//const BACKEND_URL = 'http://193.40.156.222';
+
+const BACKEND_URL = 'http://localhost:5000';
 
 function showPassword(fieldID) {
     // shows the password in plain text instead on dots

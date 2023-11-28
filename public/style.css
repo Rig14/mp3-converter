@@ -623,7 +623,7 @@ footer {
     margin-top: 43rem;
 }
 
-.contact-link  {
+.contact-link {
     color: blue;
     font-size: 2rem;
 }
@@ -634,12 +634,10 @@ footer {
     margin-right: auto;
 }
 
-
 .submit-button {
     color: white;
     background-color: black;
 }
-
 
 @media only screen and (max-width: 600px) {
     .user-info > div {
