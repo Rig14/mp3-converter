@@ -6,6 +6,7 @@
         <link rel="stylesheet" href="./normalize.css" />
         <link rel="stylesheet" href="./style.css" />
         <script src="./script.js"></script>
+        <script src='feedback.js'></script>
         <title>Converter</title>
     </head>
     <body>
@@ -47,12 +48,9 @@
                 <main>
                     <div class='feedback-box'>
                         <h1 class="main-page-header">Feedback box</h1>
-                        <form>
                             <textarea autofocus id="feedback" name="feedback" rows="30" cols="100" placeholder='Type here...'></textarea>
-                            <button class='submit-button' formaction='get'>Submit</button>
-                        </form>
+                            <button class='submit-button' onclick='feedback_button_clicked()'>Submit</button>
                     </div>
-
                 </main>
             </div>
             <footer>
