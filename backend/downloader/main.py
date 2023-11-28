@@ -21,6 +21,18 @@ FORMATS = {
 }
 
 
+def get_size(path):
+    size = os.path.getsize(path)
+    if size < 1024:
+        return f"{size} bytes"
+    elif size < pow(1024, 2):
+        return f"{round(size/1024, 2)} KB"
+    elif size < pow(1024, 3):
+        return f"{round(size/(pow(1024,2)), 2)} MB"
+    elif size < pow(1024, 4):
+        return f"{round(size/(pow(1024,3)), 2)} GB"
+
+
 def download_to_server(url: str, format_str: str):
     """
     Downloads the content from the given url.
@@ -64,7 +76,9 @@ def download_to_server(url: str, format_str: str):
     return {"identifier": identifier}, 200
 
 
-def send_file_from_server(identifier: str, file_name_new: str | None = None):
+def send_file_from_server(
+    identifier: str, file_name_new: str | None = None, get_data_only: bool = False
+):
     """Will send the file as an atachment to the client using the identifier"""
     # create the path to the file directory
     path = os.path.join(MEDIA_DIR, identifier)
@@ -77,6 +91,13 @@ def send_file_from_server(identifier: str, file_name_new: str | None = None):
     file_name = os.listdir(path)[0]
 
     file_extention = file_name.split(".")[-1]
+
+    if get_data_only:
+        return {
+            "file_name": file_name.replace("." + file_extention, ""),
+            "file_extention": file_extention,
+            "file_size": get_size(os.path.join(path, file_name)),
+        }, 200
 
     # create the path to the file
     path = os.path.join(path, file_name)

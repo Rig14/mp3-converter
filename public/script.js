@@ -222,3 +222,38 @@ async function on_loading_page() {
             './youtube-download.html?identifier=' + identifier;
     }
 }
+
+async function set_file_data() {
+    const params = new URLSearchParams(window.location.search);
+    const identifier = params.get('identifier');
+
+    const url =
+        BACKEND_URL +
+        '/api/file?identifier=' +
+        identifier +
+        '&get_name_only=true';
+
+    const response = await fetch(url, {
+        method: 'GET',
+    });
+
+    if (response.status !== 200) {
+        window.location.href = 'index.html';
+    } else {
+        const data = await response.json();
+        const file_name = data.file_name;
+        const file_extention = data.file_extention;
+        const file_size = data.file_size;
+
+        const file_name_field = document.getElementById(
+            'filename-input-element'
+        );
+        file_name_field.value = file_name;
+
+        const file_format_box = document.getElementById('file-format-box');
+        file_format_box.innerText = file_extention;
+
+        const file_size_box = document.getElementById('file-size');
+        file_size_box.innerText = '(' + file_size + ')';
+    }
+}
