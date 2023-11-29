@@ -1,5 +1,7 @@
 const BACKEND_URL = 'http://193.40.156.222';
 
+//const BACKEND_URL = 'http://127.0.0.1:5000';
+
 function showPassword(fieldID) {
     // shows the password in plain text instead on dots
     const field = document.getElementById(fieldID);
@@ -39,10 +41,15 @@ function processFormData(form_type) {
             displayFormError('Please enter a valid Youtube url');
         }
     } else if (form_type === 'youtube-download') {
+        file_name = formData.get('youtube-filename');
         const params = new URLSearchParams(window.location.search);
 
         window.location.href =
-            BACKEND_URL + '/api/file?identifier=' + params.get('identifier');
+            BACKEND_URL +
+            '/api/file?identifier=' +
+            params.get('identifier') +
+            '&file_name=' +
+            file_name;
     } else if (form_type === 'soundcloud-convert') {
         const url = formData.get('soundcloud-link');
         const regex = url.search(
@@ -213,5 +220,40 @@ async function on_loading_page() {
         const identifier = data.identifier;
         window.location.href =
             './youtube-download.html?identifier=' + identifier;
+    }
+}
+
+async function set_file_data() {
+    const params = new URLSearchParams(window.location.search);
+    const identifier = params.get('identifier');
+
+    const url =
+        BACKEND_URL +
+        '/api/file?identifier=' +
+        identifier +
+        '&get_name_only=true';
+
+    const response = await fetch(url, {
+        method: 'GET',
+    });
+
+    if (response.status !== 200) {
+        window.location.href = 'index.html';
+    } else {
+        const data = await response.json();
+        const file_name = data.file_name;
+        const file_extention = data.file_extention;
+        const file_size = data.file_size;
+
+        const file_name_field = document.getElementById(
+            'filename-input-element'
+        );
+        file_name_field.value = file_name;
+
+        const file_format_box = document.getElementById('file-format-box');
+        file_format_box.innerText = file_extention;
+
+        const file_size_box = document.getElementById('file-size');
+        file_size_box.innerText = '(' + file_size + ')';
     }
 }
