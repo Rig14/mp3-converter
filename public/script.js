@@ -72,8 +72,9 @@ function processFormData(form_type) {
     } else if (form_type === 'tiktok-convert') {
         const url = formData.get('tiktok-link');
         const regex = url.search(
+            // this link causes problems for some reason - in regex (fixed) and in backend: https://www.tiktok.com/@aestetic._.paper/video/7302525927177620768
             // 2 main regex parts:  url copied from mobile app containing "vm.tiktok"   |   url copied directly from a browser that must contain "/video/"
-            String.raw`^((?:https?:)?\/\/)?((?:www)\.)?tiktok\.com\/([\w\-@]+)/video/(?!.*?(-|_){2})([\w\-@]+)(\S+)?$|^((?:https?:)?\/\/)?((?:vm)\.)?tiktok\.com\/(?!.*?(-|_){2})([\w\-@]+)(\S+)?$`
+            String.raw`^((?:https?:)?\/\/)?((?:www)\.)?tiktok\.com\/([\w\-@_\.]+)/video/(?!.*?(-|_){2})([\w\-@]+)(\S+)?$|^((?:https?:)?\/\/)?((?:vm)\.)?tiktok\.com\/(?!.*?(-|_){2})([\w\-@]+)(\S+)?$`
         );
         if (regex === 0) {
             const media_type = formData.get('dropdown-content');
@@ -82,6 +83,26 @@ function processFormData(form_type) {
             displayFormError('Please enter a valid Tiktok url');
         }
     } else if (form_type === 'tiktok-download') {
+        const params = new URLSearchParams(window.location.search);
+
+        window.location.href =
+            BACKEND_URL + '/api/file?identifier=' + params.get('identifier');
+    } else if (form_type === 'playlist-convert') {
+        const url = formData.get('playlist-link');
+        const regex = url.search(
+            // Accepts playlist links from yt/sc only, some regular video or song links might get through
+            String.raw`^((?:https?:)?\/\/)?((?:www|m)\.)?(?:youtube\.com\/playlist\?)([\w\-]+)(\S+)?$|^((?:https?:)?\/\/)?((?:www|m|on)\.)?soundcloud\.com\/([\w\-\.]+)\/sets\/(?!.*?(-|_){2})([\w\-]+)(\S+)?$|^((?:https?:)?\/\/)?((?:m|on)\.)soundcloud\.com\/(?!.*?(-|_){2})([\w\-]+)(\S+)?$`
+        );
+        if (regex === 0) {
+            const media_type = formData.get('dropdown-content');
+            window.location.href = `./loading.html?url=${url}&media_type=${media_type}`;
+        } else {
+            displayFormError(
+                //'Youtube playlist url must contain: youtube.com/playlist?\nSoundcloud playlist url must contain: /sets/'
+                'A valid playlist url must contain:  "youtube.com/playlist?" OR "/sets/" OR "on.soundcloud"'
+            );
+        }
+    } else if (form_type === 'playlist-download') {
         const params = new URLSearchParams(window.location.search);
 
         window.location.href =
