@@ -609,18 +609,19 @@ footer {
 .contact-wrapper {
     display: flex;
     flex-direction: row;
-    gap: 90rem;
+    gap: 30rem;
 }
 
 .contact-info {
     width: 600px;
+    margin-bottom: auto;
     margin-right: auto;
 }
 
 .donation-info {
     width: 200px;
     margin-left: auto;
-    margin-top: 43rem;
+    margin-top: 20rem;
 }
 
 .contact-link {
