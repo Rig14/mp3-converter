@@ -606,6 +606,49 @@ footer {
     padding: 0;
 }
 
+.contact-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 30rem;
+}
+
+.contact-info {
+    width: 600px;
+    margin-bottom: auto;
+    margin-right: auto;
+}
+
+.donation-info {
+    width: 200px;
+    margin-left: auto;
+    margin-top: 20rem;
+}
+
+.contact-link {
+    color: blue;
+    font-size: 2rem;
+}
+
+.feedback-box {
+    display: flex;
+    flex-direction: column;
+    margin-right: auto;
+}
+
+.submit-button1 {
+    width: 10rem;
+    font-size: 2rem;
+    background-color: black;
+    color: white;
+    border: 2px solid black;
+    border-radius: 15px;
+    padding: 0.5rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
 @media only screen and (max-width: 600px) {
     .user-info > div {
         display: none;
