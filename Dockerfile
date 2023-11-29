@@ -28,7 +28,11 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 # Copy the source code into the container.
 COPY . .
 
+# allow database to be written to
 RUN chmod 666 backend/db/database.db
+
+# ffmpeg library for processing downloaded videos
+RUN apt update && apt install -y ffmpeg
 
 # Expose the port that the application listens on.
 EXPOSE 80
