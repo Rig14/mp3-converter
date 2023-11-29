@@ -18,6 +18,7 @@ FORMATS = {
     "1440p": [700, 400, 336, 308, 271, 304, 264],
     "2K": [701, 401, 337, 315, 313, 305, 266],
     "4K": [402, 571, 272, 138],
+    "mp3": ["ba[ext=m4a]/bestaudio"],
 }
 
 
@@ -63,7 +64,8 @@ def download_to_server(url: str, format_str: str):
         "-o",  # set the output file name
         "%(title)s.%(ext)s",
         "-f",  # set the format
-        "/".join(map(str, FORMATS[format_str])) + "/bestvideo" + "+bestaudio",
+        "/".join(map(str, FORMATS[format_str]))
+        + ("+bestaudio" if format_str != "mp3" else ""),
         url,  # the url to download
     ]
 
