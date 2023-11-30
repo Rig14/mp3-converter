@@ -26,7 +26,9 @@ function processFormData(form_type) {
             formData.get('password'),
             formData.get('password-confirm')
         );
-    } else if (form_type === 'youtube-convert') {
+    }
+    const converted_from = form_type.split('-')[0];
+    if (form_type === 'youtube-convert') {
         const url = formData.get('youtube-link');
         // Accepts all https combinations, youtu.be and m.youtube
         // Certain invalid characters in url might cause false-positive
@@ -36,7 +38,7 @@ function processFormData(form_type) {
         );
         if (regex === 0) {
             const media_type = formData.get('dropdown-content');
-            window.location.href = `./loading.html?url=${url}&media_type=${media_type}`;
+            window.location.href = `./loading.html?url=${url}&media_type=${media_type}&converted_from=${converted_from}`;
         } else {
             displayFormError('Please enter a valid Youtube url');
         }
@@ -60,7 +62,7 @@ function processFormData(form_type) {
         );
         if (regex === 0) {
             const media_type = formData.get('dropdown-content');
-            window.location.href = `./loading.html?url=${url}&media_type=${media_type}`;
+            window.location.href = `./loading.html?url=${url}&media_type=${media_type}&converted_from=${converted_from}`;
         } else {
             displayFormError('Please enter a valid Soundcloud url');
         }
@@ -78,7 +80,8 @@ function processFormData(form_type) {
         );
         if (regex === 0) {
             const media_type = formData.get('dropdown-content');
-            window.location.href = `./loading.html?url=${url}&media_type=${media_type}`;
+            const convert_from = form_type;
+            window.location.href = `./loading.html?url=${url}&media_type=${media_type}&converted_from=${converted_from}`;
         } else {
             displayFormError('Please enter a valid Tiktok url');
         }
@@ -95,7 +98,7 @@ function processFormData(form_type) {
         );
         if (regex === 0) {
             const media_type = formData.get('dropdown-content');
-            window.location.href = `./loading.html?url=${url}&media_type=${media_type}`;
+            window.location.href = `./loading.html?url=${url}&media_type=${media_type}&converted_from=${converted_from}`;
         } else {
             displayFormError(
                 //'Youtube playlist url must contain: youtube.com/playlist?\nSoundcloud playlist url must contain: /sets/'
@@ -222,6 +225,7 @@ async function on_loading_page() {
     const params = new URLSearchParams(window.location.search);
     const url = params.get('url');
     const media_type = params.get('media_type');
+    const converted_from = params.get('converted_from');
 
     const request_url = BACKEND_URL + '/api/download';
 
@@ -239,8 +243,16 @@ async function on_loading_page() {
     } else {
         const data = await response.json();
         const identifier = data.identifier;
-        window.location.href =
-            './youtube-download.html?identifier=' + identifier;
+        if (converted_from === 'playlist') {
+            window.location.href =
+                './youtube-download.html?identifier=' + identifier;
+        } else {
+            window.location.href =
+                './' +
+                converted_from +
+                '-download.html?identifier=' +
+                identifier;
+        }
     }
 }
 
