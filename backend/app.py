@@ -8,6 +8,7 @@ from backend.user import (
     change_data,
     change_user_profile_picture,
     add_user_history,
+    get_user_history,
 )
 from backend.downloader import download_to_server, send_file_from_server
 
@@ -112,3 +113,10 @@ def add_history():
     content_format = request.get_json().get("content_format")
 
     return add_user_history(token, content_title, content_url, content_format)
+
+
+def get_history():
+    """Get user history."""
+    token = request.headers.get("Authorization")
+
+    return get_user_history(token)
