@@ -47,6 +47,13 @@ def change_user_profile_picture(token, image: FieldStorage):
     path = os.path.join("..", "static", filename)
     image.save(path)
 
+    # delete pervious profile picture
+    prev_image = execute("SELECT image FROM users WHERE id = ?", (current_user_id,))[0][
+        0
+    ]
+    if prev_image:
+        os.remove(os.path.join("..", "static", prev_image))
+
     execute("UPDATE users SET image = ? WHERE id = ?", (filename, current_user_id))
 
     return {"message": "profile picture updated sucessfully"}, 200
