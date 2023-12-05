@@ -120,6 +120,14 @@ async function load_user_history() {
     const data = await response.json();
     const user_history = data.history;
 
+    if (user_history.length === 0) {
+        const user_history_container = document.getElementById('user-history');
+        user_history_container.innerHTML = `
+                <p>No history</p>
+        `;
+        return;
+    }
+
     // content_title, content_url, content_format
     const history_elements = user_history.map((history) => {
         return `
