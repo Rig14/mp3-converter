@@ -18,7 +18,20 @@ FORMATS = {
     "1440p": [700, 400, 336, 308, 271, 304, 264],
     "2K": [701, 401, 337, 315, 313, 305, 266],
     "4K": [402, 571, 272, 138],
+    "mp3": ["ba[ext=m4a]/bestaudio"],
 }
+
+
+def get_size(path):
+    size = os.path.getsize(path)
+    if size < 1024:
+        return f"{size} bytes"
+    elif size < pow(1024, 2):
+        return f"{round(size/1024, 2)} KB"
+    elif size < pow(1024, 3):
+        return f"{round(size/(pow(1024,2)), 2)} MB"
+    elif size < pow(1024, 4):
+        return f"{round(size/(pow(1024,3)), 2)} GB"
 
 
 def download_to_server(url: str, format_str: str):
@@ -51,7 +64,7 @@ def download_to_server(url: str, format_str: str):
         "-o",  # set the output file name
         "%(title)s.%(ext)s",
         "-f",  # set the format
-        "/".join(map(str, FORMATS[format_str])) + "/bestvideo" + "+bestaudio",
+        "/".join(map(str, FORMATS[format_str])) + "+bestaudio/best",
         url,  # the url to download
     ]
 
@@ -64,7 +77,9 @@ def download_to_server(url: str, format_str: str):
     return {"identifier": identifier}, 200
 
 
-def send_file_from_server(identifier: str, file_name: str | None = None):
+def send_file_from_server(
+    identifier: str, file_name_new: str | None = None, get_data_only: bool = False
+):
     """Will send the file as an atachment to the client using the identifier"""
     # create the path to the file directory
     path = os.path.join(MEDIA_DIR, identifier)
@@ -76,8 +91,23 @@ def send_file_from_server(identifier: str, file_name: str | None = None):
     # get the file name from the directory
     file_name = os.listdir(path)[0]
 
+    file_extention = file_name.split(".")[-1]
+
+    if get_data_only:
+        return {
+            "file_name": file_name.replace("." + file_extention, ""),
+            "file_extention": file_extention,
+            "file_size": get_size(os.path.join(path, file_name)),
+        }, 200
+
     # create the path to the file
     path = os.path.join(path, file_name)
 
     # return the file as an attachment
-    return send_file(path, as_attachment=True, download_name=file_name)
+    return send_file(
+        path,
+        as_attachment=True,
+        download_name=file_name_new + "." + file_extention
+        if file_name_new
+        else file_name,
+    )
