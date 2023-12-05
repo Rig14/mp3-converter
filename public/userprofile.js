@@ -53,3 +53,17 @@ function set_error(message) {
     const error = document.getElementById('user-profile-error');
     error.innerHTML = message;
 }
+
+function process_image() {
+    const image = document.getElementById('image-upload').files[0];
+    const reader = new FileReader();
+    // display the image file inside the img element with id=user-profile-image
+    reader.onload = function (e) {
+        const img = document.getElementById('user-profile-image');
+        img.src = e.target.result;
+    };
+    reader.readAsDataURL(image);
+}
+
+const upload_btn = document.getElementById('image-upload');
+upload_btn.addEventListener('change', process_image);
