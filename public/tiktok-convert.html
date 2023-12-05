@@ -31,7 +31,7 @@
                         <a href="playlist-convert"> Playlist </a>
                     </li>
                     <li>
-                        <a href="./help.html"> Help </a>
+                        <a href="help"> Help </a>
                     </li>
                 </ul>
                 <div class="button-container" id="user-info">
@@ -45,41 +45,52 @@
             </nav>
             <div class="main-wrapper">
                 <main>
-                    <h1 class="main-page-header">
-                        Free YouTube to MP3/4 converter
-                    </h1>
-                    <p class="main-page-subtext">
-                        Looking for a free and convenient tool to download
-                        YouTube videos? Our online YouTube to MP3/4 converter is
-                        all that and more! No need to register or install
-                        software — convert high-quality videos right from the
-                        browser with minimal effort.
-                    </p>
-                    <div class="button-container">
-                        <a href="youtube-convert">
-                            <button style="background-color: #f01414">
-                                YouTube
-                            </button>
-                        </a>
-                        <a href="soundcloud-convert">
-                            <button style="background-color: #ff9c08">
-                                Soundcloud
-                            </button>
-                        </a>
-                        <a href="tiktok-convert">
-                            <button style="background-color: black">
-                                TikTok
-                            </button>
-                        </a>
-                        <a href="playlist-convert">
-                            <button style="background-color: #6d55ac">
-                                Playlist
-                            </button>
-                        </a>
+                    <div class="link-pasting-box">
+                        <h1>Convert from Tiktok</h1>
+                        <div class="input-bar">
+                            <form action="submit" id="form">
+                                <div class="link-pasting-flex-row">
+                                    <div class="tiktok-logo">
+                                        <img
+                                            src="./resources/tiktok-logo.svg"
+                                            alt="pw"
+                                        />
+                                        Tiktok
+                                    </div>
+                                    <input
+                                        type="url"
+                                        name="tiktok-link"
+                                        id="tiktok-link"
+                                        placeholder="Paste any Tiktok URL here"
+                                    />
+                                    <select
+                                        name="dropdown-content"
+                                        id="dropdown-content"
+                                    >
+                                        <option value="144p">144p</option>
+                                        <option value="240p">240p</option>
+                                        <option value="360p">360p</option>
+                                        <option value="480p">480p</option>
+                                        <option value="720p">720p</option>
+                                        <option value="1080p">1080p</option>
+                                        <option value="1440p">1440p</option>
+                                        <option value="2160p">2160p</option>
+                                    </select>
+                                </div>
+                                <p class="need-help-text">
+                                    Need help? <a href="help">Click me!</a>
+                                </p>
+                                <p id="error-message"></p>
+                                <button
+                                    class="convert-button"
+                                    type="button"
+                                    onclick="processFormData('tiktok-convert')"
+                                >
+                                    CONVERT
+                                </button>
+                            </form>
+                        </div>
                     </div>
-                    <p class="need-help-text">
-                        Need help? <a href="help">Click me!</a>
-                    </p>
                 </main>
             </div>
             <footer>
@@ -113,7 +124,7 @@
                             <a href="legal">Legal</a>
                         </li>
                         <li>
-                            <a href="./contactpage.html">Contact</a>
+                            <a href="contact">Contact</a>
                         </li>
                         <li>
                             <a href="feedback">Feedback</a>

@@ -39,7 +39,7 @@ code .
 
 4) After clicking it you will see a popup. Click **"Reopen in Container"**
 
-5) Wait for the container to build and you are ready to go! (it can take several minuter when you open the project for the first time).
+5) Wait for the container to build and you are ready to go! (it can take several minutes when you open the project for the first time).
 
 6) useful commands are available in the **makefile**. You can run them in the **terminal** in VSCode. Commands are listed below.
 

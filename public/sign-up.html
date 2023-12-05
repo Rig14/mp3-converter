@@ -6,17 +6,23 @@
         <link rel="stylesheet" href="./normalize.css" />
         <link rel="stylesheet" href="./style.css" />
         <script src="./script.js"></script>
+        <script>
+            // prevent user from accessing this page if they are already logged in
+            if (localStorage.getItem('token')) {
+                window.location.href = '/';
+            }
+        </script>
         <title>Converter</title>
     </head>
     <body>
         <div class="page-wrapper">
             <nav>
-                <a href="/">
+                <a href="index.html">
                     <img src="./resources/Logo.svg" alt="Converter logo" />
                 </a>
                 <ul class="navbar-links">
                     <li>
-                        <a href="/"> Home </a>
+                        <a href="index.html"> Home </a>
                     </li>
                     <li>
                         <a href="youtube-convert"> Youtube </a>
@@ -34,7 +40,7 @@
                         <a href="help"> Help </a>
                     </li>
                 </ul>
-                <div class="button-container">
+                <div class="button-container" id="user-info">
                     <a href="login">
                         <button class="login-button">Login</button>
                     </a>
@@ -111,10 +117,17 @@
                             <button
                                 class="submit-button"
                                 type="button"
+                                id="submit-button"
                                 onclick="processFormData('sign-up')"
                             >
                                 Sign up
                             </button>
+                            <img
+                                src="./resources/loading-animation.gif"
+                                alt=""
+                                id="loading-animation"
+                                style="display: none"
+                            />
                         </form>
                     </div>
                 </main>
@@ -150,10 +163,10 @@
                             <a href="legal">Legal</a>
                         </li>
                         <li>
-                            <a href="contact">Contact</a>
+                            <a href="contactpage.html">Contact</a>
                         </li>
                         <li>
-                            <a href="feedback">Feedback</a>
+                            <a href="feedback.html">Feedback</a>
                         </li>
                     </ol>
                 </div>
@@ -162,5 +175,6 @@
                 </p>
             </footer>
         </div>
+        <script src="./navbar_user.js"></script>
     </body>
 </html>

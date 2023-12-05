@@ -31,7 +31,7 @@
                         <a href="playlist-convert"> Playlist </a>
                     </li>
                     <li>
-                        <a href="./help.html"> Help </a>
+                        <a href="help"> Help </a>
                     </li>
                 </ul>
                 <div class="button-container" id="user-info">
@@ -45,41 +45,12 @@
             </nav>
             <div class="main-wrapper">
                 <main>
-                    <h1 class="main-page-header">
-                        Free YouTube to MP3/4 converter
-                    </h1>
-                    <p class="main-page-subtext">
-                        Looking for a free and convenient tool to download
-                        YouTube videos? Our online YouTube to MP3/4 converter is
-                        all that and more! No need to register or install
-                        software — convert high-quality videos right from the
-                        browser with minimal effort.
-                    </p>
-                    <div class="button-container">
-                        <a href="youtube-convert">
-                            <button style="background-color: #f01414">
-                                YouTube
-                            </button>
-                        </a>
-                        <a href="soundcloud-convert">
-                            <button style="background-color: #ff9c08">
-                                Soundcloud
-                            </button>
-                        </a>
-                        <a href="tiktok-convert">
-                            <button style="background-color: black">
-                                TikTok
-                            </button>
-                        </a>
-                        <a href="playlist-convert">
-                            <button style="background-color: #6d55ac">
-                                Playlist
-                            </button>
-                        </a>
-                    </div>
-                    <p class="need-help-text">
-                        Need help? <a href="help">Click me!</a>
-                    </p>
+                    <img
+                        src="./resources/loading-animation.gif"
+                        alt=""
+                        id="loading-page-animation"
+                    />
+                    Converting your file, please wait
                 </main>
             </div>
             <footer>
@@ -113,7 +84,7 @@
                             <a href="legal">Legal</a>
                         </li>
                         <li>
-                            <a href="./contactpage.html">Contact</a>
+                            <a href="contact">Contact</a>
                         </li>
                         <li>
                             <a href="feedback">Feedback</a>
@@ -126,5 +97,8 @@
             </footer>
         </div>
         <script src="./navbar_user.js"></script>
+        <script>
+            on_loading_page();
+        </script>
     </body>
 </html>

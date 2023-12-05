@@ -1,12 +1,16 @@
 server-dev:
-	make erase-db
-	pip install -r requirements.txt
-	pip install -r dev-requirements.txt
+	make reset-db
 	flask --app ./backend/app run --debug
 web-dev:
+	npx http-server public -c-1 --cors
+install:
+	pip install -r requirements.txt
 	sudo npm install -g http-server
-	npx http-server public -c-1
-erase-db:
-	cd backend && python db.py erase_database && python db.py update
+
+
+reset-db:
+	cd backend/db && python3 main.py reset 
+create-db:
+	cd backend/db && python3 main.py create 
 update-db:
-	cd backend && python db.py update
+	cd backend/db && python3 main.py update

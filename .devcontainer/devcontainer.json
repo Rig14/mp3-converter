@@ -20,9 +20,10 @@
 				"ms-python.black-formatter",
 				"adpyke.vscode-sql-formatter",
 				"qufiwefefwoyn.inline-sql-syntax",
-				"ms-python.pylint"
+				"ms-python.pylint",
+				"qwtel.sqlite-viewer"
 			]
         }
     },
-    "forwardPorts": [5000, 8080]
+    "forwardPorts": [5000, 8080, 80]
 }

@@ -2,6 +2,52 @@
 
 This part contains instructions on how to use the API.
 
+Before you start using the API a ``.env`` file **must be made**. Variables for the .env file can be found in the .env.example file.
+
+## API endpoints
+
+### Sign up
+`/api/signup`
+- **Method:** POST
+- **Description:** Creates a new user
+- **Request Body:**
+    - email: user's email
+    - password: user's password
+    - password_confirm: user's password confirmation
+- **Returns:** Error message when values are invalid. Otherwise returns JWT.
+
+
+### Login
+`/api/login`
+- **Method:** POST
+- **Description:** Logs in a user
+- **Request Body:**
+    - email: user's email
+    - password: user's password
+- **Returns:** Error message when values are invalid. Otherwise returns JWT.
+
+### User data
+`/api/user_data`
+- **Method:** GET
+- **Description:** Returns small amount of user data
+- **Request Body:** None
+- **Returns:** Error message when values are invalid. Otherwise returns user data.
+
+
+### Download
+`/api/download`
+- **Method:** POST
+- **Description:** Downloads a file to the **server** using yt-dlp
+- **Request Body:**
+    - url: url of the video
+- **Returns:** Error message when content cant be downloaded. Otherwise returns the identifier.
+
+### Get file
+`/api/file?identifier=<identifier>`
+- **Method:** GET
+- **Description:** Returns a file
+- **Request Body:** None
+- **Returns:** Error message when values are invalid. Otherwise returns the file.
 
 # SQL database access
 
@@ -11,5 +57,5 @@ For example to create a new user:
 ```python
 from backend.db import execute
 
-execute("INSERT INTO users (username, password) VALUES (%s, %s)", ("username", "password"))
+execute("INSERT INTO users (email, password) VALUES (%s, %s)", ("legit@email.com", "password"))
 ```
