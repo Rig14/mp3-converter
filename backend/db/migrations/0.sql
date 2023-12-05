@@ -8,12 +8,12 @@ CREATE TABLE users (
     image TEXT DEFAULT 'default_user.svg'
 );
 
-CREATE TABLE HISTORY (
+CREATE TABLE history (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users(id),
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    content_title TEXT NOT NULL,
     content_url TEXT NOT NULL,
+    content_title TEXT NOT NULL,
     content_format TEXT NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users (id)
 );
