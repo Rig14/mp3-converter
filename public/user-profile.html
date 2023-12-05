@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="./normalize.css" />
+        <link rel="stylesheet" href="./style.css" />
+        <link rel="stylesheet" href="./userprofile.css" />
+        <script src="./script.js"></script>
+        <title>Converter</title>
+    </head>
+    <body>
+        <div class="page-wrapper">
+            <nav>
+                <a href="index.html">
+                    <img src="./resources/Logo.svg" alt="Converter logo" />
+                </a>
+                <ul class="navbar-links">
+                    <li>
+                        <a href="index.html"> Home </a>
+                    </li>
+                    <li>
+                        <a href="youtube-convert"> Youtube </a>
+                    </li>
+                    <li>
+                        <a href="soundcloud-convert"> Soundcloud </a>
+                    </li>
+                    <li>
+                        <a href="tiktok-convert"> TikTok </a>
+                    </li>
+                    <li>
+                        <a href="playlist-convert"> Playlist </a>
+                    </li>
+                    <li>
+                        <a href="help"> Help </a>
+                    </li>
+                </ul>
+                <div class="button-container" id="user-info">
+                    <a href="login">
+                        <button class="login-button">Login</button>
+                    </a>
+                    <a href="sign-up">
+                        <button class="signup-button">Sign up</button>
+                    </a>
+                </div>
+            </nav>
+            <div class="main-wrapper">
+                <main>
+                    <div class="user-profile-edit">
+                        <div class="user-profile-image-container">
+                            <img
+                                src=""
+                                alt="User profile"
+                                id="user-profile-image"
+                            />
+                            <button>Upload Image</button>
+                        </div>
+                        <div>
+                            <form id="user-profile-data-form">
+                                <div>
+                                    <label for="name"
+                                        >Display name (Optional)</label
+                                    >
+                                    <input
+                                        type="text"
+                                        name="name"
+                                        placeholder="insert your display name..."
+                                        id="user-profile-name"
+                                    />
+                                </div>
+                                <div>
+                                    <label for="email">Email</label>
+                                    <input
+                                        type="email"
+                                        name="email"
+                                        placeholder="insert your email..."
+                                        id="user-profile-email"
+                                    />
+                                </div>
+                                <div>
+                                    <label for="password"
+                                        >Change password</label
+                                    >
+                                    <input
+                                        type="password"
+                                        name="password"
+                                        placeholder="New password..."
+                                        id="user-profile-password"
+                                    />
+                                </div>
+                                <div>
+                                    <label for="message"
+                                        >Message (displayed next to your
+                                        profile)</label
+                                    >
+                                    <input
+                                        type="text"
+                                        name="message"
+                                        placeholder="Insert a message to be displayed next to your profile..."
+                                        id="user-profile-message"
+                                    />
+                                </div>
+                                <div>
+                                    <button>Save changes</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </main>
+            </div>
+            <footer>
+                <div class="footer-logo-box">
+                    <img src="./resources/Logo.svg" alt="Converter Logo" />
+                </div>
+                <div class="footer-links-box">
+                    <h3>Converters</h3>
+                    <ol>
+                        <li>
+                            <a href="youtube-convert">Youtube</a>
+                        </li>
+                        <li>
+                            <a href="soundcloud-convert">Soundcloud</a>
+                        </li>
+                        <li>
+                            <a href="tiktok-convert">TikTok</a>
+                        </li>
+                        <li>
+                            <a href="playlist-convert">Playlist</a>
+                        </li>
+                    </ol>
+                </div>
+                <div class="footer-links-box">
+                    <h3>Support</h3>
+                    <ol>
+                        <li>
+                            <a href="help">Help</a>
+                        </li>
+                        <li>
+                            <a href="legal">Legal</a>
+                        </li>
+                        <li>
+                            <a href="contact">Contact</a>
+                        </li>
+                        <li>
+                            <a href="feedback">Feedback</a>
+                        </li>
+                    </ol>
+                </div>
+                <p class="copyleft">
+                    © 2023 TheConverterCompany. All wrongs reserved
+                </p>
+            </footer>
+        </div>
+        <script src="./navbar_user.js"></script>
+        <script src="./userprofile.js"></script>
+    </body>
+</html>
