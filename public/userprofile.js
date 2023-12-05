@@ -151,3 +151,25 @@ async function load_user_history() {
     user_history_container.innerHTML = history_elements.join('');
 }
 load_user_history();
+
+async function delete_account() {
+    const url = BACKEND_URL + '/api/delete_account';
+    const token = localStorage.getItem('token');
+
+    const response = await fetch(url, {
+        method: 'DELETE',
+        headers: {
+            Authorization: token,
+        },
+    });
+
+    if (response.status != 200) {
+        const data = await response.json();
+        set_error(data.error);
+        return;
+    } else {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user_data');
+        window.location.href = '/';
+    }
+}

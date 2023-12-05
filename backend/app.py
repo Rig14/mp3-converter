@@ -9,6 +9,7 @@ from backend.user import (
     change_user_profile_picture,
     add_user_history,
     get_user_history,
+    delete_user_account,
 )
 from backend.downloader import download_to_server, send_file_from_server
 
@@ -121,3 +122,11 @@ def get_history():
     token = request.headers.get("Authorization")
 
     return get_user_history(token)
+
+
+@app.route("/api/delete_account", methods=["DELETE"])
+def delete_account():
+    """Delete user account."""
+    token = request.headers.get("Authorization")
+
+    return delete_user_account(token)

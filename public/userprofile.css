@@ -144,3 +144,20 @@
     width: 100%;
     margin-bottom: 3rem;
 }
+
+#delete-user-button {
+    margin-left: auto;
+    margin-bottom: 3rem;
+    background-color: #f63e3e;
+    border-radius: 5px;
+    border: 2px solid #194af6;
+    width: 10rem;
+    padding: 0.5rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#delete-user-button:hover {
+    background-color: #194af6;
+    color: white;
+}
