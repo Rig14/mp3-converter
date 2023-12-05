@@ -1,7 +1,13 @@
 """Main application file"""
 from flask import Flask, request
 from flask_cors import CORS
-from backend.user import create_user, login_user, get_user_data, change_data
+from backend.user import (
+    create_user,
+    login_user,
+    get_user_data,
+    change_data,
+    change_user_profile_picture,
+)
 from backend.downloader import download_to_server, send_file_from_server
 
 app = Flask(__name__)
@@ -83,3 +89,14 @@ def change_user_data():
     email = request.get_json().get("email")
 
     return change_data(token, name, email, password, motd)
+
+
+@app.route("/api/change_profile_picture", methods=["POST"])
+def update_profile_picture():
+    """
+    Updates the profile picture of the user.
+    """
+    token = request.headers.get("Authorization")
+    image = request.files.get("image")
+
+    return change_user_profile_picture(token, image)

@@ -193,6 +193,9 @@ async function locally_save_user_data() {
         // if response http status code is 200, then save user data in local storage
         const data = await response.json();
         localStorage.setItem('user_data', JSON.stringify(data));
+    } else {
+        localStorage.removeItem('user_data');
+        localStorage.removeItem('token');
     }
 }
 

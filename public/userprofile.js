@@ -14,6 +14,14 @@ load_user_profile();
 
 async function change_user_data() {
     set_loading_animation();
+    // send image
+    const image_error = await upload_image();
+    if (image_error) {
+        set_error(image_error);
+        remove_loading_animation();
+        return;
+    }
+
     const name = document.getElementById('user-profile-name').value;
     const motd = document.getElementById('user-profile-message').value;
     const email = document.getElementById('user-profile-email').value;
@@ -53,3 +61,43 @@ function set_error(message) {
     const error = document.getElementById('user-profile-error');
     error.innerHTML = message;
 }
+
+function process_image() {
+    const image = document.getElementById('image-upload').files[0];
+    const reader = new FileReader();
+    // display the image file inside the img element with id=user-profile-image
+    reader.onload = function (e) {
+        const img = document.getElementById('user-profile-image');
+        img.src = e.target.result;
+    };
+    reader.readAsDataURL(image);
+}
+
+async function upload_image() {
+    const image = document.getElementById('image-upload').files[0];
+    if (image === undefined) return false;
+
+    const token = localStorage.getItem('token');
+
+    const url = BACKEND_URL + '/api/change_profile_picture';
+
+    const data = new FormData();
+    data.append('image', image);
+
+    const response = await fetch(url, {
+        method: 'POST',
+        body: data,
+        headers: {
+            Authorization: token,
+        },
+    });
+
+    if (response.status != 200) {
+        const data = await response.json();
+        return data.error;
+    }
+    return false;
+}
+
+const upload_btn = document.getElementById('image-upload');
+upload_btn.addEventListener('change', process_image);

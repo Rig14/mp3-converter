@@ -1,4 +1,5 @@
 function update_navbar() {
+    locally_save_user_data();
     const user_info_container = document.getElementById('user-info');
 
     if (localStorage.getItem('user_data')) {
