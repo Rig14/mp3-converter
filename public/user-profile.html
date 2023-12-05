@@ -100,8 +100,21 @@
                                         id="user-profile-message"
                                     />
                                 </div>
-                                <div>
-                                    <button>Save changes</button>
+                                <div id="user-profile-error"></div>
+                                <div class="user-profile-button-container">
+                                    <button
+                                        onclick="change_user_data()"
+                                        type="button"
+                                        id="submit-button"
+                                    >
+                                        Save changes
+                                    </button>
+                                    <img
+                                        src="./resources/loading-animation.gif"
+                                        alt="Loading animation"
+                                        id="loading-animation"
+                                        style="display: none"
+                                    />
                                 </div>
                             </form>
                         </div>
