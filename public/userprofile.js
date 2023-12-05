@@ -75,6 +75,8 @@ function process_image() {
 
 async function upload_image() {
     const image = document.getElementById('image-upload').files[0];
+    if (image === undefined) return false;
+
     const token = localStorage.getItem('token');
 
     const url = BACKEND_URL + '/api/change_profile_picture';
