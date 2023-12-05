@@ -63,9 +63,11 @@
     margin-left: auto;
 }
 
-.user-profile-button-container > img {
+.user-profile-button-container #loading-animation {
     margin-left: auto;
     margin-right: 3rem;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 .user-profile-button-container {
