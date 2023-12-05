@@ -7,6 +7,9 @@ from backend.user import (
     get_user_data,
     change_data,
     change_user_profile_picture,
+    add_user_history,
+    get_user_history,
+    delete_user_account,
 )
 from backend.downloader import download_to_server, send_file_from_server
 
@@ -100,3 +103,30 @@ def update_profile_picture():
     image = request.files.get("image")
 
     return change_user_profile_picture(token, image)
+
+
+@app.route("/api/add_history", methods=["POST"])
+def add_history():
+    """Add a history row to the database."""
+    token = request.headers.get("Authorization")
+    content_title = request.get_json().get("content_title")
+    content_url = request.get_json().get("content_url")
+    content_format = request.get_json().get("content_format")
+
+    return add_user_history(token, content_title, content_url, content_format)
+
+
+@app.route("/api/get_history", methods=["GET"])
+def get_history():
+    """Get user history."""
+    token = request.headers.get("Authorization")
+
+    return get_user_history(token)
+
+
+@app.route("/api/delete_account", methods=["DELETE"])
+def delete_account():
+    """Delete user account."""
+    token = request.headers.get("Authorization")
+
+    return delete_user_account(token)

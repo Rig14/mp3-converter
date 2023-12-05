@@ -94,3 +94,70 @@
     font-size: 1rem;
     margin-top: 1rem;
 }
+
+#user-history {
+    width: 100%;
+    margin-bottom: 5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.history-element {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    padding: 1rem;
+}
+
+.history-video-text {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+}
+
+.history-video-text > h2 {
+    font-size: 1.4rem;
+    margin: 0;
+}
+
+.history-video-text > p {
+    margin: 0;
+}
+
+.history-element > p {
+    margin: 0;
+    margin-top: 0.3rem;
+}
+
+.history-element > p > a {
+    color: #194af6;
+    text-decoration: none;
+}
+
+.history-element > p > a:hover {
+    text-decoration: underline;
+}
+
+.userpage-history-title {
+    width: 100%;
+    margin-bottom: 3rem;
+}
+
+#delete-user-button {
+    margin-left: auto;
+    margin-bottom: 3rem;
+    background-color: #f63e3e;
+    border-radius: 5px;
+    border: 2px solid #194af6;
+    width: 10rem;
+    padding: 0.5rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#delete-user-button:hover {
+    background-color: #194af6;
+    color: white;
+}
