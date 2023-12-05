@@ -17,11 +17,14 @@ def get_user_data(t):
     if not user_id:
         return {"error": "Invalid token"}, 400
 
-    user = execute("SELECT name, motd, image FROM users WHERE id = ?", (user_id,))[0]
+    user = execute(
+        "SELECT name, motd, image, email FROM users WHERE id = ?", (user_id,)
+    )[0]
 
     return {
         "id": user_id,
         "name": user[0],
         "motd": user[1],
         "profile_picture": user[2],
+        "email": user[3],
     }, 200

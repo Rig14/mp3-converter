@@ -1,7 +1,7 @@
 """Main application file"""
 from flask import Flask, request
 from flask_cors import CORS
-from backend.user import create_user, login_user, get_user_data
+from backend.user import create_user, login_user, get_user_data, change_data
 from backend.downloader import download_to_server, send_file_from_server
 
 app = Flask(__name__)
@@ -67,3 +67,19 @@ def serve_file():
         get_name_only = True
 
     return send_file_from_server(identifier, file_name, get_name_only)
+
+
+@app.route("/api/change_user_data", methods=["POST"])
+def change_user_data():
+    """
+    Changes user data.
+
+    Returns 200 status code if successful.
+    """
+    token = request.headers.get("Authorization")
+    name = request.get_json().get("name")
+    motd = request.get_json().get("motd")
+    password = request.get_json().get("password")
+    email = request.get_json().get("email")
+
+    return change_data(token, name, email, password, motd)
