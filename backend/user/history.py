@@ -32,4 +32,14 @@ def get_user_history(token):
         (current_user_id,),
     )
 
+    # make history into a dict
+    history = [
+        {
+            "content_title": row[0],
+            "content_url": row[1],
+            "content_format": row[2],
+        }
+        for row in history
+    ]
+
     return {"history": history}, 200

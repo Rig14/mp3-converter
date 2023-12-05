@@ -101,3 +101,45 @@ async function upload_image() {
 
 const upload_btn = document.getElementById('image-upload');
 upload_btn.addEventListener('change', process_image);
+
+async function load_user_history() {
+    // get user history from backend
+    const token = localStorage.getItem('token');
+    const url = BACKEND_URL + '/api/get_history';
+    const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+            Authorization: token,
+        },
+    });
+
+    if (response.status != 200) {
+        return;
+    }
+
+    const data = await response.json();
+    const user_history = data.history;
+
+    // content_title, content_url, content_format
+    const history_elements = user_history.map((history) => {
+        return `
+            <div class="history-element">
+                <div class="history-video-text">
+                    <h2>${history.content_title}</h2>
+                    <p>(Downloaded in "${history.content_format}" format)</p>
+                </div>
+                <p>
+                    Content link:
+                    <a href=${history.content_url}>
+                        ${history.content_url}
+                    </a>
+                </p>
+            </div>
+        `;
+    });
+
+    // display the history elements in the user-history container
+    const user_history_container = document.getElementById('user-history');
+    user_history_container.innerHTML = history_elements.join('');
+}
+load_user_history();

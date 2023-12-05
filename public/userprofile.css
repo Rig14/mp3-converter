@@ -94,3 +94,53 @@
     font-size: 1rem;
     margin-top: 1rem;
 }
+
+#user-history {
+    width: 100%;
+    margin-bottom: 5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.history-element {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    padding: 1rem;
+}
+
+.history-video-text {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+}
+
+.history-video-text > h2 {
+    font-size: 1.4rem;
+    margin: 0;
+}
+
+.history-video-text > p {
+    margin: 0;
+}
+
+.history-element > p {
+    margin: 0;
+    margin-top: 0.3rem;
+}
+
+.history-element > p > a {
+    color: #194af6;
+    text-decoration: none;
+}
+
+.history-element > p > a:hover {
+    text-decoration: underline;
+}
+
+.userpage-history-title {
+    width: 100%;
+    margin-bottom: 3rem;
+}

@@ -115,6 +115,7 @@ def add_history():
     return add_user_history(token, content_title, content_url, content_format)
 
 
+@app.route("/api/get_history", methods=["GET"])
 def get_history():
     """Get user history."""
     token = request.headers.get("Authorization")
