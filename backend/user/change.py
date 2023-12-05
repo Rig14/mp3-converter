@@ -43,7 +43,7 @@ def change_user_profile_picture(token, image: FieldStorage):
 
     # save the image to a file in the static folder
     # and save the path to the database
-    filename = f"{current_user_id}_{hash(image.filename.encode())}{image.filename.split('.')[-1]}"
+    filename = f"{current_user_id}_{hash(image.filename.encode())}.{image.filename.split('.')[-1]}"
     path = os.path.join("..", "static", filename)
     image.save(path)
 
