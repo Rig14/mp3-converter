@@ -110,6 +110,16 @@ function processFormData(form_type) {
 
         window.location.href =
             BACKEND_URL + '/api/file?identifier=' + params.get('identifier');
+    } else if (form_type === 'experimental-convert') {
+        const url = formData.get('experimental-link');
+        // Hardcoded to mp4, soundcloud etc might not work.
+        const media_type = '4K';
+        window.location.href = `./loading.html?url=${url}&media_type=${media_type}&converted_from=${converted_from}`;
+    } else if (form_type === 'experimental-download') {
+        const params = new URLSearchParams(window.location.search);
+
+        window.location.href =
+            BACKEND_URL + '/api/file?identifier=' + params.get('identifier');
     }
 }
 

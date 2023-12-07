@@ -565,6 +565,9 @@ footer {
 }
 
 #dropdown-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     outline: none;
     height: auto;
     background-color: var(--backgroud-color);
@@ -739,4 +742,13 @@ maybe there is a better solution*/
 
 #converting-text {
     margin-top: none;
+}
+
+#supported-sites a {
+    color: #194af6;
+    text-decoration: none;
+}
+
+#supported-sites a:hover {
+    text-decoration: underline;
 }
