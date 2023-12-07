@@ -80,6 +80,25 @@ nav img {
     cursor: pointer;
 }
 
+#experimental-convert-button {
+    margin-left: auto;
+    margin-top: 2rem;
+    border-radius: 15px;
+    padding: 0.5rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    transition: 0.2s;
+    color: white;
+    border-style: inherit;
+}
+
+#experimental-convert-button:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    filter: brightness(0.9);
+    transition: all 0.2s ease-in-out;
+}
+
 .login-button {
     background-color: var(--form-color);
     color: black;
@@ -565,6 +584,9 @@ footer {
 }
 
 #dropdown-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     outline: none;
     height: auto;
     background-color: var(--backgroud-color);
@@ -717,9 +739,35 @@ maybe there is a better solution*/
     margin-bottom: 2rem;
 }
 
+.loading-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 #loading-page-animation {
     width: 80px;
     height: 80px;
     margin-top: 7rem;
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
+}
+
+#converting-error-message {
+    display: none;
+    margin-top: 16rem;
+    font-size: 1rem;
+}
+
+#converting-text {
+    margin-top: none;
+}
+
+#supported-sites a {
+    color: #194af6;
+    text-decoration: none;
+}
+
+#supported-sites a:hover {
+    text-decoration: underline;
 }

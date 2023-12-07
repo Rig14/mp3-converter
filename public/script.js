@@ -1,4 +1,4 @@
-//const BACKEND_URL = 'http://193.40.156.222';
+// const BACKEND_URL = 'http://193.40.156.222';
 
 const BACKEND_URL = 'http://127.0.0.1:5000';
 
@@ -106,6 +106,16 @@ function processFormData(form_type) {
             );
         }
     } else if (form_type === 'playlist-download') {
+        const params = new URLSearchParams(window.location.search);
+
+        window.location.href =
+            BACKEND_URL + '/api/file?identifier=' + params.get('identifier');
+    } else if (form_type === 'experimental-convert') {
+        const url = formData.get('experimental-link');
+        // Hardcoded to mp4, soundcloud etc might not work.
+        const media_type = 'random';
+        window.location.href = `./loading.html?url=${url}&media_type=${media_type}&converted_from=${converted_from}`;
+    } else if (form_type === 'experimental-download') {
         const params = new URLSearchParams(window.location.search);
 
         window.location.href =
@@ -242,7 +252,16 @@ async function on_loading_page() {
     });
 
     if (response.status !== 200) {
-        window.location.href = 'index.html';
+        // Display error message if the video/song doesn't exist.
+        // Replace loading animation and converting text with error message.
+        const loading_animation = document.getElementById(
+            'loading-page-animation'
+        );
+        loading_animation.style.display = 'none';
+        const converting_text = document.getElementById('converting-text');
+        converting_text.style.display = 'none';
+        const error = document.getElementById('converting-error-message');
+        error.style.display = 'block';
     } else {
         const data = await response.json();
         const identifier = data.identifier;
