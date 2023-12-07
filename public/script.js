@@ -1,6 +1,6 @@
-//const BACKEND_URL = 'http://193.40.156.222';
+const BACKEND_URL = 'http://193.40.156.222';
 
-const BACKEND_URL = 'http://127.0.0.1:5000';
+//const BACKEND_URL = 'http://127.0.0.1:5000';
 
 function showPassword(fieldID) {
     // shows the password in plain text instead on dots
@@ -242,7 +242,16 @@ async function on_loading_page() {
     });
 
     if (response.status !== 200) {
-        window.location.href = 'index.html';
+        // Display error message if the video/song doesn't exist.
+        // Replace loading animation and converting text with error message.
+        const loading_animation = document.getElementById(
+            'loading-page-animation'
+        );
+        loading_animation.style.display = 'none';
+        const converting_text = document.getElementById('converting-text');
+        converting_text.style.display = 'none';
+        const error = document.getElementById('converting-error-message');
+        error.style.display = 'block';
     } else {
         const data = await response.json();
         const identifier = data.identifier;
