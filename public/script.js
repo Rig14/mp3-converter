@@ -1,6 +1,6 @@
-const BACKEND_URL = 'http://193.40.156.222';
+// const BACKEND_URL = 'http://193.40.156.222';
 
-//const BACKEND_URL = 'http://127.0.0.1:5000';
+const BACKEND_URL = 'http://127.0.0.1:5000';
 
 function showPassword(fieldID) {
     // shows the password in plain text instead on dots
@@ -113,7 +113,7 @@ function processFormData(form_type) {
     } else if (form_type === 'experimental-convert') {
         const url = formData.get('experimental-link');
         // Hardcoded to mp4, soundcloud etc might not work.
-        const media_type = '4K';
+        const media_type = 'random';
         window.location.href = `./loading.html?url=${url}&media_type=${media_type}&converted_from=${converted_from}`;
     } else if (form_type === 'experimental-download') {
         const params = new URLSearchParams(window.location.search);

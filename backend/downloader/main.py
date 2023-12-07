@@ -19,6 +19,7 @@ FORMATS = {
     "2K": [701, 401, 337, 315, 313, 305, 266],
     "4K": [402, 571, 272, 138],
     "mp3": ["ba[ext=m4a]/bestaudio"],
+    "random": [""],
 }
 
 
@@ -64,7 +65,9 @@ def download_to_server(url: str, format_str: str):
         "-o",  # set the output file name
         "%(title)s.%(ext)s",
         "-f",  # set the format
-        "/".join(map(str, FORMATS[format_str])) + "+bestaudio/best",
+        "/".join(map(str, FORMATS[format_str])) + "+bestaudio/best"
+        if format_str != "random"
+        else "bestvideo*+bestaudio/best",
         url,  # the url to download
     ]
 
