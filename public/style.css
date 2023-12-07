@@ -80,6 +80,25 @@ nav img {
     cursor: pointer;
 }
 
+#experimental-convert-button {
+    margin-left: auto;
+    margin-top: 2rem;
+    border-radius: 15px;
+    padding: 0.5rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    transition: 0.2s;
+    color: white;
+    border-style: inherit;
+}
+
+#experimental-convert-button:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    filter: brightness(0.9);
+    transition: all 0.2s ease-in-out;
+}
+
 .login-button {
     background-color: var(--form-color);
     color: black;
