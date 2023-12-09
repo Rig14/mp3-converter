@@ -1,7 +1,16 @@
 """Main application file"""
 from flask import Flask, request
 from flask_cors import CORS
-from backend.user import create_user, login_user, get_user_data
+from backend.user import (
+    create_user,
+    login_user,
+    get_user_data,
+    change_data,
+    change_user_profile_picture,
+    add_user_history,
+    get_user_history,
+    delete_user_account,
+)
 from backend.downloader import download_to_server, send_file_from_server
 
 app = Flask(__name__)
@@ -67,3 +76,57 @@ def serve_file():
         get_name_only = True
 
     return send_file_from_server(identifier, file_name, get_name_only)
+
+
+@app.route("/api/change_user_data", methods=["POST"])
+def change_user_data():
+    """
+    Changes user data.
+
+    Returns 200 status code if successful.
+    """
+    token = request.headers.get("Authorization")
+    name = request.get_json().get("name")
+    motd = request.get_json().get("motd")
+    password = request.get_json().get("password")
+    email = request.get_json().get("email")
+
+    return change_data(token, name, email, password, motd)
+
+
+@app.route("/api/change_profile_picture", methods=["POST"])
+def update_profile_picture():
+    """
+    Updates the profile picture of the user.
+    """
+    token = request.headers.get("Authorization")
+    image = request.files.get("image")
+
+    return change_user_profile_picture(token, image)
+
+
+@app.route("/api/add_history", methods=["POST"])
+def add_history():
+    """Add a history row to the database."""
+    token = request.headers.get("Authorization")
+    content_title = request.get_json().get("content_title")
+    content_url = request.get_json().get("content_url")
+    content_format = request.get_json().get("content_format")
+
+    return add_user_history(token, content_title, content_url, content_format)
+
+
+@app.route("/api/get_history", methods=["GET"])
+def get_history():
+    """Get user history."""
+    token = request.headers.get("Authorization")
+
+    return get_user_history(token)
+
+
+@app.route("/api/delete_account", methods=["DELETE"])
+def delete_account():
+    """Delete user account."""
+    token = request.headers.get("Authorization")
+
+    return delete_user_account(token)
