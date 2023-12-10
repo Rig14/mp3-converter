@@ -176,3 +176,36 @@ adds a history entry to the user that is currently logged in
     "content_format": "format of the content",
 }
 ```
+
+
+## Get history
+returns the history of the user that is currently logged in
+
+#### route: `/api/get_history`
+
+#### method: `GET`
+
+#### **Token must be provided in the header of the request!!**
+
+#### response body:
+```json
+{
+    "history": [
+        {
+            "content_title": "title of the content",
+            "content_url": "url to the content",
+            "content_format": "format of the content",
+        },
+        {
+            "content_title": "title of the content",
+            "content_url": "url to the content",
+            "content_format": "format of the content",
+        },
+        {
+            "content_title": "title of the content",
+            "content_url": "url to the content",
+            "content_format": "format of the content",
+        },
+    ]
+}
+```
