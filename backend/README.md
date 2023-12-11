@@ -1,61 +1,40 @@
-# API documentation
+# Backend layout
+The backend is written in python and uses the flask framework.
 
-This part contains instructions on how to use the API.
+The backend is split into many parts separated into different folders.
 
-Before you start using the API a ``.env`` file **must be made**. Variables for the .env file can be found in the .env.example file.
+## `db`
+All code that is related to the database is in this folder.
 
-## API endpoints
+For example the `db.py` file contains the `execute` function that is used to execute SQL queries.
 
-### Sign up
-`/api/signup`
-- **Method:** POST
-- **Description:** Creates a new user
-- **Request Body:**
-    - email: user's email
-    - password: user's password
-    - password_confirm: user's password confirmation
-- **Returns:** Error message when values are invalid. Otherwise returns JWT.
+To alter the structure of the database you can write into the migrations folder.
+
+## `downloader`
+All code that is related to downloading files is in this folder and mainly in the main.py file.
 
 
-### Login
-`/api/login`
-- **Method:** POST
-- **Description:** Logs in a user
-- **Request Body:**
-    - email: user's email
-    - password: user's password
-- **Returns:** Error message when values are invalid. Otherwise returns JWT.
+## `user`
+All code that is related to user management is in this folder.
 
-### User data
-`/api/user_data`
-- **Method:** GET
-- **Description:** Returns small amount of user data
-- **Request Body:** None
-- **Returns:** Error message when values are invalid. Otherwise returns user data.
+That means JWT token generation and verification, user creation and login. User data (history, name, email, etc.) managment is also stored here.
 
-
-### Download
-`/api/download`
-- **Method:** POST
-- **Description:** Downloads a file to the **server** using yt-dlp
-- **Request Body:**
-    - url: url of the video
-- **Returns:** Error message when content cant be downloaded. Otherwise returns the identifier.
-
-### Get file
-`/api/file?identifier=<identifier>`
-- **Method:** GET
-- **Description:** Returns a file
-- **Request Body:** None
-- **Returns:** Error message when values are invalid. Otherwise returns the file.
+## static folder
+The static folder contains all static files that are served by the backend. For this project it is only used for user profile pictures.
 
 # SQL database access
 
-To access the SQL database you can use the execute function from *db.py* file
+To access the SQL database you can use the execute function from `db`
 
 For example to create a new user: 
 ```python
 from backend.db import execute
 
-execute("INSERT INTO users (email, password) VALUES (%s, %s)", ("legit@email.com", "password"))
+# returns the id of the user that has the email address
+email = execute("SELECT id FROM users WHERE email = ?", (email,))
+
+print(email[0][0])
 ```
+
+# API routes
+All api routes are described in the [API_ROUTES.md](API_ROUTES.md) file.
