@@ -48,7 +48,7 @@ def download_to_server(url: str, format_str: str):
 
     # check if url is not in the blacklist
     blacklist_urls = execute("SELECT url FROM blacklist", ())
-    if url in [x[0] for x in blacklist_urls]:
+    if hash(url) in [hash(x[0]) for x in blacklist_urls]:
         return {"error": "url is blacklisted"}, 403
 
     if format_str not in FORMATS:
