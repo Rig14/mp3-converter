@@ -48,6 +48,10 @@
     font-size: 20px;
     cursor: pointer;
 }
+.blacklist-item-delete:hover {
+    color: #a80000;
+    text-decoration: underline;
+}
 
 .blacklist-item-data {
     width: 100%;
