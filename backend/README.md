@@ -42,3 +42,7 @@ print(email[0][0])
 
 # API routes
 All api routes are described in the [API_ROUTES.md](API_ROUTES.md) file.
+
+# ENV file
+The `.env` file is used to store environment variables.
+If you dont have an `.env` file you can create one yourself by copying the `.env.example` file and filling it out.
