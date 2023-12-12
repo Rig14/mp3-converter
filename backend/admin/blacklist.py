@@ -17,3 +17,8 @@ def get_blacklist_items(token):
 
     if not is_admin:
         return {"message": "You are not an admin."}, 403
+
+    # get the blacklisted items
+    items = execute("SELECT * FROM blacklist")
+
+    return {"items": items}, 200
