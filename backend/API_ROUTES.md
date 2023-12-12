@@ -72,6 +72,7 @@ returns the user data of the user that is currently logged in
     "motd": "the message that is displayed next to the user profile",
     "profile_picture": "url to the profile picture",
     "email": "email of user",
+    "admin": "1 or 0 if user is a admin" 
 }
 ```
 
