@@ -12,7 +12,7 @@ from backend.user import (
     delete_user_account,
 )
 from backend.downloader import download_to_server, send_file_from_server
-from backend.admin import get_blacklist_items
+from backend.admin import get_blacklist_items, add_blacklist_item
 
 
 app = Flask(__name__)
