@@ -17,6 +17,10 @@ async function render_blacklist() {
         const blacklist_container = document.getElementById(
             'blacklist-container'
         );
+        // clear blacklist container
+        blacklist_container.innerHTML = '';
+
+        // add data to blacklist container
         data.items.forEach((item) => {
             const blacklist_item = document.createElement('li');
             blacklist_item.className = 'blacklist-item';
@@ -24,7 +28,7 @@ async function render_blacklist() {
                 <p class="blacklist-item-id">ID: ${item[0]}</p>
                 <p class="blacklist-item-content-url">Content URL: ${item[1]}</p>
                 <p class="blacklist-item-date">Date added: ${item[2]}</p>
-                <button class="blacklist-item-delete" onclick="delete_from_blacklist(${item.id})">Delete</button>
+                <button class="blacklist-item-delete" onclick="delete_from_blacklist(${item[0]})">Delete</button>
             `;
             blacklist_container.appendChild(blacklist_item);
         });
@@ -48,11 +52,31 @@ async function add_to_blacklist() {
     });
 
     if (response.status !== 200) {
-        window.location.href = 'index.html';
+        render_message('Error adding item to blacklist.');
     } else {
-        const data = await response.json();
         render_blacklist();
         render_message('Successfully added item to blacklist.');
+    }
+}
+
+async function delete_from_blacklist(id) {
+    const url = BACKEND_URL + '/api/blacklist';
+    const token = localStorage.getItem('token');
+
+    const response = await fetch(url, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: token,
+        },
+        body: JSON.stringify({ content_id: id }),
+    });
+
+    if (response.status !== 200) {
+        render_message('Error deleting item from blacklist.');
+    } else {
+        render_blacklist();
+        render_message('Successfully deleted item from blacklist.');
     }
 }
 

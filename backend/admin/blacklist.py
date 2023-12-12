@@ -46,3 +46,18 @@ def add_blacklist_item(token, url):
         return {"error": str(e)}, 500
 
     return {"message": "Item added to blacklist."}, 200
+
+
+def remove_blacklist_item(token, id):
+    """Removes a item from the blacklist."""
+    validation_failed = validate_admin(token)
+    if validation_failed:
+        return validation_failed
+
+    # remove the item from the blacklist
+    try:
+        execute("DELETE FROM blacklist WHERE id = ?", (id,))
+    except sqlite3.Error as e:
+        return {"error": str(e)}, 500
+
+    return {"message": "Item removed from blacklist."}, 200
