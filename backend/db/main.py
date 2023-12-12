@@ -123,7 +123,7 @@ def add_admin():
     hashed_pw = bcrypt.hashpw(password.encode(), bcrypt.gensalt())
 
     execute(
-        "INSERT INTO users (name, email, password, is_admin) VALUES (?, ?, ?, ?)",
+        "INSERT INTO users (name, email, password, admin) VALUES (?, ?, ?, ?)",
         ("admin", "admin", hashed_pw, True),
     )
 
