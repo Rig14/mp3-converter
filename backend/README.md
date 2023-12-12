@@ -19,6 +19,10 @@ All code that is related to user management is in this folder.
 
 That means JWT token generation and verification, user creation and login. User data (history, name, email, etc.) managment is also stored here.
 
+
+## `admin`
+All code that is related to admin management is in this folder.
+
 ## static folder
 The static folder contains all static files that are served by the backend. For this project it is only used for user profile pictures.
 

@@ -209,3 +209,43 @@ returns the history of the user that is currently logged in
     ]
 }
 ```
+
+## Blacklist
+Everything that is in the blacklist will not be downloaded.
+
+#### route: `/api/blacklist`
+
+#### Token must be provided in the header of the request!!
+
+
+#### method: `GET`
+Will return the blacklist
+#### response:
+```json
+{
+    "items": [
+        ["id", "url", "date added"],
+        ["id", "url", "date added"],
+        ["id", "url", "date added"],
+    ]
+}
+```
+
+
+#### method: `POST`
+Will add the url to the blacklist
+#### request body:
+```json
+{
+    "content_url": "url to add to blacklist"
+}
+```
+
+#### method: `PATCH`
+Will remove the url from the blacklist
+#### request body:
+```json
+{
+    "content_id": "id if item to remove from blacklist"
+}
+```
