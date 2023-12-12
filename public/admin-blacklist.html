@@ -6,6 +6,7 @@
         <link rel="stylesheet" href="./normalize.css" />
         <link rel="stylesheet" href="./style.css" />
         <script src="./script.js"></script>
+        <script src="admin.js"></script>
         <title>Converter</title>
     </head>
     <body>
@@ -44,8 +45,18 @@
                 </div>
             </nav>
             <div class="main-wrapper">
-                <main>main</main>
-                <script></script>
+                <main>
+                    <div>
+                        <form>
+                            <input type="text" id="blacklisted-url" />
+                            <button type="button" onclick="add_to_blacklist()">
+                                Add
+                            </button>
+                        </form>
+                        <p id="message_container"></p>
+                        <ul id="blacklist-container"></ul>
+                    </div>
+                </main>
             </div>
             <footer>
                 <div class="footer-logo-box">
@@ -91,6 +102,5 @@
             </footer>
         </div>
         <script src="./navbar_user.js"></script>
-        <script src="admin.js"></script>
     </body>
 </html>
