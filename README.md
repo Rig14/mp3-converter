@@ -59,3 +59,8 @@ make web-dev
 ```
 make server-dev
 ```
+
+### install dependencies
+```
+make install
+```
