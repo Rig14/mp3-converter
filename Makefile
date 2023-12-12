@@ -1,6 +1,5 @@
 server-dev:
 	make reset-db
-	make add-admin
 	flask --app ./backend/app run --debug
 web-dev:
 	npx http-server public -c-1 --cors
@@ -10,7 +9,8 @@ install:
 
 
 reset-db:
-	cd backend/db && python3 main.py reset 
+	cd backend/db && python3 main.py reset
+	make add-admin 
 create-db:
 	cd backend/db && python3 main.py create 
 update-db:

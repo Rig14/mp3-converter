@@ -1,8 +1,8 @@
 function update_navbar() {
-    locally_save_user_data();
     const user_info_container = document.getElementById('user-info');
 
     if (localStorage.getItem('user_data')) {
+        locally_save_user_data();
         // if user data is in local storage, then display user info in navbar
         const user_data = JSON.parse(localStorage.getItem('user_data'));
         user_info_container.innerHTML = `
