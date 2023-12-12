@@ -13,12 +13,12 @@ def get_blacklist_items(token):
         return {"message": "Invalid token."}, 401
 
     # check if user is admin
-    is_admin = execute("SELECT is_admin FROM users WHERE id = ?", (user_id,))[0][0]
+    is_admin = execute("SELECT admin FROM users WHERE id = ?", (user_id,))[0][0]
 
     if not is_admin:
         return {"message": "You are not an admin."}, 403
 
     # get the blacklisted items
-    items = execute("SELECT * FROM blacklist")
+    items = execute("SELECT * FROM blacklist", ())
 
     return {"items": items}, 200
