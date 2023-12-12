@@ -140,3 +140,12 @@ def get_blacklist():
     token = request.headers.get("Authorization")
 
     return get_blacklist_items(token)
+
+
+@app.route("/api/blacklist", methods=["POST"])
+def add_blacklist():
+    """Add to blacklist."""
+    token = request.headers.get("Authorization")
+    content_url = request.get_json().get("content_url")
+
+    return add_blacklist_item(token, content_url)
