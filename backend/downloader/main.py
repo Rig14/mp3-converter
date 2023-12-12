@@ -5,6 +5,8 @@ import subprocess
 
 from flask import send_file
 
+from backend.db import execute
+
 MEDIA_DIR = os.path.join(os.path.dirname(__file__), "downloaded-media")
 
 
@@ -43,6 +45,11 @@ def download_to_server(url: str, format_str: str):
     """
     if not url:
         return {"error": "url not provided"}, 400
+
+    # check if url is not in the blacklist
+    blacklist_urls = execute("SELECT url FROM blacklist", ())
+    if url in [x[0] for x in blacklist_urls]:
+        return {"error": "url is blacklisted"}, 403
 
     if format_str not in FORMATS:
         return {"error": "format not supported"}, 400
