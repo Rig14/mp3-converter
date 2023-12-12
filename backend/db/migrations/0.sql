@@ -5,7 +5,8 @@ CREATE TABLE users (
     name VARCHAR(255),
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     motd TEXT DEFAULT 'Hello, World!',
-    image TEXT DEFAULT 'default_user.svg'
+    image TEXT DEFAULT 'default_user.svg',
+    admin BOOLEAN DEFAULT FALSE
 );
 
 CREATE TABLE history (

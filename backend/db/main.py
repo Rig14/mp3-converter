@@ -3,6 +3,9 @@
 import os
 import sqlite3
 import sys
+import bcrypt
+
+from dotenv import load_dotenv
 
 # Database location is in the home directory.
 DATABASE_FILE_DIR = os.path.dirname(__file__)
@@ -109,6 +112,20 @@ def execute(query, params=None):
 
         # Return the results.
         return results
+
+
+def add_admin():
+    """Adds admin user to the database."""
+    # aquire the admin password from the environment variables
+    load_dotenv(os.path.join(os.path.dirname(__file__), "..", ".env"))
+    password = os.getenv("ADMIN_PASSWORD")
+    # hash the password
+    hashed_pw = bcrypt.hashpw(password.encode(), bcrypt.gensalt())
+
+    execute(
+        "INSERT INTO users (name, email, password, is_admin) VALUES (?, ?, ?, ?)",
+        ("admin", "admin", hashed_pw, True),
+    )
 
 
 if __name__ == "__main__":
