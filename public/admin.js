@@ -17,7 +17,17 @@ async function render_blacklist() {
         const blacklist_container = document.getElementById(
             'blacklist-container'
         );
-        blacklist_container.innerHTML = data;
+        data.items.forEach((item) => {
+            const blacklist_item = document.createElement('li');
+            blacklist_item.className = 'blacklist-item';
+            blacklist_item.innerHTML = `
+                <p class="blacklist-item-id">ID: ${item[0]}</p>
+                <p class="blacklist-item-content-url">Content URL: ${item[1]}</p>
+                <p class="blacklist-item-date">Date added: ${item[2]}</p>
+                <button class="blacklist-item-delete" onclick="delete_from_blacklist(${item.id})">Delete</button>
+            `;
+            blacklist_container.appendChild(blacklist_item);
+        });
     }
 }
 
