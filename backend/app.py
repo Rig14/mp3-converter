@@ -12,6 +12,8 @@ from backend.user import (
     delete_user_account,
 )
 from backend.downloader import download_to_server, send_file_from_server
+from backend.admin import get_blacklist_items
+
 
 app = Flask(__name__)
 CORS(app)
@@ -130,3 +132,11 @@ def delete_account():
     token = request.headers.get("Authorization")
 
     return delete_user_account(token)
+
+
+@app.route("/api/blacklist", methods=["GET"])
+def get_blacklist():
+    """Get blacklist."""
+    token = request.headers.get("Authorization")
+
+    return get_blacklist_items(token)
