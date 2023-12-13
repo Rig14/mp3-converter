@@ -19,7 +19,7 @@ def get_user_data(t):
         return {"error": "Invalid token"}, 400
 
     user = execute(
-        "SELECT name, motd, image, email FROM users WHERE id = ?", (user_id,)
+        "SELECT name, motd, image, email, admin FROM users WHERE id = ?", (user_id,)
     )[0]
 
     return {
@@ -28,6 +28,7 @@ def get_user_data(t):
         "motd": user[1],
         "profile_picture": user[2],
         "email": user[3],
+        "admin": user[4],
     }, 200
 
 

@@ -72,6 +72,7 @@ returns the user data of the user that is currently logged in
     "motd": "the message that is displayed next to the user profile",
     "profile_picture": "url to the profile picture",
     "email": "email of user",
+    "admin": "1 or 0 if user is a admin" 
 }
 ```
 
@@ -207,5 +208,45 @@ returns the history of the user that is currently logged in
             "content_format": "format of the content",
         },
     ]
+}
+```
+
+## Blacklist
+Everything that is in the blacklist will not be downloaded.
+
+#### route: `/api/blacklist`
+
+#### Token must be provided in the header of the request!!
+
+
+#### method: `GET`
+Will return the blacklist
+#### response:
+```json
+{
+    "items": [
+        ["id", "url", "date added"],
+        ["id", "url", "date added"],
+        ["id", "url", "date added"],
+    ]
+}
+```
+
+
+#### method: `POST`
+Will add the url to the blacklist
+#### request body:
+```json
+{
+    "content_url": "url to add to blacklist"
+}
+```
+
+#### method: `PATCH`
+Will remove the url from the blacklist
+#### request body:
+```json
+{
+    "content_id": "id if item to remove from blacklist"
 }
 ```

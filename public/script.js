@@ -262,6 +262,8 @@ async function on_loading_page() {
         converting_text.style.display = 'none';
         const error = document.getElementById('converting-error-message');
         error.style.display = 'block';
+        const data = await response.json();
+        error.innerHTML = 'Error: ' + data.error;
     } else {
         const data = await response.json();
         const identifier = data.identifier;

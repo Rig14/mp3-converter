@@ -771,3 +771,11 @@ maybe there is a better solution*/
 #supported-sites a:hover {
     text-decoration: underline;
 }
+
+.admin-link {
+    color: var(--link-color);
+    text-decoration: none;
+}
+.admin-link:hover {
+    text-decoration: underline;
+}

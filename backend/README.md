@@ -19,6 +19,10 @@ All code that is related to user management is in this folder.
 
 That means JWT token generation and verification, user creation and login. User data (history, name, email, etc.) managment is also stored here.
 
+
+## `admin`
+All code that is related to admin management is in this folder.
+
 ## static folder
 The static folder contains all static files that are served by the backend. For this project it is only used for user profile pictures.
 
@@ -38,3 +42,7 @@ print(email[0][0])
 
 # API routes
 All api routes are described in the [API_ROUTES.md](API_ROUTES.md) file.
+
+# ENV file
+The `.env` file is used to store environment variables.
+If you dont have an `.env` file you can create one yourself by copying the `.env.example` file and filling it out.
