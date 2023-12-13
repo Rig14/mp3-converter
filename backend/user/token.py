@@ -12,6 +12,9 @@ def create_token(user_id: int):
     load_dotenv(os.path.join(os.path.dirname(__file__), "..", ".env"))
     jwt_secret = os.getenv("JWT_SECRET")
 
+    if not jwt_secret:
+        jwt_secret = "secret"
+
     payload = {
         "exp": datetime.datetime.now() + datetime.timedelta(days=10),
         "sub": user_id,
@@ -29,6 +32,9 @@ def get_id_from_token(token) -> int:
     load_dotenv(os.path.join(os.path.dirname(__file__), "..", ".env"))
 
     jwt_secret = os.getenv("JWT_SECRET")
+
+    if not jwt_secret:
+        jwt_secret = "secret"
 
     try:
         data = jwt.decode(token, jwt_secret, algorithms=["HS256"])

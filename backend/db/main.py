@@ -119,6 +119,8 @@ def add_admin():
     # aquire the admin password from the environment variables
     load_dotenv(os.path.join(os.path.dirname(__file__), "..", ".env"))
     password = os.getenv("ADMIN_PASSWORD")
+    if not password:
+        password = "admin"
     # hash the password
     hashed_pw = bcrypt.hashpw(password.encode(), bcrypt.gensalt())
 
