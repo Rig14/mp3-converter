@@ -4,6 +4,7 @@
 import sqlite3
 from backend.db import execute
 from backend.user import get_id_from_token
+from urllib.parse import quote
 
 
 def validate_admin(token):
@@ -40,6 +41,7 @@ def add_blacklist_item(token, url):
         return validation_failed
 
     # add the item to the blacklist
+    url = quote(url)
     try:
         execute("INSERT INTO blacklist (url) VALUES (?)", (url,))
     except sqlite3.Error as e:
