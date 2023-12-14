@@ -64,3 +64,21 @@
 .blacklist-item-content-url {
     margin-bottom: 0;
 }
+
+#user-list {
+    width: 100%;
+}
+
+.user-data-field {
+    color: black;
+}
+.user-info-admin-field {
+    margin-bottom: 0;
+    margin-top: 0;
+}
+.user-managment-buttons {
+    margin-left: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

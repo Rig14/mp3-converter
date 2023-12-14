@@ -28,7 +28,6 @@ if (
     localStorage.getItem('user_data') &&
     JSON.parse(localStorage.getItem('user_data')).admin === 1
 ) {
-    console.log('create');
     // a floating box in the right bottom corner of the screen
     const floater = document.createElement('div');
     floater.style.position = 'fixed';

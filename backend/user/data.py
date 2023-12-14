@@ -52,17 +52,17 @@ def delete_user_account(_token):
     return {"message": "user deleted sucessfully"}, 200
 
 
-def get_all_users(token):
+def get_all_users(_token):
     """
     Return all users.
 
-    Returns user name, profile picture and id.
+    Returns users name, profile picture and id.
     """
     # check if token is admin
-    if not token:
+    if not _token:
         return {"error": "Token is missing"}, 400
 
-    user_id = token.get_id_from_token(token)
+    user_id = token.get_id_from_token(_token)
     if not user_id:
         return {"error": "Invalid token"}, 400
 
