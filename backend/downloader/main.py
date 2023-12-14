@@ -130,7 +130,6 @@ def send_file_from_server(
 
     # create the path to the file
     path = os.path.join(path, file_name)
-    print(path)
 
     # return the file as an attachment
     return send_file(
