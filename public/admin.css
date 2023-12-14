@@ -89,6 +89,10 @@
     border: 2px solid #194af6;
     border-radius: 10px;
     padding: 5px;
+    transition: 0.2s;
+}
+.user-managment-buttons button:hover {
+    transform: scale(1.1);
 }
 
 .user-managment-header {
@@ -121,4 +125,9 @@
     transition: 0.2s;
     padding-left: 0.5rem;
     padding-right: 0.5rem;
+    cursor: pointer;
+}
+.user-managment-header form button:hover {
+    background-color: #0f3a13;
+    color: white;
 }
