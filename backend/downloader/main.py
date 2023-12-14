@@ -109,9 +109,9 @@ def send_file_from_server(
     # check if multiple files were converted (a playlist)
     if len(os.listdir(path)) > 1:
         # change previously defined parameters to fit playlist zip file
-        zipfile_name = "zipped-playlist.zip"  # currently hardcoded
+        file_name = "zipped-playlist.zip"  # currently hardcoded
         file_extention = file_name.split(".")[-1]
-        zipfile_path = os.path.join(path, zipfile_name)
+        zipfile_path = os.path.join(path, file_name)
 
         # create a zip file containing all converted playlist content
         with zipfile.ZipFile(zipfile_path, "w") as zip_object:
