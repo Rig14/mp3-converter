@@ -69,7 +69,14 @@ nav img {
     align-items: center;
     gap: 1rem;
 }
-
+@media screen and (max-width: 1250px) {
+    .button-container > a > button {
+        font-size: 1rem;
+        padding: 0.5rem;
+        padding-left: 0.7rem;
+        padding-right: 0.7rem;
+    }
+}
 .button-container button {
     border-radius: 15px;
     padding: 0.5rem;
@@ -269,8 +276,26 @@ footer {
     padding-right: 1rem;
 }
 
+@media screen and (max-width: 1250px) {
+    .navbar-links > li > a {
+        font-size: 1rem;
+    }
+    .navbar-links > li {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+    .navbar-links li:nth-last-child(1) {
+        display: none;
+    }
+    nav > a > img {
+        display: none;
+    }
+}
 /*for responsive design navbar and footer*/
 @media only screen and (max-width: 600px) {
+    nav > a > img {
+        display: block;
+    }
     .navbar-links {
         display: none;
     }
