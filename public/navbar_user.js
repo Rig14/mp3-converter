@@ -32,12 +32,15 @@ if (
     // a floating box in the right bottom corner of the screen
     const floater = document.createElement('div');
     floater.style.position = 'fixed';
+    floater.style.display = 'flex';
+    floater.style.flexDirection = 'column';
     floater.style.bottom = '0';
     floater.style.right = '0';
     floater.style.border = '2px dashed orange';
 
     floater.innerHTML = `
             <a class="admin-link" href="./admin-blacklist.html">Blacklist</a>
+            <a class="admin-link" href="./admin-users-overview.html">Users</a>
         `;
 
     document.body.appendChild(floater);
