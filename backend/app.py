@@ -10,6 +10,7 @@ from backend.user import (
     add_user_history,
     get_user_history,
     delete_user_account,
+    get_all_users,
 )
 from backend.downloader import download_to_server, send_file_from_server
 from backend.admin import get_blacklist_items, add_blacklist_item, remove_blacklist_item
@@ -149,3 +150,11 @@ def blacklist():
     if request.method == "PATCH":
         content_id = request.get_json().get("content_id")
         return remove_blacklist_item(token, content_id)
+
+
+@app.route("/api/users", methods=["GET"])
+def users():
+    """Get all users."""
+    token = request.headers.get("Authorization")
+    if request.method == "GET":
+        return get_all_users(token)

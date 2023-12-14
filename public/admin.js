@@ -36,8 +36,6 @@ async function render_blacklist() {
     }
 }
 
-render_blacklist();
-
 async function add_to_blacklist() {
     const url = BACKEND_URL + '/api/blacklist';
     const token = localStorage.getItem('token');
@@ -85,3 +83,5 @@ function render_message(message) {
     const message_container = document.getElementById('message-container');
     message_container.innerHTML = message;
 }
+
+async function get_users() {}

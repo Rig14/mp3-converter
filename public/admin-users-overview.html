@@ -46,7 +46,20 @@
                 </div>
             </nav>
             <div class="main-wrapper">
-                <main></main>
+                <main>
+                    <h1>Users:</h1>
+                    <form>
+                        <input
+                            type="text"
+                            name="user-name"
+                            id="user-name-search"
+                        />
+                        <button type="button" onclick="search_users()">
+                            search
+                        </button>
+                    </form>
+                    <ul id="user-list"></ul>
+                </main>
             </div>
             <footer>
                 <div class="footer-logo-box">
