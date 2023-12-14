@@ -4,6 +4,13 @@
     margin-top: 3rem;
     margin-bottom: 5rem;
 }
+@media screen and (max-width: 1000px) {
+    .user-profile-edit {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+    }
+}
 #user-profile-image {
     width: 200px;
     height: 200px;
@@ -16,6 +23,11 @@
     align-items: center;
     gap: 20px;
     margin-right: 2rem;
+}
+@media screen and (max-width: 1000px) {
+    .user-profile-image-container {
+        margin-right: 0;
+    }
 }
 #user-profile-data-form > div {
     display: flex;
@@ -40,6 +52,11 @@
     display: flex;
     flex-direction: column;
     width: 40rem;
+}
+@media screen and (max-width: 1000px) {
+    #user-profile-data-form {
+        width: 100%;
+    }
 }
 
 .user-profile-image-container > .lable-button {
