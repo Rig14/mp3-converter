@@ -1,3 +1,5 @@
+"""User managment."""
+
 import os
 from backend.db import execute
 from backend.user import token
@@ -38,7 +40,7 @@ def delete_user_history(_token, user_id):
     if not admin_id:
         return {"error": "Invalid token"}, 400
 
-    is_admin = execute("SELECT admin FROM users WHERE id = ?", (admin_id))[0][0]
+    is_admin = execute("SELECT admin FROM users WHERE id = ?", (admin_id,))[0][0]
     if not is_admin:
         return {"error": "You are not an admin"}, 403
 
@@ -57,7 +59,7 @@ def delete_user_account_admin(_token, user_id):
     if not admin_id:
         return {"error": "Invalid token"}, 400
 
-    is_admin = execute("SELECT admin FROM users WHERE id = ?", (admin_id))[0][0]
+    is_admin = execute("SELECT admin FROM users WHERE id = ?", (admin_id,))[0][0]
 
     if not is_admin:
         return {"error": "You are not an admin"}, 403

@@ -155,11 +155,11 @@ async function delete_history(id) {
 }
 
 async function delete_account(id) {
-    const url = BACKEND_URL + '/api/delete_account';
+    const url = BACKEND_URL + '/api/delete_account_id';
     const token = localStorage.getItem('token');
 
     const response = await fetch(url, {
-        method: 'DELETE',
+        method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
             Authorization: token,
@@ -171,5 +171,6 @@ async function delete_account(id) {
         render_message('Error deleting account.');
     } else {
         render_message('Successfully deleted account with id ' + id);
+        get_users();
     }
 }
