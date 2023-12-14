@@ -739,6 +739,15 @@ footer {
     margin-top: 0.75rem;
     text-shadow: 0.4px 0.4px 0.4px gray;
 }
+@media screen and (max-width: 1000px) {
+    .filename-editing-box {
+        width: 90%;
+    }
+    .input-bar .need-help-text {
+        margin-top: 1rem;
+        margin-right: 0;
+    }
+}
 
 #file-format-box {
     display: flex;
@@ -752,12 +761,24 @@ footer {
     width: 4rem;
     font-size: 1.2rem;
 }
+@media screen and (max-width: 1000px) {
+    #file-format-box {
+        margin-top: 2rem;
+        border-radius: 5px;
+        padding: 0.5rem;
+    }
+}
 
 /*fixes alignment issues caused by file-size element
 maybe there is a better solution*/
 #filename-input-element {
     width: 45.7rem;
     font-size: 1.1rem;
+}
+@media screen and (max-width: 1000px) {
+    #filename-input-element {
+        width: 100%;
+    }
 }
 
 /*fixes alignment issues caused by file-size element
@@ -768,6 +789,15 @@ maybe there is a better solution*/
     height: 3rem;
     padding-left: 6.75rem;
 }
+@media screen and (max-width: 1000px) {
+    #filename-editing-flex-row {
+        flex-direction: column;
+        height: auto;
+        justify-content: center;
+        align-items: center;
+        padding-left: 0;
+    }
+}
 
 #file-size {
     display: flex;
@@ -776,6 +806,13 @@ maybe there is a better solution*/
     white-space: nowrap;
     padding-left: 1rem;
     font-size: 1.3rem;
+}
+@media screen and (max-width: 1000px) {
+    #file-size {
+        margin-top: 2rem;
+        border-radius: 5px;
+        padding: 0.5rem;
+    }
 }
 
 .download-button {
