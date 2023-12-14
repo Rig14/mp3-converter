@@ -117,7 +117,7 @@ def execute(query, params=None):
 def add_admin():
     """Adds admin user to the database."""
     # aquire the admin password from the environment variables
-    load_dotenv(os.path.join(os.path.dirname(__file__), "..", ".env"))
+    load_dotenv()
     password = os.getenv("ADMIN_PASSWORD")
     if not password:
         password = "admin"

@@ -12,7 +12,14 @@ from backend.user import (
     delete_user_account,
 )
 from backend.downloader import download_to_server, send_file_from_server
-from backend.admin import get_blacklist_items, add_blacklist_item, remove_blacklist_item
+from backend.admin import (
+    get_blacklist_items,
+    add_blacklist_item,
+    remove_blacklist_item,
+    get_all_users,
+    delete_user_history,
+    delete_user_account_admin,
+)
 
 
 app = Flask(__name__)
@@ -149,3 +156,31 @@ def blacklist():
     if request.method == "PATCH":
         content_id = request.get_json().get("content_id")
         return remove_blacklist_item(token, content_id)
+
+
+@app.route("/api/users", methods=["GET"])
+def users():
+    """Get all users."""
+    token = request.headers.get("Authorization")
+    if request.method == "GET":
+        return get_all_users(token)
+
+
+@app.route("/api/delete_history", methods=["PATCH"])
+def delete_history():
+    """Delete user history for a given user id."""
+
+    token = request.headers.get("Authorization")
+    user_id = request.get_json().get("user_id")
+
+    return delete_user_history(token, user_id)
+
+
+@app.route("/api/delete_account_id", methods=["PATCH"])
+def delete_account_id():
+    """Delete user account for a given user id."""
+
+    token = request.headers.get("Authorization")
+    user_id = request.get_json().get("user_id")
+
+    return delete_user_account_admin(token, user_id)

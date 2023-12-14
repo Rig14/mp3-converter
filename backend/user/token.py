@@ -9,7 +9,7 @@ def create_token(user_id: int):
     """
     Creates a jwt token for the given user id.
     """
-    load_dotenv(os.path.join(os.path.dirname(__file__), "..", ".env"))
+    load_dotenv()
     jwt_secret = os.getenv("JWT_SECRET")
 
     if not jwt_secret:
@@ -29,7 +29,7 @@ def get_id_from_token(token) -> int:
 
     Returns the user id if the token is valid, otherwise returns False.
     """
-    load_dotenv(os.path.join(os.path.dirname(__file__), "..", ".env"))
+    load_dotenv()
 
     jwt_secret = os.getenv("JWT_SECRET")
 
