@@ -10,11 +10,16 @@ from backend.user import (
     add_user_history,
     get_user_history,
     delete_user_account,
-    get_all_users,
-    delete_user_history,
 )
 from backend.downloader import download_to_server, send_file_from_server
-from backend.admin import get_blacklist_items, add_blacklist_item, remove_blacklist_item
+from backend.admin import (
+    get_blacklist_items,
+    add_blacklist_item,
+    remove_blacklist_item,
+    get_all_users,
+    delete_user_history,
+    delete_user_account_admin,
+)
 
 
 app = Flask(__name__)
@@ -169,3 +174,13 @@ def delete_history():
     user_id = request.get_json().get("user_id")
 
     return delete_user_history(token, user_id)
+
+
+@app.route("/api/delete_account_id", methods=["PATCH"])
+def delete_account_id():
+    """Delete user account for a given user id."""
+
+    token = request.headers.get("Authorization")
+    user_id = request.get_json().get("user_id")
+
+    return delete_user_account_admin(token, user_id)

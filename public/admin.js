@@ -153,3 +153,23 @@ async function delete_history(id) {
         render_message('Successfully deleted history for user with id ' + id);
     }
 }
+
+async function delete_account(id) {
+    const url = BACKEND_URL + '/api/delete_account';
+    const token = localStorage.getItem('token');
+
+    const response = await fetch(url, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: token,
+        },
+        body: JSON.stringify({ user_id: id }),
+    });
+
+    if (response.status !== 200) {
+        render_message('Error deleting account.');
+    } else {
+        render_message('Successfully deleted account with id ' + id);
+    }
+}

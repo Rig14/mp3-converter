@@ -43,18 +43,3 @@ def get_user_history(token):
     ]
 
     return {"history": history}, 200
-
-
-def delete_user_history(token, user_id):
-    """Deletes users history."""
-    if not token:
-        return {"error": "Invalid token"}, 400
-
-    admin_id = get_id_from_token(token)
-
-    if not admin_id:
-        return {"error": "Invalid token"}, 400
-
-    execute("DELETE FROM history WHERE user_id = ?", (user_id,))
-
-    return {"message": "history deleted sucessfully"}, 200
