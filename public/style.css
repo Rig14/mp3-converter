@@ -540,6 +540,11 @@ footer {
     font-size: 1.3rem;
     z-index: 1;
 }
+@media screen and (max-width: 1000px) {
+    .input-bar .tiktok-logo {
+        display: none;
+    }
+}
 
 .input-bar .playlist-logo {
     display: flex;
@@ -554,6 +559,11 @@ footer {
     border: 3px solid black;
     font-size: 1.3rem;
     z-index: 1;
+}
+@media screen and (max-width: 1000px) {
+    .input-bar .playlist-logo {
+        display: none;
+    }
 }
 
 .playlist-logo #big-logo {
