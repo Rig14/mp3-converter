@@ -133,3 +133,23 @@ async function get_users() {
         });
     }
 }
+
+async function delete_history(id) {
+    const url = BACKEND_URL + '/api/delete_history';
+    const token = localStorage.getItem('token');
+
+    const response = await fetch(url, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: token,
+        },
+        body: JSON.stringify({ user_id: id }),
+    });
+
+    if (response.status !== 200) {
+        render_message('Error deleting history.');
+    } else {
+        render_message('Successfully deleted history for user with id ' + id);
+    }
+}

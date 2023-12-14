@@ -11,6 +11,7 @@ from backend.user import (
     get_user_history,
     delete_user_account,
     get_all_users,
+    delete_user_history,
 )
 from backend.downloader import download_to_server, send_file_from_server
 from backend.admin import get_blacklist_items, add_blacklist_item, remove_blacklist_item
@@ -158,3 +159,13 @@ def users():
     token = request.headers.get("Authorization")
     if request.method == "GET":
         return get_all_users(token)
+
+
+@app.route("/api/delete_history", methods=["PATCH"])
+def delete_history():
+    """Delete user history for a given user id."""
+
+    token = request.headers.get("Authorization")
+    user_id = request.get_json().get("user_id")
+
+    return delete_user_history(token, user_id)
