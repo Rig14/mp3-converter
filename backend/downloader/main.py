@@ -2,6 +2,7 @@
 import os
 import random
 import subprocess
+import zipfile
 from urllib.parse import quote
 
 from flask import send_file
@@ -105,6 +106,25 @@ def send_file_from_server(
 
     file_extention = file_name.split(".")[-1]
 
+    # check if there are multiple converted files (if a playlist was converted)
+    if len(os.listdir(path)) > 1:
+        # change previously defined parameters to fit playlist zip file
+        dir_name = "zip"
+        file_name = "zipped-playlist.zip"
+        file_extention = file_name.split(".")[-1]
+
+        # create a zip file containing all content of the converted playlist
+        print(os.path.dirname(__file__))
+        print(os.path.join(MEDIA_DIR, identifier))
+        print(os.listdir(path))
+        # print(zipfile.Path())
+        zip_path = os.path.join(path, file_name)
+        with zipfile.ZipFile(zip_path, "w") as zip_object:
+            for file in os.listdir(path):
+                if file.split(".")[-1] != "zip":
+                    zip_object.write(os.path.join(path, file))
+            zip_object.close()
+
     if get_data_only:
         return {
             "file_name": file_name.replace("." + file_extention, ""),
@@ -114,6 +134,7 @@ def send_file_from_server(
 
     # create the path to the file
     path = os.path.join(path, file_name)
+    print(path)
 
     # return the file as an attachment
     return send_file(
