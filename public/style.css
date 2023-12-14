@@ -436,7 +436,7 @@ footer {
 .link-pasting-box {
     text-align: center;
 }
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 1000px) {
     .link-pasting-box {
         width: 90%;
     }
@@ -453,7 +453,7 @@ footer {
     flex-direction: row;
     height: 3rem;
 }
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 1000px) {
     .input-bar .link-pasting-flex-row {
         flex-direction: column;
         height: auto;
@@ -473,7 +473,7 @@ footer {
     padding-right: 0;
     font-size: 1rem;
 }
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 1000px) {
     .input-bar input {
         width: 100%;
         border: 2px solid black;
@@ -498,7 +498,7 @@ footer {
     font-size: 1.3rem;
     z-index: 1;
 }
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 1000px) {
     .input-bar .youtube-logo {
         display: none;
     }
@@ -615,7 +615,7 @@ footer {
     margin-top: 0.75rem;
     text-shadow: 0.4px 0.4px 0.4px gray;
 }
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 1000px) {
     .link-pasting-box .need-help-text {
         margin-top: 1rem;
         margin-right: 0;
@@ -648,7 +648,7 @@ footer {
     color: white;
     border: 3px solid black;
 }
-@media screen {
+@media screen and (max-width: 1000px) {
     #dropdown-content {
         margin-top: 2rem;
         border-radius: 5px;
