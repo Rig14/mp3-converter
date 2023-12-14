@@ -436,6 +436,11 @@ footer {
 .link-pasting-box {
     text-align: center;
 }
+@media screen and (max-width: 600px) {
+    .link-pasting-box {
+        width: 90%;
+    }
+}
 
 .link-pasting-box h1 {
     font-size: 1.5rem;
@@ -448,6 +453,14 @@ footer {
     flex-direction: row;
     height: 3rem;
 }
+@media screen and (max-width: 600px) {
+    .input-bar .link-pasting-flex-row {
+        flex-direction: column;
+        height: auto;
+        justify-content: center;
+        align-items: center;
+    }
+}
 
 .input-bar input {
     border: none;
@@ -459,6 +472,13 @@ footer {
     padding: 0.7rem;
     padding-right: 0;
     font-size: 1rem;
+}
+@media screen and (max-width: 600px) {
+    .input-bar input {
+        width: 100%;
+        border: 2px solid black;
+        border-radius: 10px;
+    }
 }
 
 .youtube-logo img {
@@ -477,6 +497,11 @@ footer {
     border: 3px solid black;
     font-size: 1.3rem;
     z-index: 1;
+}
+@media screen and (max-width: 600px) {
+    .input-bar .youtube-logo {
+        display: none;
+    }
 }
 
 .soundcloud-logo img {
@@ -590,6 +615,12 @@ footer {
     margin-top: 0.75rem;
     text-shadow: 0.4px 0.4px 0.4px gray;
 }
+@media screen and (max-width: 600px) {
+    .link-pasting-box .need-help-text {
+        margin-top: 1rem;
+        margin-right: 0;
+    }
+}
 
 .convert-button {
     margin-top: 3rem;
@@ -616,6 +647,13 @@ footer {
     width: 10rem;
     color: white;
     border: 3px solid black;
+}
+@media screen {
+    #dropdown-content {
+        margin-top: 2rem;
+        border-radius: 5px;
+        padding: 0.5rem;
+    }
 }
 
 .user-info {
