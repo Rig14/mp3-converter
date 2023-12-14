@@ -80,7 +80,7 @@ def download_to_server(url: str, format_str: str):
         else "bestvideo*+bestaudio/best",
         url,  # the url to download
     ]
-
+    playlist_command = ["--flat-playlist", "--no-clean-info", "--write-info", url]
     # run the command
     try:
         subprocess.run(command, check=True)
@@ -106,23 +106,19 @@ def send_file_from_server(
 
     file_extention = file_name.split(".")[-1]
 
-    # check if there are multiple converted files (if a playlist was converted)
+    # check if multiple files were converted (a playlist)
     if len(os.listdir(path)) > 1:
         # change previously defined parameters to fit playlist zip file
-        dir_name = "zip"
-        file_name = "zipped-playlist.zip"
+        zipfile_name = "zipped-playlist.zip"  # currently hardcoded
         file_extention = file_name.split(".")[-1]
+        zipfile_path = os.path.join(path, zipfile_name)
 
-        # create a zip file containing all content of the converted playlist
-        print(os.path.dirname(__file__))
-        print(os.path.join(MEDIA_DIR, identifier))
-        print(os.listdir(path))
-        # print(zipfile.Path())
-        zip_path = os.path.join(path, file_name)
-        with zipfile.ZipFile(zip_path, "w") as zip_object:
+        # create a zip file containing converted playlist content
+        with zipfile.ZipFile(zipfile_path, "w") as zip_object:
             for file in os.listdir(path):
+                # ignore created .zip file
                 if file.split(".")[-1] != "zip":
-                    zip_object.write(os.path.join(path, file))
+                    zip_object.write(os.path.join(path, file), file)
             zip_object.close()
 
     if get_data_only:
