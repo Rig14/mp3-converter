@@ -135,6 +135,12 @@ h1.main-page-header {
     font-size: 2rem;
     margin-bottom: 2rem;
 }
+@media screen and (max-width: 600px) {
+    h1.main-page-header {
+        font-size: 1.5rem;
+        text-align: center;
+    }
+}
 
 p.main-page-subtext {
     font-size: 1rem;
@@ -142,6 +148,11 @@ p.main-page-subtext {
     text-align: center;
     width: 70%;
     opacity: 0.6;
+}
+@media screen and (max-width: 600px) {
+    p.main-page-subtext {
+        width: 100%;
+    }
 }
 
 main > .button-container {
@@ -151,6 +162,13 @@ main > .button-container {
     justify-content: center;
     width: 100%;
     margin-top: 2rem;
+}
+
+@media screen and (max-width: 1200px) {
+    main > .button-container {
+        flex-direction: column;
+        margin: 0;
+    }
 }
 
 main > .button-container button {
@@ -173,6 +191,11 @@ main > .button-container button:hover {
 main > .button-container a {
     border-radius: 100px;
     margin: 0 2.5rem;
+}
+@media screen and (max-width: 600px) {
+    main > .button-container a {
+        margin: 1rem 0;
+    }
 }
 
 .need-help-text {
