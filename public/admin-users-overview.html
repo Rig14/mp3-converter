@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="./normalize.css" />
+        <link rel="stylesheet" href="./style.css" />
+        <link rel="stylesheet" href="./admin.css" />
+        <script src="./script.js"></script>
+        <script src="admin.js"></script>
+        <title>Converter</title>
+    </head>
+    <body>
+        <div class="page-wrapper">
+            <nav>
+                <a href="index.html">
+                    <img src="./resources/Logo.svg" alt="Converter logo" />
+                </a>
+                <ul class="navbar-links">
+                    <li>
+                        <a href="index.html"> Home </a>
+                    </li>
+                    <li>
+                        <a href="youtube-convert"> Youtube </a>
+                    </li>
+                    <li>
+                        <a href="soundcloud-convert"> Soundcloud </a>
+                    </li>
+                    <li>
+                        <a href="tiktok-convert"> TikTok </a>
+                    </li>
+                    <li>
+                        <a href="playlist-convert"> Playlist </a>
+                    </li>
+                    <li>
+                        <a href="help"> Help </a>
+                    </li>
+                </ul>
+                <div class="button-container" id="user-info">
+                    <a href="login">
+                        <button class="login-button">Login</button>
+                    </a>
+                    <a href="sign-up">
+                        <button class="signup-button">Sign up</button>
+                    </a>
+                </div>
+            </nav>
+            <div class="main-wrapper">
+                <main>
+                    <h1>Users:</h1>
+                    <div class="user-managment-header">
+                        <form>
+                            <input
+                                type="text"
+                                name="user-name"
+                                id="user-name-search"
+                                placeholder="Search for user..."
+                            />
+                            <button type="button" onclick="render_users()">
+                                search
+                            </button>
+                        </form>
+                        <div></div>
+                    </div>
+                    <p id="message-container"></p>
+                    <ul id="user-list"></ul>
+                </main>
+            </div>
+            <footer>
+                <div class="footer-logo-box">
+                    <img src="./resources/Logo.svg" alt="Converter Logo" />
+                </div>
+                <div class="footer-links-box">
+                    <h3>Converters</h3>
+                    <ol>
+                        <li>
+                            <a href="youtube-convert">Youtube</a>
+                        </li>
+                        <li>
+                            <a href="soundcloud-convert">Soundcloud</a>
+                        </li>
+                        <li>
+                            <a href="tiktok-convert">TikTok</a>
+                        </li>
+                        <li>
+                            <a href="playlist-convert">Playlist</a>
+                        </li>
+                    </ol>
+                </div>
+                <div class="footer-links-box">
+                    <h3>Support</h3>
+                    <ol>
+                        <li>
+                            <a href="help">Help</a>
+                        </li>
+                        <li>
+                            <a href="legal">Legal</a>
+                        </li>
+                        <li>
+                            <a href="contact">Contact</a>
+                        </li>
+                        <li>
+                            <a href="feedback">Feedback</a>
+                        </li>
+                    </ol>
+                </div>
+                <p class="copyleft">
+                    © 2023 TheConverterCompany. All wrongs reserved
+                </p>
+            </footer>
+        </div>
+        <script src="./navbar_user.js"></script>
+        <script>
+            get_users();
+        </script>
+    </body>
+</html>

@@ -69,7 +69,14 @@ nav img {
     align-items: center;
     gap: 1rem;
 }
-
+@media screen and (max-width: 1250px) {
+    .button-container > a > button {
+        font-size: 1rem;
+        padding: 0.5rem;
+        padding-left: 0.7rem;
+        padding-right: 0.7rem;
+    }
+}
 .button-container button {
     border-radius: 15px;
     padding: 0.5rem;
@@ -135,6 +142,12 @@ h1.main-page-header {
     font-size: 2rem;
     margin-bottom: 2rem;
 }
+@media screen and (max-width: 600px) {
+    h1.main-page-header {
+        font-size: 1.5rem;
+        text-align: center;
+    }
+}
 
 p.main-page-subtext {
     font-size: 1rem;
@@ -142,6 +155,11 @@ p.main-page-subtext {
     text-align: center;
     width: 70%;
     opacity: 0.6;
+}
+@media screen and (max-width: 600px) {
+    p.main-page-subtext {
+        width: 100%;
+    }
 }
 
 main > .button-container {
@@ -151,6 +169,13 @@ main > .button-container {
     justify-content: center;
     width: 100%;
     margin-top: 2rem;
+}
+
+@media screen and (max-width: 1200px) {
+    main > .button-container {
+        flex-direction: column;
+        margin: 0;
+    }
 }
 
 main > .button-container button {
@@ -173,6 +198,11 @@ main > .button-container button:hover {
 main > .button-container a {
     border-radius: 100px;
     margin: 0 2.5rem;
+}
+@media screen and (max-width: 600px) {
+    main > .button-container a {
+        margin: 1rem 0;
+    }
 }
 
 .need-help-text {
@@ -246,8 +276,26 @@ footer {
     padding-right: 1rem;
 }
 
+@media screen and (max-width: 1250px) {
+    .navbar-links > li > a {
+        font-size: 1rem;
+    }
+    .navbar-links > li {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+    .navbar-links li:nth-last-child(1) {
+        display: none;
+    }
+    nav > a > img {
+        display: none;
+    }
+}
 /*for responsive design navbar and footer*/
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 1100px) {
+    nav > a > img {
+        display: block;
+    }
     .navbar-links {
         display: none;
     }
@@ -265,7 +313,6 @@ footer {
         align-items: center;
         justify-content: center;
     }
-
     .copyleft {
         display: none;
     }
@@ -413,6 +460,11 @@ footer {
 .link-pasting-box {
     text-align: center;
 }
+@media screen and (max-width: 1000px) {
+    .link-pasting-box {
+        width: 90%;
+    }
+}
 
 .link-pasting-box h1 {
     font-size: 1.5rem;
@@ -425,6 +477,14 @@ footer {
     flex-direction: row;
     height: 3rem;
 }
+@media screen and (max-width: 1000px) {
+    .input-bar .link-pasting-flex-row {
+        flex-direction: column;
+        height: auto;
+        justify-content: center;
+        align-items: center;
+    }
+}
 
 .input-bar input {
     border: none;
@@ -436,6 +496,13 @@ footer {
     padding: 0.7rem;
     padding-right: 0;
     font-size: 1rem;
+}
+@media screen and (max-width: 1000px) {
+    .input-bar input {
+        width: 100%;
+        border: 2px solid black;
+        border-radius: 10px;
+    }
 }
 
 .youtube-logo img {
@@ -455,6 +522,11 @@ footer {
     font-size: 1.3rem;
     z-index: 1;
 }
+@media screen and (max-width: 1000px) {
+    .input-bar .youtube-logo {
+        display: none;
+    }
+}
 
 .soundcloud-logo img {
     padding-left: 0.2rem;
@@ -473,6 +545,11 @@ footer {
     font-size: 1.3rem;
     z-index: 1;
 }
+@media screen and (max-width: 1000px) {
+    .input-bar .soundcloud-logo {
+        display: none;
+    }
+}
 
 .input-bar .tiktok-logo {
     display: flex;
@@ -486,6 +563,11 @@ footer {
     border: 3px solid black;
     font-size: 1.3rem;
     z-index: 1;
+}
+@media screen and (max-width: 1000px) {
+    .input-bar .tiktok-logo {
+        display: none;
+    }
 }
 
 .input-bar .playlist-logo {
@@ -501,6 +583,11 @@ footer {
     border: 3px solid black;
     font-size: 1.3rem;
     z-index: 1;
+}
+@media screen and (max-width: 1000px) {
+    .input-bar .playlist-logo {
+        display: none;
+    }
 }
 
 .playlist-logo #big-logo {
@@ -567,6 +654,12 @@ footer {
     margin-top: 0.75rem;
     text-shadow: 0.4px 0.4px 0.4px gray;
 }
+@media screen and (max-width: 1000px) {
+    .link-pasting-box .need-help-text {
+        margin-top: 1rem;
+        margin-right: 0;
+    }
+}
 
 .convert-button {
     margin-top: 3rem;
@@ -593,6 +686,13 @@ footer {
     width: 10rem;
     color: white;
     border: 3px solid black;
+}
+@media screen and (max-width: 1000px) {
+    #dropdown-content {
+        margin-top: 2rem;
+        border-radius: 5px;
+        padding: 0.5rem;
+    }
 }
 
 .user-info {
@@ -678,6 +778,15 @@ footer {
     margin-top: 0.75rem;
     text-shadow: 0.4px 0.4px 0.4px gray;
 }
+@media screen and (max-width: 1000px) {
+    .filename-editing-box {
+        width: 90%;
+    }
+    .input-bar .need-help-text {
+        margin-top: 1rem;
+        margin-right: 0;
+    }
+}
 
 #file-format-box {
     display: flex;
@@ -691,12 +800,24 @@ footer {
     width: 4rem;
     font-size: 1.2rem;
 }
+@media screen and (max-width: 1000px) {
+    #file-format-box {
+        margin-top: 2rem;
+        border-radius: 5px;
+        padding: 0.5rem;
+    }
+}
 
 /*fixes alignment issues caused by file-size element
 maybe there is a better solution*/
 #filename-input-element {
     width: 45.7rem;
     font-size: 1.1rem;
+}
+@media screen and (max-width: 1000px) {
+    #filename-input-element {
+        width: 100%;
+    }
 }
 
 /*fixes alignment issues caused by file-size element
@@ -707,6 +828,15 @@ maybe there is a better solution*/
     height: 3rem;
     padding-left: 6.75rem;
 }
+@media screen and (max-width: 1000px) {
+    #filename-editing-flex-row {
+        flex-direction: column;
+        height: auto;
+        justify-content: center;
+        align-items: center;
+        padding-left: 0;
+    }
+}
 
 #file-size {
     display: flex;
@@ -715,6 +845,13 @@ maybe there is a better solution*/
     white-space: nowrap;
     padding-left: 1rem;
     font-size: 1.3rem;
+}
+@media screen and (max-width: 1000px) {
+    #file-size {
+        margin-top: 2rem;
+        border-radius: 5px;
+        padding: 0.5rem;
+    }
 }
 
 .download-button {
