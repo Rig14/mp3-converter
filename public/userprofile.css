@@ -9,6 +9,10 @@
         flex-direction: column;
         align-items: center;
         gap: 2rem;
+        width: 100%;
+    }
+    .user-profile-edit div {
+        width: 100%;
     }
 }
 #user-profile-image {
@@ -55,6 +59,9 @@
 }
 @media screen and (max-width: 1000px) {
     #user-profile-data-form {
+        width: 100%;
+    }
+    #user-profile-data-form > div > input {
         width: 100%;
     }
 }
