@@ -84,6 +84,8 @@ function render_message(message) {
     message_container.innerHTML = message;
 }
 
+let USERS = [];
+
 async function get_users() {
     const url = BACKEND_URL + '/api/users';
 
@@ -101,37 +103,50 @@ async function get_users() {
         // render users on screen
         const data = await response.json();
         const users = data.users;
-        const list = document.getElementById('user-list');
-
-        list.innerHTML = '';
-        users.forEach((user) => {
-            const user_container = document.createElement('li');
-            user_container.style.display = 'flex';
-            user_container.style.flexDirection = 'row';
-            user_container.style.borderBottom = '1px solid black';
-            user_container.className = 'user-container';
-            user_container.innerHTML = `
-                <div class="user-info user-info-admin-field">
-                    <a>
-                        <img src="${BACKEND_URL + '/static/' + user[2]}">
-                    </a>
-                    <div class="user-data-field">
-                        <h2>${user[1]}</h2>
-                        <p>ID: ${user[0]}</p>
-                    </div>
-                </div>
-                <div class="user-managment-buttons">
-                    <button onclick="delete_history(${
-                        user[0]
-                    })">Delete history</button>
-                    <button onclick="delete_account(${
-                        user[0]
-                    })">Delete account</button>
-                </div>
-            `;
-            list.appendChild(user_container);
-        });
+        USERS = users;
+        render_users();
     }
+}
+
+function render_users() {
+    const list = document.getElementById('user-list');
+
+    list.innerHTML = '';
+    USERS.forEach((user) => {
+        // check if search input matches user
+        const search_input = document.getElementById('user-name-search').value;
+        if (search_input) {
+            if (!user[1].includes(search_input)) {
+                return;
+            }
+        }
+
+        const user_container = document.createElement('li');
+        user_container.style.display = 'flex';
+        user_container.style.flexDirection = 'row';
+        user_container.style.borderBottom = '1px solid black';
+        user_container.className = 'user-container';
+        user_container.innerHTML = `
+            <div class="user-info user-info-admin-field">
+                <a>
+                    <img src="${BACKEND_URL + '/static/' + user[2]}">
+                </a>
+                <div class="user-data-field">
+                    <h2>${user[1]}</h2>
+                    <p>ID: ${user[0]}</p>
+                </div>
+            </div>
+            <div class="user-managment-buttons">
+                <button onclick="delete_history(${
+                    user[0]
+                })">Delete history</button>
+                <button onclick="delete_account(${
+                    user[0]
+                })">Delete account</button>
+            </div>
+        `;
+        list.appendChild(user_container);
+    });
 }
 
 async function delete_history(id) {
