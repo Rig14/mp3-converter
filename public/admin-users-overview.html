@@ -48,16 +48,20 @@
             <div class="main-wrapper">
                 <main>
                     <h1>Users:</h1>
-                    <form>
-                        <input
-                            type="text"
-                            name="user-name"
-                            id="user-name-search"
-                        />
-                        <button type="button" onclick="render_users()">
-                            search
-                        </button>
-                    </form>
+                    <div class="user-managment-header">
+                        <form>
+                            <input
+                                type="text"
+                                name="user-name"
+                                id="user-name-search"
+                                placeholder="Search for user..."
+                            />
+                            <button type="button" onclick="render_users()">
+                                search
+                            </button>
+                        </form>
+                        <div></div>
+                    </div>
                     <p id="message-container"></p>
                     <ul id="user-list"></ul>
                 </main>

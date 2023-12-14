@@ -81,4 +81,44 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 1rem;
+}
+
+.user-managment-buttons button {
+    background-color: #f01414;
+    border: 2px solid #194af6;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.user-managment-header {
+    display: flex;
+    justify-content: center;
+    width: 60%;
+}
+.user-managment-header form {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+.user-managment-header form input {
+    width: 100%;
+    height: 30px;
+    border: 2px solid black;
+    background-color: #e7e0e0;
+    margin-right: 0;
+}
+
+.user-managment-header form button {
+    margin-left: 0;
+    border-radius: 0 30px 30px 0;
+    border: 2px solid black;
+    border-left: none;
+    background-color: #3f8846;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
 }

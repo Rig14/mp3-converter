@@ -125,7 +125,7 @@ function render_users() {
         user_container.style.display = 'flex';
         user_container.style.flexDirection = 'row';
         user_container.style.borderBottom = '1px solid black';
-        user_container.className = 'user-container';
+        user_container.style.marginBottom = '1.5rem';
         user_container.innerHTML = `
             <div class="user-info user-info-admin-field">
                 <a>
@@ -140,13 +140,15 @@ function render_users() {
                 <button onclick="delete_history(${
                     user[0]
                 })">Delete history</button>
-                <button onclick="delete_account(${
-                    user[0]
-                })">Delete account</button>
+                <button onclick="delete_account(${user[0]})">Remove</button>
             </div>
         `;
         list.appendChild(user_container);
     });
+
+    if (list.innerHTML === '') {
+        list.innerHTML = '<p>No users found.</p>';
+    }
 }
 
 async function delete_history(id) {
