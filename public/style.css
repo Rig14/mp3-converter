@@ -521,6 +521,11 @@ footer {
     font-size: 1.3rem;
     z-index: 1;
 }
+@media screen and (max-width: 1000px) {
+    .input-bar .soundcloud-logo {
+        display: none;
+    }
+}
 
 .input-bar .tiktok-logo {
     display: flex;
