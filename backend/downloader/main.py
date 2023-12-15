@@ -81,11 +81,29 @@ def download_to_server(url: str, format_str: str):
         url,  # the url to download
     ]
 
+    # create a command to extract playlist data
+    command_playlist = [
+        "yt-dlp",  # call yt-dlp
+        "-P",  # set the output dir
+        os.path.join(MEDIA_DIR, identifier),
+        "--write-info-json",  # write media data to json file
+        "--flat-playlist",  # ignore excess playlist metadata
+        "--no-clean-info",
+        url,  # the url to download
+    ]
+
     # run the command
     try:
         subprocess.run(command, check=True)
     except subprocess.CalledProcessError as e:
         return {"error": str(e)}, 500
+
+    # check if downloaded media was a playlist
+    if len(os.listdir(os.path.join(MEDIA_DIR, identifier))) > 1:
+        try:
+            subprocess.run(command_playlist, check=True)
+        except subprocess.CalledProcessError as e:
+            return {"error": str(e)}, 500
 
     return {"identifier": identifier}, 200
 
@@ -107,18 +125,24 @@ def send_file_from_server(
     file_extention = file_name.split(".")[-1]
 
     # check if multiple files were converted (a playlist)
-    if len(os.listdir(path)) > 1:
-        # change previously defined parameters to fit playlist zip file
-        file_name = "zipped-playlist.zip"  # currently hardcoded
-        file_extention = file_name.split(".")[-1]
+    if len(os.listdir(path)) > 1 and get_data_only:
+        media_files = []
+        # change previously defined variables to fit playlist zip file
+        for file in os.listdir(path):
+            print(os.listdir(path))
+            # separate media files and metadata
+            if file.split(".")[-1] == "json":
+                file_name = file.rsplit(" [", maxsplit=1)[0] + ".zip"
+            else:
+                media_files.append(file)
+        file_extention = "zip"
         zipfile_path = os.path.join(path, file_name)
 
         # create a zip file containing all converted playlist content
         with zipfile.ZipFile(zipfile_path, "w") as zip_object:
-            for file in os.listdir(path):
-                # ignore created .zip file
-                if file.split(".")[-1] != "zip":
-                    zip_object.write(os.path.join(path, file), file)
+            print(media_files)
+            for media_file in media_files:
+                zip_object.write(os.path.join(path, media_file), media_file)
             zip_object.close()
 
     if get_data_only:
