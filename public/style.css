@@ -916,3 +916,14 @@ maybe there is a better solution*/
 .admin-link:hover {
     text-decoration: underline;
 }
+
+#custom-selection-box {
+    color: black;
+}
+
+.custom-selection #media {
+    color: black;
+    background-color: #194af6;
+    block-size: 1.25rem;
+    width: 5rem;
+}

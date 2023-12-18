@@ -341,6 +341,46 @@ async function set_file_data() {
     }
 }
 
+async function set_playlist_data() {
+    const custom_selection_container = document.getElementById(
+        'custom-selection-box'
+    );
+    const media_dict = {
+        0: { filename: 'slipknot 1', new_filename: false, size: '(3.45Mb' },
+        1: { filename: 'slipknot 2', new_filename: false, size: '(3.45Mb' },
+        2: { filename: 'slipknot 3', new_filename: false, size: '(3.45Mb' },
+        3: { filename: 'slipknot 4', new_filename: false, size: '(3.45Mb' },
+        4: { filename: 'slipknot 5', new_filename: false, size: '(3.45Mb' },
+    };
+
+    let text = '';
+    const media_dict_keys = Object.keys(media_dict);
+    for (let i = 0; i < media_dict_keys.length; i++) {
+        const id = 'media' + i;
+        text += `
+        <div>
+            <input type="checkbox" id="media" name=${id}
+            } value="000000">
+            <label for=${id}>${media_dict[i]['filename']}</label>
+        </div>
+    `;
+    }
+    custom_selection_container.innerHTML = text;
+
+    const file_name = 'zipfile';
+    const file_extention = '.zip';
+    const file_size = '33 Mb';
+
+    const file_name_field = document.getElementById('filename-input-element');
+    file_name_field.value = file_name;
+
+    const file_format_box = document.getElementById('file-format-box');
+    file_format_box.innerText = file_extention;
+
+    const file_size_box = document.getElementById('file-size');
+    file_size_box.innerText = '(' + file_size + ')';
+}
+
 async function add_user_history(content_title, content_url, content_format) {
     const url = BACKEND_URL + '/api/add_history';
     const token = localStorage.getItem('token');
