@@ -1,7 +1,9 @@
 """Everything that has to do with downloading usign yt-dlp"""
 import os
 import random
+import shutil
 import subprocess
+import time
 import zipfile
 from urllib.parse import quote
 
@@ -10,7 +12,7 @@ from flask import send_file
 from backend.db import execute
 
 MEDIA_DIR = os.path.join(os.path.dirname(__file__), "downloaded-media")
-
+TTL = 60 * 60  # 1 hour
 
 FORMATS = {
     "1080p": [699, 399, 335, 303, 248, 299, 137],
@@ -96,6 +98,16 @@ def download_to_server(url: str, format_str: str):
     Returns the media identifier if download is successful,
     else returns an error message and code.
     """
+    # check media folder for old files and delete them
+    for file in os.listdir(MEDIA_DIR):
+        file_path = os.path.join(MEDIA_DIR, file)
+        if os.path.isdir(file_path):
+            if len(os.listdir(file_path)) == 0:
+                shutil.rmtree(file_path)
+            else:
+                if os.path.getmtime(file_path) < time.time() - TTL:
+                    shutil.rmtree(file_path)
+
     if not url:
         return {"error": "url not provided"}, 400
 
