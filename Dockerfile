@@ -28,8 +28,11 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 # Copy the source code into the container.
 COPY . .
 
-# allow database to be written to
-RUN chmod 666 backend/db/database.db
+# Install build tools
+RUN apt update && apt install -y build-essential
+
+# create db and add admin user with make
+RUN make init-db
 
 # ffmpeg library for processing downloaded videos
 RUN apt update && apt install -y ffmpeg

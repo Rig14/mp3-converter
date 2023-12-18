@@ -16,5 +16,8 @@ create-db:
 update-db:
 	cd backend/db && python3 main.py update
 add-admin:
-	chmod 777 backend/db/database.db
 	cd backend/db && python3 main.py add_admin
+
+init-db:
+	make create-db
+	make add-admin
