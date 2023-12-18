@@ -67,10 +67,15 @@ function processFormData(form_type) {
             displayFormError('Please enter a valid Soundcloud url');
         }
     } else if (form_type === 'soundcloud-download') {
+        file_name = formData.get('soundcloud-filename');
         const params = new URLSearchParams(window.location.search);
 
         window.location.href =
-            BACKEND_URL + '/api/file?identifier=' + params.get('identifier');
+            BACKEND_URL +
+            '/api/file?identifier=' +
+            params.get('identifier') +
+            '&file_name=' +
+            file_name;
     } else if (form_type === 'tiktok-convert') {
         const url = formData.get('tiktok-link');
         const regex = url.search(
@@ -86,10 +91,15 @@ function processFormData(form_type) {
             displayFormError('Please enter a valid Tiktok url');
         }
     } else if (form_type === 'tiktok-download') {
+        file_name = formData.get('tiktok-filename');
         const params = new URLSearchParams(window.location.search);
 
         window.location.href =
-            BACKEND_URL + '/api/file?identifier=' + params.get('identifier');
+            BACKEND_URL +
+            '/api/file?identifier=' +
+            params.get('identifier') +
+            '&file_name=' +
+            file_name;
     } else if (form_type === 'playlist-convert') {
         const url = formData.get('playlist-link');
         const regex = url.search(
@@ -106,20 +116,30 @@ function processFormData(form_type) {
             );
         }
     } else if (form_type === 'playlist-download') {
+        file_name = formData.get('playlist-filename');
         const params = new URLSearchParams(window.location.search);
 
         window.location.href =
-            BACKEND_URL + '/api/file?identifier=' + params.get('identifier');
+            BACKEND_URL +
+            '/api/file?identifier=' +
+            params.get('identifier') +
+            '&file_name=' +
+            file_name;
     } else if (form_type === 'experimental-convert') {
         const url = formData.get('experimental-link');
         // Hardcoded to mp4, soundcloud etc might not work.
         const media_type = 'random';
         window.location.href = `./loading.html?url=${url}&media_type=${media_type}&converted_from=${converted_from}`;
     } else if (form_type === 'experimental-download') {
+        file_name = formData.get('experimental-filename');
         const params = new URLSearchParams(window.location.search);
 
         window.location.href =
-            BACKEND_URL + '/api/file?identifier=' + params.get('identifier');
+            BACKEND_URL +
+            '/api/file?identifier=' +
+            params.get('identifier') +
+            '&file_name=' +
+            file_name;
     }
 }
 
@@ -267,25 +287,15 @@ async function on_loading_page() {
     } else {
         const data = await response.json();
         const identifier = data.identifier;
-        if (converted_from === 'playlist') {
-            window.location.href =
-                './youtube-download.html?identifier=' +
-                identifier +
-                '&url=' +
-                url +
-                '&media_type=' +
-                media_type;
-        } else {
-            window.location.href =
-                './' +
-                converted_from +
-                '-download.html?identifier=' +
-                identifier +
-                '&url=' +
-                url +
-                '&media_type=' +
-                media_type;
-        }
+        window.location.href =
+            './' +
+            converted_from +
+            '-download.html?identifier=' +
+            identifier +
+            '&url=' +
+            url +
+            '&media_type=' +
+            media_type;
     }
 }
 
