@@ -50,13 +50,33 @@
                         <div class="input-bar">
                             <form action="submit" id="form">
                                 <div id="filename-editing-flex-row">
-                                    <div class="youtube-logo">ANYTHING</div>
+                                    <div class="playlist-logo">
+                                        <img
+                                            src="./resources/playlist-logo.svg"
+                                            alt="pw"
+                                            id="big-logo"
+                                        />
+                                        Playlist
+                                        <div class="small-logos">
+                                            <img
+                                                src="./resources/small-youtube-logo.svg"
+                                                alt="pw"
+                                                id="small"
+                                            />
+                                            <img
+                                                src="./resources/small-soundcloud-logo.svg"
+                                                alt="pw"
+                                                id="small"
+                                            />
+                                        </div>
+                                    </div>
                                     <input
                                         type="text"
-                                        name="experimental-filename"
+                                        name="playlist-filename"
                                         id="filename-input-element"
                                         value=""
                                     />
+
                                     <div id="file-format-box"></div>
                                     <div id="file-size">loading...</div>
                                 </div>
@@ -66,7 +86,7 @@
                                 <button
                                     class="download-button"
                                     type="button"
-                                    onclick="processFormData('experimental-download')"
+                                    onclick="processFormData('playlist-download')"
                                 >
                                     DOWNLOAD
                                 </button>
