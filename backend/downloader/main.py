@@ -158,7 +158,10 @@ def download_to_server(url: str, format_str: str):
 
 
 def send_file_from_server(
-    identifier: str, file_name_new: str | None = None, get_data_only: bool = False
+    identifier: str,
+    file_name_new: str | None = None,
+    get_data_only: bool = False,
+    selected: str | None = None,
 ):
     """Will send the file as an atachment to the client using the identifier"""
     # create the path to the file(s) directory

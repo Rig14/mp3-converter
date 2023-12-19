@@ -16,6 +16,7 @@ function hidePassword(fieldID) {
 function processFormData(form_type) {
     // get form data from the fields in the form
     const form = document.getElementById('form');
+    console.log(form);
     const formData = new FormData(form);
 
     if (form_type === 'login') {
@@ -116,15 +117,32 @@ function processFormData(form_type) {
             );
         }
     } else if (form_type === 'playlist-download') {
+        // get data from playlist selection form
+        const selectionForm = document.getElementById('playlist-form');
+        console.log(selectionForm);
+        const selectionData = new FormData(selectionForm);
+        i = 0;
+        selected_indexes = [];
+        while (i < 50) {
+            content = selectionData.get('media' + i);
+            if (typeof content === typeof 'a') {
+                selected_indexes.push(content);
+            }
+            i += 1;
+        }
+        console.log(selected_indexes);
+        selected_media = selected_indexes.join('.');
+        // zip file name
         file_name = formData.get('playlist-filename');
         const params = new URLSearchParams(window.location.search);
-
         window.location.href =
             BACKEND_URL +
             '/api/file?identifier=' +
             params.get('identifier') +
             '&file_name=' +
-            file_name;
+            file_name +
+            '&selected=' +
+            selected_media;
     } else if (form_type === 'experimental-convert') {
         const url = formData.get('experimental-link');
         // Hardcoded to mp4, soundcloud etc might not work.
@@ -342,16 +360,42 @@ async function set_file_data() {
 }
 
 async function set_playlist_data() {
+    const media_dict = {
+        0: {
+            filename: 'slipknot 1',
+            new_filename: false,
+            selected: true,
+            size: '(3.45Mb',
+        },
+        1: {
+            filename: 'slipknot 2',
+            new_filename: false,
+            selected: true,
+            size: '(3.45Mb',
+        },
+        2: {
+            filename: 'slipknot 3',
+            new_filename: false,
+            selected: true,
+            size: '(3.45Mb',
+        },
+        3: {
+            filename: 'slipknot 4',
+            new_filename: false,
+            selected: true,
+            size: '(3.45Mb',
+        },
+        4: {
+            filename: 'slipknot 5',
+            new_filename: false,
+            selected: true,
+            size: '(3.45Mb',
+        },
+    };
+
     const custom_selection_container = document.getElementById(
         'custom-selection-box'
     );
-    const media_dict = {
-        0: { filename: 'slipknot 1', new_filename: false, size: '(3.45Mb' },
-        1: { filename: 'slipknot 2', new_filename: false, size: '(3.45Mb' },
-        2: { filename: 'slipknot 3', new_filename: false, size: '(3.45Mb' },
-        3: { filename: 'slipknot 4', new_filename: false, size: '(3.45Mb' },
-        4: { filename: 'slipknot 5', new_filename: false, size: '(3.45Mb' },
-    };
 
     let text = '';
     const media_dict_keys = Object.keys(media_dict);
@@ -359,12 +403,12 @@ async function set_playlist_data() {
         const id = 'media' + i;
         text += `
         <div>
-            <input type="checkbox" id="media" name=${id}
-            } value="000000">
+            <input type="checkbox" id="media" name=${id} value=${i}>
             <label for=${id}>${media_dict[i]['filename']}</label>
         </div>
     `;
     }
+
     custom_selection_container.innerHTML = text;
 
     const file_name = 'zipfile';
