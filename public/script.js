@@ -44,15 +44,29 @@ function processFormData(form_type) {
             displayFormError('Please enter a valid Youtube url');
         }
     } else if (form_type === 'youtube-download') {
-        file_name = formData.get('youtube-filename');
+        new_filename = formData.get('youtube-filename');
         const params = new URLSearchParams(window.location.search);
+        const identifier = params.get('identifier');
+        const data = JSON.parse(localStorage.getItem(identifier));
+        // old_filename = data.files_data[0]['file_name'];
+        data.files_data[0]['new_filename'] = new_filename;
+        // localStorage.removeItem(identifier)
 
+        /* Miks if statement false'ga triggerib???? new-filename kontroll lykatud backendi hetkel
+        if (new_filename !== old_filename && new_filename !== '');
+        {
+            console.log(new_filename !== old_filename && new_filename !== '');
+        data.files_data[0]['new_filename'] = new_filename;
+        console.log(data.files_data[0]['new_filename']);
+*/
+        /*
         window.location.href =
             BACKEND_URL +
             '/api/file?identifier=' +
             params.get('identifier') +
-            '&file_name=' +
-            file_name;
+            '&data_dict=' +
+            JSON.stringify(data);
+*/
     } else if (form_type === 'soundcloud-convert') {
         const url = formData.get('soundcloud-link');
         const regex = url.search(
@@ -316,7 +330,7 @@ async function on_loading_page() {
             media_type;
     }
 }
-
+/* _previous version of the function
 async function set_file_data() {
     const params = new URLSearchParams(window.location.search);
     const identifier = params.get('identifier');
@@ -358,6 +372,52 @@ async function set_file_data() {
         }
     }
 }
+*/
+async function set_file_data() {
+    const params = new URLSearchParams(window.location.search);
+    const identifier = params.get('identifier');
+
+    const url =
+        BACKEND_URL +
+        '/api/file?identifier=' +
+        identifier +
+        '&get_data_only=true';
+
+    const response = await fetch(url, {
+        method: 'GET',
+    });
+
+    if (response.status !== 200) {
+        window.location.href = 'index.html';
+    } else {
+        const data = await response.json();
+        console.log(data);
+        const files_data = data.files_data;
+        localStorage.setItem(identifier, JSON.stringify(data));
+        len = Object.keys(files_data).length;
+
+        // single video
+        if (len == 1);
+        {
+            const single_media = data.files_data[0];
+
+            const file_name = single_media.file_name;
+            const file_extension = single_media.file_extension;
+            const file_size = single_media.file_size;
+
+            const file_name_field = document.getElementById(
+                'filename-input-element'
+            );
+            file_name_field.value = file_name;
+
+            const file_format_box = document.getElementById('file-format-box');
+            file_format_box.innerText = file_extension;
+
+            const file_size_box = document.getElementById('file-size');
+            file_size_box.innerText = '(' + file_size + ')';
+        }
+    }
+}
 
 async function set_playlist_data() {
     const params = new URLSearchParams(window.location.search);
@@ -378,39 +438,19 @@ async function set_playlist_data() {
     } else {
         const data = await response.json();
         const files_data = data.files_data;
-        localStorage.setItem(identifier, data);
+        localStorage.setItem(identifier, JSON.stringify(data));
+        len = Object.keys(files_data).length;
 
-        // single video
-        if (console.log(Object.keys(files_data).length) === 1);
-        {
-            const single_media = data.files_data[0];
-
-            console.log(single_media);
-            const file_name = single_media.file_name;
-            const file_extension = single_media.file_extension;
-            const file_size = single_media.file_size;
-
-            const file_name_field = document.getElementById(
-                'filename-input-element'
-            );
-            file_name_field.value = file_name;
-
-            const file_format_box = document.getElementById('file-format-box');
-            file_format_box.innerText = file_extension;
-
-            const file_size_box = document.getElementById('file-size');
-            file_size_box.innerText = '(' + file_size + ')';
-        }
-        // playlist data
-        else if (console.log(Object.keys(files_data).length) > 1);
+        // playlist
+        if (len > 1);
         {
             // const data2 = localStorage.getItem(identifier);
 
             // set playlist data
             const playlist_data = data.playlist_data;
-            const pl_file_name = data.playlist_data.file_name;
-            const pl_file_extension = data.playlist_data.file_extension;
-            const pl_file_size = data.playlist_data.file_size;
+            const pl_file_name = playlist_data.title;
+            const pl_file_extension = playlist_data.file_extension;
+            const pl_file_size = playlist_data.file_size;
 
             const file_name_field = document.getElementById(
                 'filename-input-element'
@@ -425,22 +465,8 @@ async function set_playlist_data() {
 
             const media_dict = data.files_data;
             console.log(media_dict);
-            /*
-            const media_dict = {
-                0: {
-                    filename: 'slipknot 1',
-                    new_filename: false,
-                    selected: true,
-                    size: '(3.45Mb',
-                },
-                1: {
-                    filename: 'slipknot 2',
-                    new_filename: false,
-                    selected: true,
-                    size: '(3.45Mb',
-                }
-            };
-            */
+
+            // fill custom selection form
             const custom_selection_container = document.getElementById(
                 'custom-selection-box'
             );

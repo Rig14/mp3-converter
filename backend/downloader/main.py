@@ -82,8 +82,8 @@ def get_data_only_function(identifier):
         file_data_dict = {
             "file_name": filename.split(".")[0],
             "file_extension": "." + filename.split(".")[-1],
-            "file_size": get_size(os.path.join(media_files_path, filename))
-            # "new_filename": None  would enable filename changing in custom selection
+            "file_size": get_size(os.path.join(media_files_path, filename)),
+            "new_filename": "",
         }
         # add created dict to media_files_dict
         media_files_dict[i] = file_data_dict
@@ -97,14 +97,14 @@ def get_data_only_function(identifier):
         playlist_data_dict["title"] = metadata_file.rsplit(" [", maxsplit=1)[0]
 
         # get size of the whole playlist (media_files dir)
-        playlist_data_dict["size"] = get_size(media_files_path, True)
-        playlist_data_dict["extension"] = ".zip"
+        playlist_data_dict["file_size"] = get_size(media_files_path, True)
+        playlist_data_dict["file_extension"] = ".zip"
 
     return {
         "files_data": media_files_dict,
         # "is_playlist": is_playlist
         "playlist_data": playlist_data_dict,
-    }
+    }, 200
 
 
 """
