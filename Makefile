@@ -9,8 +9,15 @@ install:
 
 
 reset-db:
-	cd backend/db && python3 main.py reset 
+	cd backend/db && python3 main.py reset
+	make add-admin 
 create-db:
 	cd backend/db && python3 main.py create 
 update-db:
 	cd backend/db && python3 main.py update
+add-admin:
+	cd backend/db && python3 main.py add_admin
+
+init-db:
+	make create-db
+	make add-admin

@@ -5,7 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="./normalize.css" />
         <link rel="stylesheet" href="./style.css" />
+        <link rel="stylesheet" href="./admin.css" />
         <script src="./script.js"></script>
+        <script src="admin.js"></script>
         <title>Converter</title>
     </head>
     <body>
@@ -45,19 +47,23 @@
             </nav>
             <div class="main-wrapper">
                 <main>
-                    <div class="loading-page">
-                        <img
-                            src="./resources/loading-animation.gif"
-                            alt=""
-                            id="loading-page-animation"
+                    <form class="blacklisted-form">
+                        <input
+                            type="text"
+                            id="blacklisted-url"
+                            placeholder="url to disable..."
                         />
-                        <p id="converting-error-message">
-                            Something went wrong, please try again.
-                        </p>
-                        <p id="converting-text">
-                            Converting your file, please wait
-                        </p>
-                    </div>
+                        <button
+                            type="button"
+                            onclick="add_to_blacklist()"
+                            class="blacklist-submit-button"
+                        >
+                            Disable link
+                        </button>
+                    </form>
+                    <p id="message-container"></p>
+                    <h1 class="blacklist-title">Current blacklist:</h1>
+                    <ul id="blacklist-container"></ul>
                 </main>
             </div>
             <footer>
@@ -105,7 +111,7 @@
         </div>
         <script src="./navbar_user.js"></script>
         <script>
-            on_loading_page();
+            render_blacklist();
         </script>
     </body>
 </html>

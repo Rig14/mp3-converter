@@ -5,7 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="./normalize.css" />
         <link rel="stylesheet" href="./style.css" />
+        <link rel="stylesheet" href="./admin.css" />
         <script src="./script.js"></script>
+        <script src="admin.js"></script>
         <title>Converter</title>
     </head>
     <body>
@@ -45,19 +47,23 @@
             </nav>
             <div class="main-wrapper">
                 <main>
-                    <div class="loading-page">
-                        <img
-                            src="./resources/loading-animation.gif"
-                            alt=""
-                            id="loading-page-animation"
-                        />
-                        <p id="converting-error-message">
-                            Something went wrong, please try again.
-                        </p>
-                        <p id="converting-text">
-                            Converting your file, please wait
-                        </p>
+                    <h1>Users:</h1>
+                    <div class="user-managment-header">
+                        <form>
+                            <input
+                                type="text"
+                                name="user-name"
+                                id="user-name-search"
+                                placeholder="Search for user..."
+                            />
+                            <button type="button" onclick="render_users()">
+                                search
+                            </button>
+                        </form>
+                        <div></div>
                     </div>
+                    <p id="message-container"></p>
+                    <ul id="user-list"></ul>
                 </main>
             </div>
             <footer>
@@ -105,7 +111,7 @@
         </div>
         <script src="./navbar_user.js"></script>
         <script>
-            on_loading_page();
+            get_users();
         </script>
     </body>
 </html>

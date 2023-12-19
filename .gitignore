@@ -3,6 +3,9 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+backend/static/*
+!backend/static/default_user.svg
+
 # C extensions
 *.so
 

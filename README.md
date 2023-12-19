@@ -59,3 +59,34 @@ make web-dev
 ```
 make server-dev
 ```
+
+### install dependencies
+```
+make install
+```
+
+
+# Used technologies
+
+## Project management
+- [git](https://git-scm.com/)
+- [gitlab](https://about.gitlab.com/)
+- [dev containers](https://code.visualstudio.com/docs/remote/containers)
+- [makefile](https://www.gnu.org/software/make/manual/make.html)
+- [markdown](https://www.markdownguide.org/)
+- [docker](https://www.docker.com/)
+- [VSCode](https://code.visualstudio.com/)
+
+## Frontend
+- [html, css, js](https://www.w3schools.com/)
+- [prettier](https://prettier.io/)
+- [GitLab pages](https://docs.gitlab.com/ee/user/project/pages/)
+
+## Backend
+- [python](https://www.python.org/)
+- [flask](https://flask.palletsprojects.com/en/2.0.x/)
+- [sqlite](https://www.sqlite.org/index.html)
+- yt-dlp
+- [JWT](https://jwt.io/)
+- [bcrypt](https://pypi.org/project/bcrypt/)
+

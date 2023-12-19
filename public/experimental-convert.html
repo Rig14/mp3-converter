@@ -46,59 +46,30 @@
             <div class="main-wrapper">
                 <main>
                     <div class="link-pasting-box">
-                        <h1>Convert from Youtube</h1>
+                        <h1>Convert anything (beta version)</h1>
+                        <p id="supported-sites">
+                            See list of
+                            <a
+                                href="https://github.com/yt-dlp/yt-dlp/blob/master/supportedsites.md"
+                                >supported sites</a
+                            >
+                        </p>
                         <div class="input-bar">
                             <form action="submit" id="form">
                                 <div class="link-pasting-flex-row">
-                                    <div class="youtube-logo">
-                                        <img
-                                            src="./resources/youtube-logo.svg"
-                                            alt="pw"
-                                        />
-                                        Youtube
-                                    </div>
+                                    <div class="youtube-logo">ANYTHING</div>
                                     <input
                                         type="url"
-                                        name="youtube-link"
-                                        id="youtube-link"
-                                        placeholder="Paste any Youtube URL here"
+                                        name="experimental-link"
+                                        id="experimental-link"
+                                        placeholder="Paste any URL here"
                                     />
-                                    <!--
-                                    <div class="youtube-dropdown">
-                                        <div class="dropdown-preview">
-                                            MP32
-                                            <i class="arrow-down"></i>
-                                        </div>
-                                        <div class="dropdown-content-test">
-                                            <p>.mp3 96 kbps</p>
-                                            <p>.mp3 128 kbps</p>
-                                            <p>.mp3 256 kbps</p>
-                                            <p>.mp3 320 kbps</p>
-                                            <p>.mp4 144p</p>
-                                            <p>.mp4 480p</p>
-                                            <p>.mp4 720p</p>
-                                            <p>.mp4 1080p</p>
-                                            <p>võib muuta</p>
-                                        </div>
-                                    </div>
-                                    -->
-                                    <select
+                                    <div
                                         name="dropdown-content"
                                         id="dropdown-content"
                                     >
-                                        <option value="144p">144p</option>
-                                        <option value="240p">240p</option>
-                                        <option value="360p">360p</option>
-                                        <option value="480p">480p</option>
-                                        <option value="720p">720p</option>
-                                        <option value="1080p">1080p</option>
-                                        <option value="1440p">1440p</option>
-                                        <option value="2K">2K</option>
-                                        <option value="4K">4K</option>
-                                        <option value="mp3" selected>
-                                            mp3
-                                        </option>
-                                    </select>
+                                        Format varies by site
+                                    </div>
                                 </div>
                                 <p class="need-help-text">
                                     Need help? <a href="help">Click me!</a>
@@ -107,7 +78,7 @@
                                 <button
                                     class="convert-button"
                                     type="button"
-                                    onclick="processFormData('youtube-convert')"
+                                    onclick="processFormData('experimental-convert')"
                                 >
                                     CONVERT
                                 </button>
