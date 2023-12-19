@@ -325,7 +325,7 @@ async function set_file_data() {
         BACKEND_URL +
         '/api/file?identifier=' +
         identifier +
-        '&get_name_only=true';
+        '&get_data_only=true';
 
     const response = await fetch(url, {
         method: 'GET',
@@ -336,7 +336,7 @@ async function set_file_data() {
     } else {
         const data = await response.json();
         const file_name = data.file_name;
-        const file_extention = data.file_extention;
+        const file_extension = data.file_extension;
         const file_size = data.file_size;
 
         const file_name_field = document.getElementById(
@@ -345,7 +345,7 @@ async function set_file_data() {
         file_name_field.value = file_name;
 
         const file_format_box = document.getElementById('file-format-box');
-        file_format_box.innerText = file_extention;
+        file_format_box.innerText = file_extension;
 
         const file_size_box = document.getElementById('file-size');
         file_size_box.innerText = '(' + file_size + ')';
@@ -360,6 +360,42 @@ async function set_file_data() {
 }
 
 async function set_playlist_data() {
+    const params = new URLSearchParams(window.location.search);
+    const identifier = params.get('identifier');
+
+    const url =
+        BACKEND_URL +
+        '/api/file?identifier=' +
+        identifier +
+        '&get_data_only=true';
+
+    const response = await fetch(url, {
+        method: 'GET',
+    });
+
+    if (response.status !== 200) {
+        window.location.href = 'index.html';
+    } else {
+        const data = await response.json();
+        console.log(data);
+    }
+    /*
+        const file_name = data.file_name;
+        const file_extension = data.file_extension;
+        const file_size = data.file_size;
+
+        const file_name_field = document.getElementById(
+            'filename-input-element'
+        );
+        file_name_field.value = file_name;
+
+        const file_format_box = document.getElementById('file-format-box');
+        file_format_box.innerText = file_extension;
+
+        const file_size_box = document.getElementById('file-size');
+        file_size_box.innerText = '(' + file_size + ')';
+    }
+    */
     const media_dict = {
         0: {
             filename: 'slipknot 1',
@@ -410,19 +446,19 @@ async function set_playlist_data() {
     }
 
     custom_selection_container.innerHTML = text;
-
+    /*
     const file_name = 'zipfile';
-    const file_extention = '.zip';
+    const file_extension = '.zip';
     const file_size = '33 Mb';
 
     const file_name_field = document.getElementById('filename-input-element');
     file_name_field.value = file_name;
 
     const file_format_box = document.getElementById('file-format-box');
-    file_format_box.innerText = file_extention;
+    file_format_box.innerText = file_extension;
 
     const file_size_box = document.getElementById('file-size');
-    file_size_box.innerText = '(' + file_size + ')';
+    file_size_box.innerText = '(' + file_size + ')';*/
 }
 
 async function add_user_history(content_title, content_url, content_format) {

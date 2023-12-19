@@ -29,8 +29,12 @@ FORMATS = {
 }
 
 
-def get_size(path):
-    size = os.path.getsize(path)
+def get_size(path, is_dir=False):
+    if is_dir:
+        files = os.listdir(path)
+        size = sum([os.path.getsize(os.path.join(path, x)) for x in files])
+    else:
+        size = os.path.getsize(path)
     if size < 1024:
         return f"{size} bytes"
     elif size < pow(1024, 2):
@@ -39,6 +43,77 @@ def get_size(path):
         return f"{round(size/(pow(1024,2)), 2)} MB"
     elif size < pow(1024, 4):
         return f"{round(size/(pow(1024,3)), 2)} GB"
+
+
+def download_metadata_file(path: object, url: str):
+    # create a dir for metadata file
+    os.makedirs(os.path.join(path, "metadata"))
+
+    # create a command to extract playlist data
+    playlist_command = [
+        "yt-dlp",  # call yt-dlp
+        "-P",  # set the output dir
+        os.path.join(path, "metadata"),
+        "--write-info-json",  # write media data to json file
+        "--flat-playlist",  # ignore excess playlist metadata
+        "--no-clean-info",
+        url,  # the url to download
+    ]
+
+    # run the command
+    try:
+        subprocess.run(playlist_command, check=True)
+    except subprocess.CalledProcessError as e:
+        return {"error": str(e)}, 500
+
+
+def get_data_only_function(identifier):
+    # create necessary paths
+    path = os.path.join(MEDIA_DIR, identifier)
+    media_files_path = os.path.join(path, "media_files")
+
+    # check if the file directory exists
+    if not os.path.exists(media_files_path):
+        return {"error": "file not found"}, 404
+
+    media_files_dict = {}
+    # create a dictionary containing file data for each file in media_files dir
+    for i, filename in enumerate(os.listdir(media_files_path)):
+        file_data_dict = {
+            "file_name": filename.split(".")[0],
+            "file_extension": "." + filename.split(".")[-1],
+            "file_size": get_size(os.path.join(media_files_path, filename))
+            # "new_filename": None  would enable filename changing in custom selection
+        }
+        # add created dict to media_files_dict
+        media_files_dict[i] = file_data_dict
+
+    playlist_data_dict = {}
+
+    # create a dictionary containing playlist data
+    if len(media_files_dict.keys()) > 1:
+        # extract playlist title from metadata file's filename
+        metadata_file = os.listdir(os.path.join(path, "metadata"))[0]
+        playlist_data_dict["title"] = metadata_file.rsplit(" [", maxsplit=1)[0]
+
+        # get size of the whole playlist (media_files dir)
+        playlist_data_dict["size"] = get_size(media_files_path, True)
+        playlist_data_dict["extension"] = ".zip"
+
+    return {
+        "files_data": media_files_dict,
+        # "is_playlist": is_playlist
+        "playlist_data": playlist_data_dict,
+    }
+
+
+"""
+    return {
+        "file_name": file_name.replace("." + file_extension, ""),
+        "file_extension": "." + file_extension,
+        "file_size": get_size(os.path.join(path, file_name)),
+    }, 200
+"""
 
 
 def zip_playlist(playlist_path: object, url: str):
@@ -51,23 +126,6 @@ def zip_playlist(playlist_path: object, url: str):
     """
     # list of media files in playlist, might be used for playlist-custom-selection
     media_files = os.listdir(playlist_path)
-
-    # create a command to extract playlist data
-    playlist_command = [
-        "yt-dlp",  # call yt-dlp
-        "-P",  # set the output dir
-        playlist_path,
-        "--write-info-json",  # write media data to json file
-        "--flat-playlist",  # ignore excess playlist metadata
-        "--no-clean-info",
-        url,  # the url to download
-    ]
-
-    # run the command
-    try:
-        subprocess.run(playlist_command, check=True)
-    except subprocess.CalledProcessError as e:
-        return {"error": str(e)}, 500
 
     zipfile_name = "zipped-playlist.zip"  # hardcoded filename
     new_filename = ""  # playlist title
@@ -130,11 +188,14 @@ def download_to_server(url: str, format_str: str):
     # create a dir named after identifier in the media dir
     os.makedirs(os.path.join(MEDIA_DIR, identifier))
 
+    # create a dir for all downloaded media files
+    os.makedirs(os.path.join(MEDIA_DIR, identifier, "media_files"))
+
     # create a command to be run
     command = [
         "yt-dlp",  # call yt-dlp
         "-P",  # set the output dir
-        os.path.join(MEDIA_DIR, identifier),
+        os.path.join(MEDIA_DIR, identifier, "media_files"),
         "-o",  # set the output file name
         "%(title)s.%(ext)s",
         "-f",  # set the format
@@ -151,8 +212,8 @@ def download_to_server(url: str, format_str: str):
         return {"error": str(e)}, 500
 
     # check if downloaded media was a playlist
-    if len(os.listdir(os.path.join(MEDIA_DIR, identifier))) > 1:
-        zip_playlist(os.path.join(MEDIA_DIR, identifier), url)
+    if len(os.listdir(os.path.join(MEDIA_DIR, identifier, "media_files"))) > 1:
+        download_metadata_file(os.path.join(MEDIA_DIR, identifier), url)
 
     return {"identifier": identifier}, 200
 
@@ -171,15 +232,18 @@ def send_file_from_server(
     if not os.path.exists(path):
         return {"error": "file not found"}, 404
 
+    if get_data_only:
+        return get_data_only_function(identifier)
+
     # get the file name from the directory
     file_name = os.listdir(path)[0]
 
-    file_extention = file_name.split(".")[-1]
+    file_extension = file_name.split(".")[-1]
 
     if get_data_only:
         return {
-            "file_name": file_name.replace("." + file_extention, ""),
-            "file_extention": "." + file_extention,
+            "file_name": file_name.replace("." + file_extension, ""),
+            "file_extension": "." + file_extension,
             "file_size": get_size(os.path.join(path, file_name)),
         }, 200
 
@@ -190,7 +254,7 @@ def send_file_from_server(
     return send_file(
         path,
         as_attachment=True,
-        download_name=file_name_new + "." + file_extention
+        download_name=file_name_new + "." + file_extension
         if file_name_new
         else file_name,
     )
