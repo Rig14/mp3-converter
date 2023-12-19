@@ -377,88 +377,89 @@ async function set_playlist_data() {
         window.location.href = 'index.html';
     } else {
         const data = await response.json();
-        console.log(data);
+        const files_data = data.files_data;
+        localStorage.setItem(identifier, data);
+
+        // single video
+        if (console.log(Object.keys(files_data).length) === 1);
+        {
+            const single_media = data.files_data[0];
+
+            console.log(single_media);
+            const file_name = single_media.file_name;
+            const file_extension = single_media.file_extension;
+            const file_size = single_media.file_size;
+
+            const file_name_field = document.getElementById(
+                'filename-input-element'
+            );
+            file_name_field.value = file_name;
+
+            const file_format_box = document.getElementById('file-format-box');
+            file_format_box.innerText = file_extension;
+
+            const file_size_box = document.getElementById('file-size');
+            file_size_box.innerText = '(' + file_size + ')';
+        }
+        // playlist data
+        else if (console.log(Object.keys(files_data).length) > 1);
+        {
+            // const data2 = localStorage.getItem(identifier);
+
+            // set playlist data
+            const playlist_data = data.playlist_data;
+            const pl_file_name = data.playlist_data.file_name;
+            const pl_file_extension = data.playlist_data.file_extension;
+            const pl_file_size = data.playlist_data.file_size;
+
+            const file_name_field = document.getElementById(
+                'filename-input-element'
+            );
+            file_name_field.value = pl_file_name;
+
+            const file_format_box = document.getElementById('file-format-box');
+            file_format_box.innerText = pl_file_extension;
+
+            const file_size_box = document.getElementById('file-size');
+            file_size_box.innerText = '(' + pl_file_size + ')';
+
+            const media_dict = data.files_data;
+            console.log(media_dict);
+            /*
+            const media_dict = {
+                0: {
+                    filename: 'slipknot 1',
+                    new_filename: false,
+                    selected: true,
+                    size: '(3.45Mb',
+                },
+                1: {
+                    filename: 'slipknot 2',
+                    new_filename: false,
+                    selected: true,
+                    size: '(3.45Mb',
+                }
+            };
+            */
+            const custom_selection_container = document.getElementById(
+                'custom-selection-box'
+            );
+
+            let text = '';
+            const media_dict_keys = Object.keys(media_dict);
+            for (let i = 0; i < media_dict_keys.length; i++) {
+                const id = 'media' + i;
+                text += `
+                <div>
+                    <input type="checkbox" id="media" name=${id} value=${i}>
+                    <label for=${id}>${media_dict[i]['file_name']}</label>
+                </div>
+            `;
+            }
+
+            custom_selection_container.innerHTML = text;
+        }
     }
-    /*
-        const file_name = data.file_name;
-        const file_extension = data.file_extension;
-        const file_size = data.file_size;
-
-        const file_name_field = document.getElementById(
-            'filename-input-element'
-        );
-        file_name_field.value = file_name;
-
-        const file_format_box = document.getElementById('file-format-box');
-        file_format_box.innerText = file_extension;
-
-        const file_size_box = document.getElementById('file-size');
-        file_size_box.innerText = '(' + file_size + ')';
-    }
-    */
-    const media_dict = {
-        0: {
-            filename: 'slipknot 1',
-            new_filename: false,
-            selected: true,
-            size: '(3.45Mb',
-        },
-        1: {
-            filename: 'slipknot 2',
-            new_filename: false,
-            selected: true,
-            size: '(3.45Mb',
-        },
-        2: {
-            filename: 'slipknot 3',
-            new_filename: false,
-            selected: true,
-            size: '(3.45Mb',
-        },
-        3: {
-            filename: 'slipknot 4',
-            new_filename: false,
-            selected: true,
-            size: '(3.45Mb',
-        },
-        4: {
-            filename: 'slipknot 5',
-            new_filename: false,
-            selected: true,
-            size: '(3.45Mb',
-        },
-    };
-
-    const custom_selection_container = document.getElementById(
-        'custom-selection-box'
-    );
-
-    let text = '';
-    const media_dict_keys = Object.keys(media_dict);
-    for (let i = 0; i < media_dict_keys.length; i++) {
-        const id = 'media' + i;
-        text += `
-        <div>
-            <input type="checkbox" id="media" name=${id} value=${i}>
-            <label for=${id}>${media_dict[i]['filename']}</label>
-        </div>
-    `;
-    }
-
-    custom_selection_container.innerHTML = text;
-    /*
-    const file_name = 'zipfile';
-    const file_extension = '.zip';
-    const file_size = '33 Mb';
-
-    const file_name_field = document.getElementById('filename-input-element');
-    file_name_field.value = file_name;
-
-    const file_format_box = document.getElementById('file-format-box');
-    file_format_box.innerText = file_extension;
-
-    const file_size_box = document.getElementById('file-size');
-    file_size_box.innerText = '(' + file_size + ')';*/
 }
 
 async function add_user_history(content_title, content_url, content_format) {
