@@ -7,7 +7,7 @@ function update_navbar() {
         const user_data = JSON.parse(localStorage.getItem('user_data'));
         user_info_container.innerHTML = `
             <div class="user-info">
-                <a href='/user-profile'>
+                <a href='./user-profile.html'>
                     <img src=
                     ${BACKEND_URL + '/static/' + user_data.profile_picture}>
                 </a>
