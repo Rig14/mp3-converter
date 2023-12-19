@@ -5,5 +5,22 @@ CREATE TABLE users (
     name VARCHAR(255),
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     motd TEXT DEFAULT 'Hello, World!',
-    image TEXT DEFAULT 'default_user.svg'
+    image TEXT DEFAULT 'default_user.svg',
+    admin BOOLEAN DEFAULT FALSE
+);
+
+CREATE TABLE history (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    content_url TEXT NOT NULL,
+    content_title TEXT NOT NULL,
+    content_format TEXT NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users (id)
+);
+
+CREATE TABLE blacklist (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    url TEXT UNIQUE NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );

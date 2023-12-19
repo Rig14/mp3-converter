@@ -31,7 +31,7 @@
                         <a href="playlist-convert"> Playlist </a>
                     </li>
                     <li>
-                        <a href="./help.html"> Help </a>
+                        <a href="help"> Help </a>
                     </li>
                 </ul>
                 <div class="button-container" id="user-info">
@@ -45,49 +45,46 @@
             </nav>
             <div class="main-wrapper">
                 <main>
-                    <h1 class="main-page-header">
-                        Free YouTube to MP3/4 converter
-                    </h1>
-                    <p class="main-page-subtext">
-                        Looking for a free and convenient tool to download
-                        YouTube videos? Our online YouTube to MP3/4 converter is
-                        all that and more! No need to register or install
-                        software — convert high-quality videos right from the
-                        browser with minimal effort.
-                    </p>
-                    <div class="button-container">
-                        <a href="youtube-convert">
-                            <button style="background-color: #f01414">
-                                YouTube
-                            </button>
-                        </a>
-                        <a href="soundcloud-convert">
-                            <button style="background-color: #ff9c08">
-                                Soundcloud
-                            </button>
-                        </a>
-                        <a href="tiktok-convert">
-                            <button style="background-color: black">
-                                TikTok
-                            </button>
-                        </a>
-                        <a href="playlist-convert">
-                            <button style="background-color: #6d55ac">
-                                Playlist
-                            </button>
-                        </a>
+                    <div class="link-pasting-box">
+                        <h1>Convert anything (beta version)</h1>
+                        <p id="supported-sites">
+                            See list of
+                            <a
+                                href="https://github.com/yt-dlp/yt-dlp/blob/master/supportedsites.md"
+                                >supported sites</a
+                            >
+                        </p>
+                        <div class="input-bar">
+                            <form action="submit" id="form">
+                                <div class="link-pasting-flex-row">
+                                    <div class="youtube-logo">ANYTHING</div>
+                                    <input
+                                        type="url"
+                                        name="experimental-link"
+                                        id="experimental-link"
+                                        placeholder="Paste any URL here"
+                                    />
+                                    <div
+                                        name="dropdown-content"
+                                        id="dropdown-content"
+                                    >
+                                        Format varies by site
+                                    </div>
+                                </div>
+                                <p class="need-help-text">
+                                    Need help? <a href="help">Click me!</a>
+                                </p>
+                                <p id="error-message"></p>
+                                <button
+                                    class="convert-button"
+                                    type="button"
+                                    onclick="processFormData('experimental-convert')"
+                                >
+                                    CONVERT
+                                </button>
+                            </form>
+                        </div>
                     </div>
-                    <a href="experimental-convert">
-                        <button
-                            id="experimental-convert-button"
-                            style="background-color: gray"
-                        >
-                            Convert anything (beta version)
-                        </button>
-                    </a>
-                    <p class="need-help-text">
-                        Need help? <a href="help">Click me!</a>
-                    </p>
                 </main>
             </div>
             <footer>
@@ -121,7 +118,7 @@
                             <a href="legal">Legal</a>
                         </li>
                         <li>
-                            <a href="./contactpage.html">Contact</a>
+                            <a href="contact">Contact</a>
                         </li>
                         <li>
                             <a href="feedback">Feedback</a>

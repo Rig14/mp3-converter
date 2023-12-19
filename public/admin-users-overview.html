@@ -5,7 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="./normalize.css" />
         <link rel="stylesheet" href="./style.css" />
+        <link rel="stylesheet" href="./admin.css" />
         <script src="./script.js"></script>
+        <script src="admin.js"></script>
         <title>Converter</title>
     </head>
     <body>
@@ -31,7 +33,7 @@
                         <a href="playlist-convert"> Playlist </a>
                     </li>
                     <li>
-                        <a href="./help.html"> Help </a>
+                        <a href="help"> Help </a>
                     </li>
                 </ul>
                 <div class="button-container" id="user-info">
@@ -45,49 +47,23 @@
             </nav>
             <div class="main-wrapper">
                 <main>
-                    <h1 class="main-page-header">
-                        Free YouTube to MP3/4 converter
-                    </h1>
-                    <p class="main-page-subtext">
-                        Looking for a free and convenient tool to download
-                        YouTube videos? Our online YouTube to MP3/4 converter is
-                        all that and more! No need to register or install
-                        software — convert high-quality videos right from the
-                        browser with minimal effort.
-                    </p>
-                    <div class="button-container">
-                        <a href="youtube-convert">
-                            <button style="background-color: #f01414">
-                                YouTube
+                    <h1>Users:</h1>
+                    <div class="user-managment-header">
+                        <form>
+                            <input
+                                type="text"
+                                name="user-name"
+                                id="user-name-search"
+                                placeholder="Search for user..."
+                            />
+                            <button type="button" onclick="render_users()">
+                                search
                             </button>
-                        </a>
-                        <a href="soundcloud-convert">
-                            <button style="background-color: #ff9c08">
-                                Soundcloud
-                            </button>
-                        </a>
-                        <a href="tiktok-convert">
-                            <button style="background-color: black">
-                                TikTok
-                            </button>
-                        </a>
-                        <a href="playlist-convert">
-                            <button style="background-color: #6d55ac">
-                                Playlist
-                            </button>
-                        </a>
+                        </form>
+                        <div></div>
                     </div>
-                    <a href="experimental-convert">
-                        <button
-                            id="experimental-convert-button"
-                            style="background-color: gray"
-                        >
-                            Convert anything (beta version)
-                        </button>
-                    </a>
-                    <p class="need-help-text">
-                        Need help? <a href="help">Click me!</a>
-                    </p>
+                    <p id="message-container"></p>
+                    <ul id="user-list"></ul>
                 </main>
             </div>
             <footer>
@@ -121,7 +97,7 @@
                             <a href="legal">Legal</a>
                         </li>
                         <li>
-                            <a href="./contactpage.html">Contact</a>
+                            <a href="contact">Contact</a>
                         </li>
                         <li>
                             <a href="feedback">Feedback</a>
@@ -134,5 +110,8 @@
             </footer>
         </div>
         <script src="./navbar_user.js"></script>
+        <script>
+            get_users();
+        </script>
     </body>
 </html>

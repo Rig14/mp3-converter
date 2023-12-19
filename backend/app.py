@@ -1,8 +1,26 @@
 """Main application file"""
 from flask import Flask, request
 from flask_cors import CORS
-from backend.user import create_user, login_user, get_user_data
+from backend.user import (
+    create_user,
+    login_user,
+    get_user_data,
+    change_data,
+    change_user_profile_picture,
+    add_user_history,
+    get_user_history,
+    delete_user_account,
+)
 from backend.downloader import download_to_server, send_file_from_server
+from backend.admin import (
+    get_blacklist_items,
+    add_blacklist_item,
+    remove_blacklist_item,
+    get_all_users,
+    delete_user_history,
+    delete_user_account_admin,
+)
+
 
 app = Flask(__name__)
 CORS(app)
@@ -67,3 +85,102 @@ def serve_file():
         get_name_only = True
 
     return send_file_from_server(identifier, file_name, get_name_only)
+
+
+@app.route("/api/change_user_data", methods=["POST"])
+def change_user_data():
+    """
+    Changes user data.
+
+    Returns 200 status code if successful.
+    """
+    token = request.headers.get("Authorization")
+    name = request.get_json().get("name")
+    motd = request.get_json().get("motd")
+    password = request.get_json().get("password")
+    email = request.get_json().get("email")
+
+    return change_data(token, name, email, password, motd)
+
+
+@app.route("/api/change_profile_picture", methods=["POST"])
+def update_profile_picture():
+    """
+    Updates the profile picture of the user.
+    """
+    token = request.headers.get("Authorization")
+    image = request.files.get("image")
+
+    return change_user_profile_picture(token, image)
+
+
+@app.route("/api/add_history", methods=["POST"])
+def add_history():
+    """Add a history row to the database."""
+    token = request.headers.get("Authorization")
+    content_title = request.get_json().get("content_title")
+    content_url = request.get_json().get("content_url")
+    content_format = request.get_json().get("content_format")
+
+    return add_user_history(token, content_title, content_url, content_format)
+
+
+@app.route("/api/get_history", methods=["GET"])
+def get_history():
+    """Get user history."""
+    token = request.headers.get("Authorization")
+
+    return get_user_history(token)
+
+
+@app.route("/api/delete_account", methods=["DELETE"])
+def delete_account():
+    """Delete user account."""
+    token = request.headers.get("Authorization")
+
+    return delete_user_account(token)
+
+
+@app.route("/api/blacklist", methods=["GET", "POST", "PATCH"])
+def blacklist():
+    """Blacklist operations."""
+    token = request.headers.get("Authorization")
+
+    if request.method == "GET":
+        return get_blacklist_items(token)
+
+    if request.method == "POST":
+        content_url = request.get_json().get("content_url")
+        return add_blacklist_item(token, content_url)
+
+    if request.method == "PATCH":
+        content_id = request.get_json().get("content_id")
+        return remove_blacklist_item(token, content_id)
+
+
+@app.route("/api/users", methods=["GET"])
+def users():
+    """Get all users."""
+    token = request.headers.get("Authorization")
+    if request.method == "GET":
+        return get_all_users(token)
+
+
+@app.route("/api/delete_history", methods=["PATCH"])
+def delete_history():
+    """Delete user history for a given user id."""
+
+    token = request.headers.get("Authorization")
+    user_id = request.get_json().get("user_id")
+
+    return delete_user_history(token, user_id)
+
+
+@app.route("/api/delete_account_id", methods=["PATCH"])
+def delete_account_id():
+    """Delete user account for a given user id."""
+
+    token = request.headers.get("Authorization")
+    user_id = request.get_json().get("user_id")
+
+    return delete_user_account_admin(token, user_id)

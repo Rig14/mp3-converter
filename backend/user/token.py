@@ -30,6 +30,7 @@ def get_id_from_token(token) -> int:
     Returns the user id if the token is valid, otherwise returns False.
     """
     load_dotenv()
+
     jwt_secret = os.getenv("JWT_SECRET")
 
     if not jwt_secret:
