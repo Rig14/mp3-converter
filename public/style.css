@@ -443,6 +443,57 @@ footer {
     transform: scale(1.1);
 }
 
+.help-header {
+    position: relative;
+    top: 25px;
+    right: 100px;
+    text-align: center;
+}
+
+.tutorial {
+    position: relative;
+    top: 40px;
+    left: 50px;
+    text-align: left;
+}
+.tutorial-paragraph {
+    position: relative;
+    top: 30px;
+    left: 50px;
+    text-align: left;
+}
+
+.tutorial-image {
+    position: relative;
+    bottom: 40px;
+    left: 500px;
+}
+
+.tutorial-image-alternate {
+    position: relative;
+    bottom: 40px;
+    left: 900px;
+}
+
+.tutorial-image-alternate2 {
+    position: relative;
+    bottom: 40px;
+    left: 975px;
+}
+
+.tutorial-image-alternate3 {
+    position: relative;
+    bottom: 40px;
+    left: 750px;
+}
+
+.tutorial-image-alternate4 {
+    position: relative;
+    bottom: 40px;
+    left: 650px;
+}
+
+
 @media only screen and (max-width: 600px) {
     .user-form-box {
         width: 100%;
@@ -751,6 +802,49 @@ footer {
     height: inherit;
     margin: 0;
     padding: 0;
+}
+
+.contact-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 30rem;
+}
+
+.contact-info {
+    width: 600px;
+    margin-bottom: auto;
+    margin-right: auto;
+}
+
+.donation-info {
+    width: 200px;
+    margin-left: auto;
+    margin-top: 20rem;
+}
+
+.contact-link {
+    color: blue;
+    font-size: 2rem;
+}
+
+.feedback-box {
+    display: flex;
+    flex-direction: column;
+    margin-right: auto;
+}
+
+.submit-button1 {
+    width: 10rem;
+    font-size: 2rem;
+    background-color: black;
+    color: white;
+    border: 2px solid black;
+    border-radius: 15px;
+    padding: 0.5rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    cursor: pointer;
+    transition: 0.2s;
 }
 
 @media only screen and (max-width: 600px) {
