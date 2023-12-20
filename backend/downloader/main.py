@@ -13,109 +13,7 @@ from flask import send_file
 from backend.db import execute
 
 MEDIA_DIR = os.path.join(os.path.dirname(__file__), "downloaded-media")
-TTL = 60 * 60 * 15  # 1 hour
-
-hardcoded_data_dict = {
-    "files_data": {
-        "0": {
-            "file_extension": ".m4a",
-            "file_name": "A Liar's Funeral",
-            "file_size": "5.06 MB",
-            "new_filename": "",
-        },
-        "1": {
-            "file_extension": ".m4a",
-            "file_name": "All Out Life",
-            "file_size": "5.25 MB",
-            "new_filename": "",
-        },
-        "2": {
-            "file_extension": ".m4a",
-            "file_name": "Birth Of The Cruel",
-            "file_size": "4.26 MB",
-            "new_filename": "",
-        },
-        "3": {
-            "file_extension": ".m4a",
-            "file_name": "Critical Darling",
-            "file_size": "5.96 MB",
-            "new_filename": "",
-        },
-        "4": {
-            "file_extension": ".m4a",
-            "file_name": "Death Because of Death",
-            "file_size": "1.25 MB",
-            "new_filename": "",
-        },
-        "5": {
-            "file_extension": ".m4a",
-            "file_name": "Insert Coin",
-            "file_size": "1.53 MB",
-            "new_filename": "",
-        },
-        "6": {
-            "file_extension": ".m4a",
-            "file_name": "My Pain",
-            "file_size": "6.3 MB",
-            "new_filename": "",
-        },
-        "7": {
-            "file_extension": ".m4a",
-            "file_name": "Nero Forte",
-            "file_size": "4.87 MB",
-            "new_filename": "",
-        },
-        "8": {
-            "file_extension": ".m4a",
-            "file_name": "Not Long for This World",
-            "file_size": "6.11 MB",
-            "new_filename": "",
-        },
-        "9": {
-            "file_extension": ".m4a",
-            "file_name": "Orphan",
-            "file_size": "5.58 MB",
-            "new_filename": "",
-        },
-        "10": {
-            "file_extension": ".m4a",
-            "file_name": "Red Flag",
-            "file_size": "3.89 MB",
-            "new_filename": "",
-        },
-        "11": {
-            "file_extension": ".m4a",
-            "file_name": "Solway Firth",
-            "file_size": "5.49 MB",
-            "new_filename": "",
-        },
-        "12": {
-            "file_extension": ".m4a",
-            "file_name": "Spiders",
-            "file_size": "3.76 MB",
-            "new_filename": "",
-        },
-        "13": {
-            "file_extension": ".m4a",
-            "file_name": "Unsainted",
-            "file_size": "4.03 MB",
-            "new_filename": "",
-        },
-        "14": {
-            "file_extension": ".m4a",
-            "file_name": "What's Next",
-            "file_size": "852.66 KB",
-            "new_filename": "",
-        },
-    },
-    "playlist_data": {
-        "file_extension": ".zip",
-        "file_size": "64.16 MB",
-        "new_title": "SLIPKNOT - We Are Not Your Ki",
-        "selected": "1.2.3.4.7.8.9.10.11.12",
-        "title": "SLIPKNOT - We Are Not Your Kind (FULL ALBUM 2019)",
-    },
-}
+TTL = 60 * 60  # 1 hour
 
 
 FORMATS = {
@@ -174,20 +72,20 @@ def download_metadata_file(path: object, url: str):
 def get_data_only_function(identifier):
     # create necessary paths
     path = os.path.join(MEDIA_DIR, identifier)
-    media_files_path = os.path.join(path, "media_files")
+    media_dir_path = os.path.join(path, "media_files")
 
     # check if the file directory exists
-    if not os.path.exists(media_files_path):
+    if not os.path.exists(media_dir_path):
         return {"error": "file not found"}, 404
 
     media_files_dict = {}
     # create a dictionary containing file data for each file in media_files dir
-    for i, filename in enumerate(os.listdir(media_files_path)):
+    for i, filename in enumerate(os.listdir(media_dir_path)):
         file_data_dict = {
             "file_name": filename.split(".")[0],
             "file_extension": "." + filename.split(".")[-1],
-            "file_size": get_size(os.path.join(media_files_path, filename)),
-            "new_filename": "",
+            "file_size": get_size(os.path.join(media_dir_path, filename)),
+            # "new_filename": "",
         }
         # add created dict to media_files_dict
         media_files_dict[i] = file_data_dict
@@ -198,62 +96,17 @@ def get_data_only_function(identifier):
     if len(media_files_dict.keys()) > 1:
         # extract playlist title from metadata file's filename
         metadata_file = os.listdir(os.path.join(path, "metadata"))[0]
-        playlist_data_dict["title"] = metadata_file.rsplit(" [", maxsplit=1)[0]
-        playlist_data_dict["new_title"] = ""
 
-        # get size of the whole playlist (media_files dir)
-        playlist_data_dict["file_size"] = get_size(media_files_path, True)
+        playlist_data_dict["title"] = metadata_file.rsplit(" [", maxsplit=1)[0]
+        playlist_data_dict["file_size"] = get_size(media_dir_path, True)  # whole dir
         playlist_data_dict["file_extension"] = ".zip"
         playlist_data_dict["selected"] = []
+        # playlist_data_dict["new_title"] = ""
 
     return {
         "files_data": media_files_dict,
         "playlist_data": playlist_data_dict,
-        # "is_playlist": is_playlist
     }, 200
-
-
-"""
-    return {
-        "file_name": file_name.replace("." + file_extension, ""),
-        "file_extension": "." + file_extension,
-        "file_size": get_size(os.path.join(path, file_name)),
-    }, 200
-"""
-
-
-def zip_playlist(playlist_path: object, url: str):
-    """
-    Extracts playlist title with yt-dlp command.
-    Moves all media files to a single zip file named after playlist title.
-    Deletes all files except zip file.
-    :param path: path to the playlist media files folder (MEDIA_DIR + identifier)
-    :param url: url of the converted playlist
-    """
-    # list of media files in playlist, might be used for playlist-custom-selection
-    media_files = os.listdir(playlist_path)
-
-    zipfile_name = "zipped-playlist.zip"  # hardcoded filename
-    new_filename = ""  # playlist title
-    zipfile_path = os.path.join(playlist_path, zipfile_name)
-
-    # move all playlist media to newly created zip file
-    with zipfile.ZipFile(zipfile_path, "w") as zip_object:
-        # process and delete all files except .zip file
-        for file in os.listdir(playlist_path):
-            file_path = os.path.join(playlist_path, file)
-            if file in media_files:
-                zip_object.write(file_path, file)
-                os.remove(file_path)
-            elif file.split(".")[-1] == "json":
-                # extract playlist title from metadata file filename
-                new_filename = file.rsplit(" [", maxsplit=1)[0] + ".zip"
-                os.remove(file_path)
-        zip_object.close()
-
-    # replace hardcoded zipfile name with playlist title
-    if new_filename:
-        os.rename(zipfile_path, os.path.join(playlist_path, new_filename))
 
 
 def download_to_server(url: str, format_str: str):
@@ -295,7 +148,9 @@ def download_to_server(url: str, format_str: str):
     os.makedirs(os.path.join(MEDIA_DIR, identifier))
 
     # create a dir for all downloaded media files
-    os.makedirs(os.path.join(MEDIA_DIR, identifier, "media_files"))
+    os.makedirs(
+        os.path.join(MEDIA_DIR, identifier, "media_files")
+    )  # 2 dirs at once possible?
 
     # create a command to be run
     command = [
@@ -317,19 +172,63 @@ def download_to_server(url: str, format_str: str):
     except subprocess.CalledProcessError as e:
         return {"error": str(e)}, 500
 
+    # path to downloaded media dir
+    path = os.path.join(MEDIA_DIR, identifier)
+
     # check if downloaded media was a playlist
-    if len(os.listdir(os.path.join(MEDIA_DIR, identifier, "media_files"))) > 1:
-        download_metadata_file(os.path.join(MEDIA_DIR, identifier), url)
+    if len(os.listdir(os.path.join(path, "media_files"))) > 1:
+        download_metadata_file(path, url)
 
     return {"identifier": identifier}, 200
 
 
+def zip_playlist(path: object, selected: list):
+    """
+    Move all elected playlist content to file "zipped-playlist.zip".
+    :param path: path to the playlist media files folder (MEDIA_DIR + identifier)
+    :param url: url of the converted playlist
+    """
+    # hardcoded filename
+    zipfile_name = "zipped-playlist.zip"
+
+    # create paths
+    zipfile_dir_path = os.path.join(path, "zip_file")
+    media_dir_path = os.path.join(path, "media_files")
+    zipfile_path = os.path.join(zipfile_dir_path, zipfile_name)
+
+    # remove previously created zip file | create new dir if first download
+    if os.path.isdir(zipfile_dir_path):
+        # stored zipfile name is constant, only downloaded file's name changes
+        os.remove(zipfile_path)
+    else:
+        os.makedirs(zipfile_dir_path)
+
+    # list of stored media filenames with extension
+    media_files = os.listdir(media_dir_path)
+
+    # move selected playlist media to zipfile
+    with zipfile.ZipFile(zipfile_path, "w") as zip_object:
+        for i in selected:
+            media = media_files[int(i)]  # example: song.mp3
+            z_path = os.path.join(media_dir_path, media)
+            zip_object.write(z_path, media)
+        zip_object.close()
+
+    # extract playlist title from metadata file's filename  (should find a better way)
+    metadata_file = os.listdir(os.path.join(path, "metadata"))[0]
+    old_filename = metadata_file.rsplit(" [", maxsplit=1)[0]
+
+    return zipfile_path, old_filename
+
+
 def send_file_from_server(
     identifier: str,
-    data_dict: str | None = None,
+    selected: str,
+    new_filename: str,
     get_data_only: bool = False,
 ):
     """Will send the file as an atachment to the client using the identifier"""
+
     # create the path to the file(s) directory
     path = os.path.join(MEDIA_DIR, identifier)
 
@@ -337,20 +236,21 @@ def send_file_from_server(
     if not os.path.exists(path):
         return {"error": "file not found"}, 404
 
-    # if get_data_only:
-    #    return get_data_only_function(identifier)
+    if get_data_only:
+        return get_data_only_function(identifier)
 
-    # data_dict = json.loads(data_dict)
-    data_dict = hardcoded_data_dict
-    identifier = "477904aa0dbb81f"
+    # get selected files
+    selected = selected.split(".")
 
     # return the single media file as an attachment
-    if len((data_dict["files_data"]).keys()) == 1:  # add checking selected for short PL
-        # get file data from data_dict
-        old_filename = data_dict["files_data"]["0"]["file_name"]
-        new_filename = data_dict["files_data"]["0"]["new_filename"]
-        file_extension = data_dict["files_data"]["0"]["file_extension"]
-        file_path = os.path.join(path, "media_files", old_filename + file_extension)
+    if len(selected) == 1 and selected[0] == "0":  # exclude short playlist
+        # list of stored media filenames with extension
+        media_path = os.path.join(path, "media_files")
+
+        # get file data from media_files dir
+        old_filename = os.listdir(media_path)[0].split(".")[0]
+        file_extension = "." + os.listdir(media_path)[0].split(".")[-1]
+        file_path = os.path.join(media_path, old_filename + file_extension)
 
         # new_filename checking and logic might need rework in javascript processFormData()
         return send_file(
@@ -360,54 +260,15 @@ def send_file_from_server(
             if old_filename != new_filename and new_filename != ""
             else old_filename + file_extension,
         )
-    else:
-        # create path for zip file directory
-        zipfile_dir = os.path.join(path, "zip_file")
-
-        # remove previously created zip file | create new dir when first download
-        if os.path.isdir(zipfile_dir):
-            os.remove(os.path.join(zipfile_dir, os.listdir(zipfile_dir)[0]))
-        else:
-            os.makedirs(zipfile_dir)
-
-        zipfile_name = "zipped-playlist.zip"  # hardcoded filename
-        zipfile_path = os.path.join(zipfile_dir, zipfile_name)
-
-        selected_indexes = data_dict["playlist_data"]["selected"].split(".")
-
-        # move all playlist media to newly created zip file
-        with zipfile.ZipFile(zipfile_path, "w") as zip_object:
-            for i in selected_indexes:
-                media = data_dict["files_data"][i]
-                filename = media["file_name"]
-                z_path = os.path.join(
-                    path, "media_files", filename + media["file_extension"]
-                )
-                zip_object.write(
-                    z_path, filename + media["file_extension"]
-                )  # could add new name from html form
-            zip_object.close()
-
-        # replace hardcoded zipfile name with playlist title
-        old_title = data_dict["playlist_data"]["title"]
-        new_title = data_dict["playlist_data"]["new_title"]
+    # return selected playlist content as a zipfile
+    elif len(selected) > 0:
+        # path to zip file containing all selected media, playlist title
+        zipfile_path, old_filename = zip_playlist(path, selected)
 
         return send_file(
             zipfile_path,
             as_attachment=True,
-            download_name=new_title + ".zip"
-            if old_title != new_title and new_title != ""
-            else old_title + ".zip",
+            download_name=new_filename + ".zip"
+            if old_filename != new_filename and new_filename != ""
+            else old_filename + ".zip",
         )
-
-
-""" previous version
-    # return the file as an attachment
-    return send_file(
-        path,
-        as_attachment=True,
-        download_name=file_name_new + "." + file_extension
-        if file_name_new
-        else file_name,
-    )
-"""

@@ -47,25 +47,15 @@ function processFormData(form_type) {
         const new_filename = formData.get('youtube-filename');
         const params = new URLSearchParams(window.location.search);
         const identifier = params.get('identifier');
-        const data = JSON.parse(localStorage.getItem(identifier));
-        // old_filename = data.files_data[0]['file_name'];
-        data.files_data[0]['new_filename'] = new_filename;
         // localStorage.removeItem(identifier)
-
-        /* Miks if statement false'ga triggerib???? new-filename kontroll lykatud backendi hetkel
-        if (new_filename !== old_filename && new_filename !== '');
-        {
-            console.log(new_filename !== old_filename && new_filename !== '');
-        data.files_data[0]['new_filename'] = new_filename;
-        console.log(data.files_data[0]['new_filename']);
-*/
 
         window.location.href =
             BACKEND_URL +
             '/api/file?identifier=' +
-            params.get('identifier') +
-            '&data_dict=' +
-            JSON.stringify(data);
+            identifier +
+            '&selected=0' +
+            '&new_filename=' +
+            new_filename;
     } else if (form_type === 'soundcloud-convert') {
         const url = formData.get('soundcloud-link');
         const regex = url.search(
@@ -84,17 +74,15 @@ function processFormData(form_type) {
         const new_filename = formData.get('soundcloud-filename');
         const params = new URLSearchParams(window.location.search);
         const identifier = params.get('identifier');
-        const data = JSON.parse(localStorage.getItem(identifier));
-        // old_filename = data.files_data[0]['file_name'];
-        data.files_data[0]['new_filename'] = new_filename;
         // localStorage.removeItem(identifier)
 
         window.location.href =
             BACKEND_URL +
             '/api/file?identifier=' +
-            params.get('identifier') +
-            '&data_dict=' +
-            JSON.stringify(data);
+            identifier +
+            '&selected=0' +
+            '&new_filename=' +
+            new_filename;
     } else if (form_type === 'tiktok-convert') {
         const url = formData.get('tiktok-link');
         const regex = url.search(
@@ -113,17 +101,15 @@ function processFormData(form_type) {
         const new_filename = formData.get('tiktok-filename');
         const params = new URLSearchParams(window.location.search);
         const identifier = params.get('identifier');
-        const data = JSON.parse(localStorage.getItem(identifier));
-        // old_filename = data.files_data[0]['file_name'];
-        data.files_data[0]['new_filename'] = new_filename;
         // localStorage.removeItem(identifier)
 
         window.location.href =
             BACKEND_URL +
             '/api/file?identifier=' +
-            params.get('identifier') +
-            '&data_dict=' +
-            JSON.stringify(data);
+            identifier +
+            '&selected=0' +
+            '&new_filename=' +
+            new_filename;
     } else if (form_type === 'playlist-convert') {
         const url = formData.get('playlist-link');
         const regex = url.search(
@@ -140,9 +126,10 @@ function processFormData(form_type) {
             );
         }
     } else if (form_type === 'playlist-download') {
+        const new_filename = formData.get('playlist-filename');
         const params = new URLSearchParams(window.location.search);
         const identifier = params.get('identifier');
-        const data = JSON.parse(localStorage.getItem(identifier));
+
         // get data from playlist selection form
         const selectionForm = document.getElementById('playlist-form');
         const selectionData = new FormData(selectionForm);
@@ -155,20 +142,17 @@ function processFormData(form_type) {
             }
             i += 1;
         }
-        console.log(selected_indexes);
         // selected media files indexes
-        const selected_media = selected_indexes.join('.');
-        data.playlist_data['selected'] = selected_media;
-        // zip file name
-        const new_title = formData.get('playlist-filename');
-        data.playlist_data['new_title'] = new_title;
-        console.log(data);
-        console.log(JSON.stringify(data));
+        const selected = selected_indexes.join('.');
 
         window.location.href =
-            BACKEND_URL + '/api/file?identifier=' + params.get('identifier');
-        ('&data_dict=testtttt');
-        /*JSON.stringify(data);*/
+            BACKEND_URL +
+            '/api/file?identifier=' +
+            identifier +
+            '&selected=' +
+            selected +
+            '&new_filename=' +
+            new_filename;
     } else if (form_type === 'experimental-convert') {
         const url = formData.get('experimental-link');
         // Hardcoded to mp4, soundcloud etc might not work.
@@ -178,17 +162,15 @@ function processFormData(form_type) {
         const new_filename = formData.get('experimental-filename');
         const params = new URLSearchParams(window.location.search);
         const identifier = params.get('identifier');
-        const data = JSON.parse(localStorage.getItem(identifier));
-        // old_filename = data.files_data[0]['file_name'];
-        data.files_data[0]['new_filename'] = new_filename;
         // localStorage.removeItem(identifier)
 
         window.location.href =
             BACKEND_URL +
             '/api/file?identifier=' +
-            params.get('identifier') +
-            '&data_dict=' +
-            JSON.stringify(data.files_data);
+            identifier +
+            '&selected=0' +
+            '&new_filename=' +
+            new_filename;
     }
 }
 
@@ -347,49 +329,7 @@ async function on_loading_page() {
             media_type;
     }
 }
-/* _previous version of the function
-async function set_file_data() {
-    const params = new URLSearchParams(window.location.search);
-    const identifier = params.get('identifier');
 
-    const url =
-        BACKEND_URL +
-        '/api/file?identifier=' +
-        identifier +
-        '&get_data_only=true';
-
-    const response = await fetch(url, {
-        method: 'GET',
-    });
-
-    if (response.status !== 200) {
-        window.location.href = 'index.html';
-    } else {
-        const data = await response.json();
-        const file_name = data.file_name;
-        const file_extension = data.file_extension;
-        const file_size = data.file_size;
-
-        const file_name_field = document.getElementById(
-            'filename-input-element'
-        );
-        file_name_field.value = file_name;
-
-        const file_format_box = document.getElementById('file-format-box');
-        file_format_box.innerText = file_extension;
-
-        const file_size_box = document.getElementById('file-size');
-        file_size_box.innerText = '(' + file_size + ')';
-
-        // send history to backend if user is logged in
-        if (localStorage.getItem('token')) {
-            const url = params.get('url');
-            const media_type = params.get('media_type');
-            add_user_history(file_name, url, media_type);
-        }
-    }
-}
-*/
 async function set_file_data() {
     const params = new URLSearchParams(window.location.search);
     const identifier = params.get('identifier');
@@ -411,110 +351,78 @@ async function set_file_data() {
         console.log(data);
         const files_data = data.files_data;
         localStorage.setItem(identifier, JSON.stringify(data));
-        len = Object.keys(files_data).length;
+        // determine if converted content was a playlist or single file
+        const len = Object.keys(files_data).length;
 
-        // single video
-        //if (len == 1);
-        //{
-        const single_media = data.files_data[0];
+        // set single file data
+        if (len == 1) {
+            const single_media = data.files_data[0];
+            const file_name = single_media.file_name;
+            const file_extension = single_media.file_extension;
+            const file_size = single_media.file_size;
 
-        const file_name = single_media.file_name;
-        const file_extension = single_media.file_extension;
-        const file_size = single_media.file_size;
+            const file_name_field = document.getElementById(
+                'filename-input-element'
+            );
+            file_name_field.value = file_name;
 
+            const file_format_box = document.getElementById('file-format-box');
+            file_format_box.innerText = file_extension;
+
+            const file_size_box = document.getElementById('file-size');
+            file_size_box.innerText = '(' + file_size + ')';
+
+            // set playlist data
+        } else if (len > 1) {
+            const playlist_data = data.playlist_data;
+            const file_name = playlist_data.title;
+            const file_extension = playlist_data.file_extension;
+            const file_size = playlist_data.file_size;
+
+            const file_name_field = document.getElementById(
+                'filename-input-element'
+            );
+            file_name_field.value = file_name;
+
+            const file_format_box = document.getElementById('file-format-box');
+            file_format_box.innerText = file_extension;
+
+            const file_size_box = document.getElementById('file-size');
+            file_size_box.innerText = '(' + file_size + ')';
+
+            const media_dict = data.files_data;
+
+            // fill custom selection form
+            const custom_selection_container = document.getElementById(
+                'custom-selection-box'
+            );
+
+            let text = '';
+            const media_dict_keys = Object.keys(media_dict);
+            for (let i = 0; i < media_dict_keys.length; i++) {
+                const id = 'media' + i;
+                text += `
+                <div>
+                    <input type="checkbox" id="media" name=${id} value=${i}>
+                    <label for=${id}>${media_dict[i]['file_name']}</label>
+                </div>
+            `;
+            }
+            custom_selection_container.innerHTML = text;
+        }
+
+        // get filename for add_user_history function
         const file_name_field = document.getElementById(
             'filename-input-element'
         );
-        file_name_field.value = file_name;
-
-        const file_format_box = document.getElementById('file-format-box');
-        file_format_box.innerText = file_extension;
-
-        const file_size_box = document.getElementById('file-size');
-        file_size_box.innerText = '(' + file_size + ')';
-        //}
+        const converted_file = file_name_field.value;
 
         // send history to backend if user is logged in
         if (localStorage.getItem('token')) {
             const url = params.get('url');
             const media_type = params.get('media_type');
-            add_user_history(file_name, url, media_type);
+            add_user_history(converted_file, url, media_type);
         }
-    }
-}
-
-async function set_playlist_data() {
-    const params = new URLSearchParams(window.location.search);
-    const identifier = params.get('identifier');
-
-    const url =
-        BACKEND_URL +
-        '/api/file?identifier=' +
-        identifier +
-        '&get_data_only=true';
-
-    const response = await fetch(url, {
-        method: 'GET',
-    });
-
-    if (response.status !== 200) {
-        window.location.href = 'index.html';
-    } else {
-        const data = await response.json();
-        const files_data = data.files_data;
-        localStorage.setItem(identifier, JSON.stringify(data));
-        len = Object.keys(files_data).length;
-
-        // playlist
-        //if (len > 1);
-        //{
-        // const data2 = localStorage.getItem(identifier);
-
-        // set playlist data
-        const playlist_data = data.playlist_data;
-        const pl_file_name = playlist_data.title;
-        const pl_file_extension = playlist_data.file_extension;
-        const pl_file_size = playlist_data.file_size;
-
-        const file_name_field = document.getElementById(
-            'filename-input-element'
-        );
-        file_name_field.value = pl_file_name;
-
-        const file_format_box = document.getElementById('file-format-box');
-        file_format_box.innerText = pl_file_extension;
-
-        const file_size_box = document.getElementById('file-size');
-        file_size_box.innerText = '(' + pl_file_size + ')';
-
-        const media_dict = data.files_data;
-
-        // fill custom selection form
-        const custom_selection_container = document.getElementById(
-            'custom-selection-box'
-        );
-
-        let text = '';
-        const media_dict_keys = Object.keys(media_dict);
-        for (let i = 0; i < media_dict_keys.length; i++) {
-            const id = 'media' + i;
-            text += `
-            <div>
-                <input type="checkbox" id="media" name=${id} value=${i}>
-                <label for=${id}>${media_dict[i]['file_name']}</label>
-            </div>
-        `;
-        }
-
-        custom_selection_container.innerHTML = text;
-
-        // send history to backend if user is logged in
-        if (localStorage.getItem('token')) {
-            const url = params.get('url');
-            const media_type = params.get('media_type');
-            add_user_history(pl_file_name, url, media_type);
-        }
-        //}
     }
 }
 
