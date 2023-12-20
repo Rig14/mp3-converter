@@ -116,8 +116,13 @@ function processFormData(form_type) {
         // Accepts playlist links from yt/sc only, some regular video or song links might get through
         //    String.raw`^((?:https?:)?\/\/)?((?:www|m)\.)?(?:youtube\.com\/playlist\?)([\w\-]+)(\S+)?$|^((?:https?:)?\/\/)?((?:www|m|on)\.)?soundcloud\.com\/([\w\-\.]+)\/sets\/(?!.*?(-|_){2})([\w\-]+)(\S+)?$|^((?:https?:)?\/\/)?((?:m|on)\.)soundcloud\.com\/(?!.*?(-|_){2})([\w\-]+)(\S+)?$`
         //);
-        const regex = 0;
-        if (regex === 0) {
+
+        // New regex that searches for youtube single-video links
+        const regex = url.search(
+            String.raw`^((?:https?:)?\/\/)?((?:www|m)\.)?(?:youtube\.com\/watch\?v=?)([\w\-]+)(\S+)?$`
+        );
+
+        if (regex != 0 && url != '') {
             const media_type = formData.get('dropdown-content');
             window.location.href = `./loading.html?url=${url}&media_type=${media_type}&converted_from=${converted_from}`;
         } else {
