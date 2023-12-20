@@ -16,7 +16,6 @@ function hidePassword(fieldID) {
 function processFormData(form_type) {
     // get form data from the fields in the form
     const form = document.getElementById('form');
-    console.log(form);
     const formData = new FormData(form);
 
     if (form_type === 'login') {
