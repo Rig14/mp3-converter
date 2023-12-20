@@ -137,7 +137,7 @@ function processFormData(form_type) {
         selected_indexes = [];
         i = 0;
         // must be replaced by a for loop, currently selected items amount max 50
-        while (i < 50) {
+        while (i < 150) {
             content = selectionData.get('media' + i);
             if (typeof content === typeof 'a') {
                 selected_indexes.push(content);
