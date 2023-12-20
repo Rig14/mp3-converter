@@ -78,14 +78,13 @@ def download():
 def serve_file():
     """Sends file to frontend."""
     identifier = request.args.get("identifier")
-    file_name = request.args.get("file_name")
+    data_dict = request.args.get("data_dict")
     get_data_only = request.args.get("get_data_only")
-    selected = request.args.get("selected")
 
     if get_data_only:
         get_data_only = True
 
-    return send_file_from_server(identifier, file_name, get_data_only, selected)
+    return send_file_from_server(identifier, data_dict, get_data_only)
 
 
 @app.route("/api/change_user_data", methods=["POST"])
