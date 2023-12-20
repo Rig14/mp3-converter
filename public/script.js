@@ -112,10 +112,11 @@ function processFormData(form_type) {
             new_filename;
     } else if (form_type === 'playlist-convert') {
         const url = formData.get('playlist-link');
-        const regex = url.search(
-            // Accepts playlist links from yt/sc only, some regular video or song links might get through
-            String.raw`^((?:https?:)?\/\/)?((?:www|m)\.)?(?:youtube\.com\/playlist\?)([\w\-]+)(\S+)?$|^((?:https?:)?\/\/)?((?:www|m|on)\.)?soundcloud\.com\/([\w\-\.]+)\/sets\/(?!.*?(-|_){2})([\w\-]+)(\S+)?$|^((?:https?:)?\/\/)?((?:m|on)\.)soundcloud\.com\/(?!.*?(-|_){2})([\w\-]+)(\S+)?$`
-        );
+        //const regex = url.search(
+        // Accepts playlist links from yt/sc only, some regular video or song links might get through
+        //    String.raw`^((?:https?:)?\/\/)?((?:www|m)\.)?(?:youtube\.com\/playlist\?)([\w\-]+)(\S+)?$|^((?:https?:)?\/\/)?((?:www|m|on)\.)?soundcloud\.com\/([\w\-\.]+)\/sets\/(?!.*?(-|_){2})([\w\-]+)(\S+)?$|^((?:https?:)?\/\/)?((?:m|on)\.)soundcloud\.com\/(?!.*?(-|_){2})([\w\-]+)(\S+)?$`
+        //);
+        const regex = 0;
         if (regex === 0) {
             const media_type = formData.get('dropdown-content');
             window.location.href = `./loading.html?url=${url}&media_type=${media_type}&converted_from=${converted_from}`;
@@ -133,8 +134,9 @@ function processFormData(form_type) {
         // get data from playlist selection form
         const selectionForm = document.getElementById('playlist-form');
         const selectionData = new FormData(selectionForm);
-        i = 0;
         selected_indexes = [];
+        i = 0;
+        // must be replaced by a for loop, currently selected items amount max 50
         while (i < 50) {
             content = selectionData.get('media' + i);
             if (typeof content === typeof 'a') {
@@ -143,16 +145,18 @@ function processFormData(form_type) {
             i += 1;
         }
         // selected media files indexes
-        const selected = selected_indexes.join('.');
+        if (selected_indexes.length != 0) {
+            const selected = selected_indexes.join('.');
 
-        window.location.href =
-            BACKEND_URL +
-            '/api/file?identifier=' +
-            identifier +
-            '&selected=' +
-            selected +
-            '&new_filename=' +
-            new_filename;
+            window.location.href =
+                BACKEND_URL +
+                '/api/file?identifier=' +
+                identifier +
+                '&selected=' +
+                selected +
+                '&new_filename=' +
+                new_filename;
+        }
     } else if (form_type === 'experimental-convert') {
         const url = formData.get('experimental-link');
         // Hardcoded to mp4, soundcloud etc might not work.
@@ -402,8 +406,8 @@ async function set_file_data() {
             for (let i = 0; i < media_dict_keys.length; i++) {
                 const id = 'media' + i;
                 text += `
-                <div>
-                    <input type="checkbox" id="media" name=${id} value=${i}>
+                <div class="media">
+                    <input type="checkbox" class="media-checkbox" id=${id} name=${id} value=${i} checked>
                     <label for=${id}>${media_dict[i]['file_name']}</label>
                 </div>
             `;
