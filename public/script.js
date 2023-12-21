@@ -1,6 +1,6 @@
-const BACKEND_URL = 'http://193.40.156.222';
+// const BACKEND_URL = 'http://193.40.156.222';
 
-//const BACKEND_URL = 'http://127.0.0.1:5000';
+const BACKEND_URL = 'http://127.0.0.1:5000';
 
 function showPassword(fieldID) {
     // shows the password in plain text instead on dots
@@ -43,15 +43,18 @@ function processFormData(form_type) {
             displayFormError('Please enter a valid Youtube url');
         }
     } else if (form_type === 'youtube-download') {
-        file_name = formData.get('youtube-filename');
+        const new_filename = formData.get('youtube-filename');
         const params = new URLSearchParams(window.location.search);
+        const identifier = params.get('identifier');
+        // localStorage.removeItem(identifier)
 
         window.location.href =
             BACKEND_URL +
             '/api/file?identifier=' +
-            params.get('identifier') +
-            '&file_name=' +
-            file_name;
+            identifier +
+            '&selected=0' +
+            '&new_filename=' +
+            new_filename;
     } else if (form_type === 'soundcloud-convert') {
         const url = formData.get('soundcloud-link');
         const regex = url.search(
@@ -67,15 +70,18 @@ function processFormData(form_type) {
             displayFormError('Please enter a valid Soundcloud url');
         }
     } else if (form_type === 'soundcloud-download') {
-        file_name = formData.get('soundcloud-filename');
+        const new_filename = formData.get('soundcloud-filename');
         const params = new URLSearchParams(window.location.search);
+        const identifier = params.get('identifier');
+        // localStorage.removeItem(identifier)
 
         window.location.href =
             BACKEND_URL +
             '/api/file?identifier=' +
-            params.get('identifier') +
-            '&file_name=' +
-            file_name;
+            identifier +
+            '&selected=0' +
+            '&new_filename=' +
+            new_filename;
     } else if (form_type === 'tiktok-convert') {
         const url = formData.get('tiktok-link');
         const regex = url.search(
@@ -91,22 +97,31 @@ function processFormData(form_type) {
             displayFormError('Please enter a valid Tiktok url');
         }
     } else if (form_type === 'tiktok-download') {
-        file_name = formData.get('tiktok-filename');
+        const new_filename = formData.get('tiktok-filename');
         const params = new URLSearchParams(window.location.search);
+        const identifier = params.get('identifier');
+        // localStorage.removeItem(identifier)
 
         window.location.href =
             BACKEND_URL +
             '/api/file?identifier=' +
-            params.get('identifier') +
-            '&file_name=' +
-            file_name;
+            identifier +
+            '&selected=0' +
+            '&new_filename=' +
+            new_filename;
     } else if (form_type === 'playlist-convert') {
         const url = formData.get('playlist-link');
+        //const regex = url.search(
+        // Accepts playlist links from yt/sc only, some regular video or song links might get through
+        //    String.raw`^((?:https?:)?\/\/)?((?:www|m)\.)?(?:youtube\.com\/playlist\?)([\w\-]+)(\S+)?$|^((?:https?:)?\/\/)?((?:www|m|on)\.)?soundcloud\.com\/([\w\-\.]+)\/sets\/(?!.*?(-|_){2})([\w\-]+)(\S+)?$|^((?:https?:)?\/\/)?((?:m|on)\.)soundcloud\.com\/(?!.*?(-|_){2})([\w\-]+)(\S+)?$`
+        //);
+
+        // New regex that searches for youtube single-video links
         const regex = url.search(
-            // Accepts playlist links from yt/sc only, some regular video or song links might get through
-            String.raw`^((?:https?:)?\/\/)?((?:www|m)\.)?(?:youtube\.com\/playlist\?)([\w\-]+)(\S+)?$|^((?:https?:)?\/\/)?((?:www|m|on)\.)?soundcloud\.com\/([\w\-\.]+)\/sets\/(?!.*?(-|_){2})([\w\-]+)(\S+)?$|^((?:https?:)?\/\/)?((?:m|on)\.)soundcloud\.com\/(?!.*?(-|_){2})([\w\-]+)(\S+)?$`
+            String.raw`^((?:https?:)?\/\/)?((?:www|m)\.)?(?:youtube\.com\/watch\?v=?)([\w\-]+)(\S+)?$`
         );
-        if (regex === 0) {
+
+        if (regex != 0 && url != '') {
             const media_type = formData.get('dropdown-content');
             window.location.href = `./loading.html?url=${url}&media_type=${media_type}&converted_from=${converted_from}`;
         } else {
@@ -116,30 +131,72 @@ function processFormData(form_type) {
             );
         }
     } else if (form_type === 'playlist-download') {
-        file_name = formData.get('playlist-filename');
+        const new_filename = formData.get('playlist-filename');
         const params = new URLSearchParams(window.location.search);
+        const identifier = params.get('identifier');
 
-        window.location.href =
-            BACKEND_URL +
-            '/api/file?identifier=' +
-            params.get('identifier') +
-            '&file_name=' +
-            file_name;
+        // get data from playlist selection form
+        const selectionForm = document.getElementById('playlist-form');
+        const selectionData = new FormData(selectionForm);
+        selected_indexes = [];
+        i = 0;
+        // must be replaced by a for loop, currently selected items amount max 50
+        while (i < 150) {
+            content = selectionData.get('media' + i);
+            if (typeof content === typeof 'a') {
+                selected_indexes.push(content);
+            }
+            i += 1;
+        }
+        // selected media files indexes
+        if (selected_indexes.length > 0) {
+            const selected = selected_indexes.join('.');
+            // edge case only 1 media selected
+            if (selected_indexes.length == 1) {
+                data = JSON.parse(localStorage.getItem(identifier));
+                console.log(data);
+                // replace playlist title with selected file name
+                index = parseInt(selected_indexes[0]);
+                const new_filename = data['files_data'][index]['file_name'];
+                console.log(new_filename);
+
+                window.location.href =
+                    BACKEND_URL +
+                    '/api/file?identifier=' +
+                    identifier +
+                    '&selected=' +
+                    selected +
+                    '&new_filename=' +
+                    new_filename;
+            } else {
+                window.location.href =
+                    BACKEND_URL +
+                    '/api/file?identifier=' +
+                    identifier +
+                    '&selected=' +
+                    selected +
+                    '&new_filename=' +
+                    new_filename;
+            }
+        }
     } else if (form_type === 'experimental-convert') {
         const url = formData.get('experimental-link');
         // Hardcoded to mp4, soundcloud etc might not work.
         const media_type = 'random';
         window.location.href = `./loading.html?url=${url}&media_type=${media_type}&converted_from=${converted_from}`;
     } else if (form_type === 'experimental-download') {
-        file_name = formData.get('experimental-filename');
+        const new_filename = formData.get('experimental-filename');
         const params = new URLSearchParams(window.location.search);
+        const identifier = params.get('identifier');
+        // localStorage.removeItem(identifier)
 
         window.location.href =
             BACKEND_URL +
             '/api/file?identifier=' +
-            params.get('identifier') +
-            '&file_name=' +
-            file_name;
+            identifier +
+            '&selected=0' +
+            '&new_filename=' +
+            new_filename;
     }
 }
 
@@ -307,7 +364,7 @@ async function set_file_data() {
         BACKEND_URL +
         '/api/file?identifier=' +
         identifier +
-        '&get_name_only=true';
+        '&get_data_only=true';
 
     const response = await fetch(url, {
         method: 'GET',
@@ -317,26 +374,79 @@ async function set_file_data() {
         window.location.href = 'index.html';
     } else {
         const data = await response.json();
-        const file_name = data.file_name;
-        const file_extention = data.file_extention;
-        const file_size = data.file_size;
+        const files_data = data.files_data;
+        localStorage.setItem(identifier, JSON.stringify(data));
+        // determine if converted content was a playlist or single file
+        const len = Object.keys(files_data).length;
 
+        // set single file data
+        if (len == 1) {
+            const single_media = data.files_data[0];
+            const file_name = single_media.file_name;
+            const file_extension = single_media.file_extension;
+            const file_size = single_media.file_size;
+
+            const file_name_field = document.getElementById(
+                'filename-input-element'
+            );
+            file_name_field.value = file_name;
+
+            const file_format_box = document.getElementById('file-format-box');
+            file_format_box.innerText = file_extension;
+
+            const file_size_box = document.getElementById('file-size');
+            file_size_box.innerText = '(' + file_size + ')';
+
+            // set playlist data
+        } else if (len > 1) {
+            const playlist_data = data.playlist_data;
+            const file_name = playlist_data.title;
+            const file_extension = playlist_data.file_extension;
+            const file_size = playlist_data.file_size;
+
+            const file_name_field = document.getElementById(
+                'filename-input-element'
+            );
+            file_name_field.value = file_name;
+
+            const file_format_box = document.getElementById('file-format-box');
+            file_format_box.innerText = file_extension;
+
+            const file_size_box = document.getElementById('file-size');
+            file_size_box.innerText = '(' + file_size + ')';
+
+            const media_dict = data.files_data;
+
+            // fill custom selection form
+            const custom_selection_container = document.getElementById(
+                'custom-selection-box'
+            );
+
+            let text = '';
+            const media_dict_keys = Object.keys(media_dict);
+            for (let i = 0; i < media_dict_keys.length; i++) {
+                const id = 'media' + i;
+                text += `
+                <div class="media">
+                    <input type="checkbox" class="media-checkbox" id=${id} name=${id} value=${i} checked>
+                    <label for=${id}>${media_dict[i]['file_name']}</label>
+                </div>
+            `;
+            }
+            custom_selection_container.innerHTML = text;
+        }
+
+        // get filename for add_user_history function
         const file_name_field = document.getElementById(
             'filename-input-element'
         );
-        file_name_field.value = file_name;
-
-        const file_format_box = document.getElementById('file-format-box');
-        file_format_box.innerText = file_extention;
-
-        const file_size_box = document.getElementById('file-size');
-        file_size_box.innerText = '(' + file_size + ')';
+        const converted_file = file_name_field.value;
 
         // send history to backend if user is logged in
         if (localStorage.getItem('token')) {
             const url = params.get('url');
             const media_type = params.get('media_type');
-            add_user_history(file_name, url, media_type);
+            add_user_history(converted_file, url, media_type);
         }
     }
 }
