@@ -243,7 +243,7 @@ def send_file_from_server(
     selected = selected.split(".")
 
     # return the single media file as an attachment
-    if len(selected) == 1:
+    if len(selected) == 1 and selected[0] == "0":
         # list of stored media filenames with extension
         media_path = os.path.join(path, "media_files")
 
