@@ -149,17 +149,35 @@ function processFormData(form_type) {
             i += 1;
         }
         // selected media files indexes
-        if (selected_indexes.length != 0) {
+        if (selected_indexes.length > 0) {
             const selected = selected_indexes.join('.');
+            // edge case only 1 media selected
+            if (selected_indexes.length == 1) {
+                data = JSON.parse(localStorage.getItem(identifier));
+                console.log(data);
+                // replace playlist title with selected file name
+                index = parseInt(selected_indexes[0]);
+                const new_filename = data['files_data'][index]['file_name'];
+                console.log(new_filename);
 
-            window.location.href =
-                BACKEND_URL +
-                '/api/file?identifier=' +
-                identifier +
-                '&selected=' +
-                selected +
-                '&new_filename=' +
-                new_filename;
+                window.location.href =
+                    BACKEND_URL +
+                    '/api/file?identifier=' +
+                    identifier +
+                    '&selected=' +
+                    selected +
+                    '&new_filename=' +
+                    new_filename;
+            } else {
+                window.location.href =
+                    BACKEND_URL +
+                    '/api/file?identifier=' +
+                    identifier +
+                    '&selected=' +
+                    selected +
+                    '&new_filename=' +
+                    new_filename;
+            }
         }
     } else if (form_type === 'experimental-convert') {
         const url = formData.get('experimental-link');
@@ -356,7 +374,6 @@ async function set_file_data() {
         window.location.href = 'index.html';
     } else {
         const data = await response.json();
-        console.log(data);
         const files_data = data.files_data;
         localStorage.setItem(identifier, JSON.stringify(data));
         // determine if converted content was a playlist or single file

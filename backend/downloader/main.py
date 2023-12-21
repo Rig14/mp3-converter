@@ -82,8 +82,8 @@ def get_data_only_function(identifier):
     # create a dictionary containing file data for each file in media_files dir
     for i, filename in enumerate(os.listdir(media_dir_path)):
         file_data_dict = {
-            "file_name": filename.split(".")[0],
-            "file_extension": "." + filename.split(".")[-1],
+            "file_name": filename.rsplit(".", maxsplit=1)[0],
+            "file_extension": "." + filename.rsplit(".", maxsplit=1)[-1],
             "file_size": get_size(os.path.join(media_dir_path, filename)),
             # "new_filename": "",
         }
@@ -228,6 +228,8 @@ def send_file_from_server(
     get_data_only: bool = False,
 ):
     """Will send the file as an atachment to the client using the identifier"""
+    if new_filename == ".":
+        new_filename = ""
 
     # create the path to the file(s) directory
     path = os.path.join(MEDIA_DIR, identifier)
@@ -242,26 +244,8 @@ def send_file_from_server(
     # get selected files
     selected = selected.split(".")
 
-    # return the single media file as an attachment
-    if len(selected) == 1 and selected[0] == "0":
-        # list of stored media filenames with extension
-        media_path = os.path.join(path, "media_files")
-
-        # get file data from media_files dir
-        old_filename = os.listdir(media_path)[0].split(".")[0]
-        file_extension = "." + os.listdir(media_path)[0].split(".")[-1]
-        file_path = os.path.join(media_path, old_filename + file_extension)
-
-        # new_filename checking and logic might need rework in javascript processFormData()
-        return send_file(
-            file_path,
-            as_attachment=True,
-            download_name=new_filename + file_extension
-            if old_filename != new_filename and new_filename != ""
-            else old_filename + file_extension,
-        )
     # return selected playlist content as a zipfile
-    elif len(selected) > 0:
+    if len(selected) > 1:
         # path to zip file containing all selected media, playlist title
         zipfile_path, old_filename = zip_playlist(path, selected)
 
@@ -271,4 +255,29 @@ def send_file_from_server(
             download_name=new_filename + ".zip"
             if old_filename != new_filename and new_filename != ""
             else old_filename + ".zip",
+        )
+
+    # return the single media file as an attachment
+    elif len(selected) == 1:
+        # list of stored media filenames with extension
+        media_dir_path = os.path.join(path, "media_files")
+
+        # list of stored media filenames with extension
+        media_files = os.listdir(media_dir_path)
+
+        # file index in media_files dir
+        index = int(selected[0])
+
+        # get file data from media_files dir
+        old_filename = media_files[index].rsplit(".", maxsplit=1)[0]
+        file_extension = "." + media_files[index].rsplit(".", maxsplit=1)[-1]
+        file_path = os.path.join(media_dir_path, old_filename + file_extension)
+
+        # new_filename checking and logic might need rework in javascript processFormData()
+        return send_file(
+            file_path,
+            as_attachment=True,
+            download_name=new_filename + file_extension
+            if old_filename != new_filename and new_filename != ""
+            else old_filename + file_extension,
         )

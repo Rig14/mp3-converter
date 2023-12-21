@@ -923,6 +923,7 @@ maybe there is a better solution*/
     align-items: center;
     justify-content: center;
     color: black;
+    padding-bottom: 3rem;
 }
 
 .custom-selection .media-checkbox {
